@@ -406,4 +406,4 @@ Func TSwitch()
 		Send($ShortCutKey & "s")
 	EndIf
 EndFunc   ;==>TSwitch
-;"Made with️ ❤ in Bangladesh"
+;==>"Made with️ ❤ in Bangladesh"
