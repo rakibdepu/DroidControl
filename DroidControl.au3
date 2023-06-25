@@ -25,14 +25,14 @@ $MainGUI = GUICreate("Scrcpy Helper", 400, 525, 0, Default, $WS_POPUP)
 GUISetOnEvent($GUI_EVENT_CLOSE, "Off")
 $MainGroup = GUICtrlCreateGroup("", 10, 6, 380, 489)
 $DeviceGroup = GUICtrlCreateGroup("Device", 20, 18, 360, 118, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
-Local $DeviceList = GUICtrlCreateListView("#|Serial|Device", 30, 36, 260, 90, BitOR($GUI_SS_DEFAULT_LISTVIEW,$WS_HSCROLL,$WS_BORDER,$BS_CENTER), BitOR($WS_EX_CLIENTEDGE,$LVS_EX_GRIDLINES,$LVS_EX_CHECKBOXES,$LVS_EX_FULLROWSELECT))
+Local $DeviceList = GUICtrlCreateListView("#|Device|Serial", 30, 36, 260, 90, BitOR($GUI_SS_DEFAULT_LISTVIEW,$WS_HSCROLL,$WS_BORDER,$BS_CENTER), BitOR($WS_EX_CLIENTEDGE,$LVS_EX_GRIDLINES,$LVS_EX_CHECKBOXES,$LVS_EX_FULLROWSELECT))
 GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 0, 46)
 GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 1, 140)
 GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 2, 70)
 _GUICtrlListView_JustifyColumn(GUICtrlGetHandle($DeviceList), 0, 2)
 _GUICtrlListView_JustifyColumn(GUICtrlGetHandle($DeviceList), 1, 2)
 _GUICtrlListView_JustifyColumn(GUICtrlGetHandle($DeviceList), 2, 2)
-GUICtrlSetTip(-1, "Double click on serial")
+GUICtrlSetTip(-1, "Double click on device")
 $Refresh = GUICtrlCreateButton("Refresh", 300, 36, 70, 90)
 GUICtrlSetOnEvent($Refresh, "Refresh")
 GUICtrlCreateGroup("", -99, -99, 1, 1)
@@ -170,12 +170,14 @@ Func Refresh()
 	Local $iPID = Run(@ComSpec & " /c adb devices -l", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 	ProcessWaitClose($iPID)
 	$adbdevices = StdoutRead($iPID)
-	ConsoleWrite($adbdevices & @CRLF)
-	$ADBOutput = StringReplace(StringStripWS(StringTrimLeft($adbdevices, 26), $STR_STRIPTRAILING), @CR, " =")
+	Local $pattern = "(.*?)device\s+product:(.*?)\s+model:(.*?)\s+device:(.*?)\s+transport_id:(\d+)"
+	Local $replacement = "$1 $3"
+	Local $ADBOutput = StringReplace(StringRegExpReplace(StringTrimLeft($adbdevices, 26), $pattern, $replacement), @CR, "")
+	;ConsoleWrite($ADBOutput & @CRLF)
 	If $ADBOutput = "" Then
-		IniWriteSection($ini, "Devices", $WiFiAddressV & "	device =")
+		IniWriteSection($ini, "Devices", $WiFiAddressV)
 	Else
-		IniWriteSection($ini, "Devices", $ADBOutput & " =")
+		IniWriteSection($ini, "Devices", $ADBOutput)
 	EndIf
 	_GUICtrlListView_DeleteAllItems($DeviceList)
 	DeviceRefresh()
@@ -183,10 +185,13 @@ EndFunc   ;==>Refresh
 
 Func DeviceRefresh()
 	$aList = IniReadSection($ini, "Devices")
+	ConsoleWrite('@@ Debug(' & @ScriptLineNumber & ') : 	$aList = ' & 	$aList & @CRLF & '>Error code: ' & @error & @CRLF) ;### Debug Console
+	ConsoleWrite($aList)
 	_GUICtrlListView_BeginUpdate($DeviceList)
 	For $i = 1 To $aList[0][0]
+		;ConsoleWrite($aList[$i][0] & @CRLF)
 		_GUICtrlListView_AddItem($DeviceList, $i)
-		$aStr = StringSplit($aList[$i][0], "	", 1)
+		$aStr = StringSplit($aList[$i][0], " ", 1)
 		_GUICtrlListView_AddSubItem($DeviceList, $i-1, $aStr[1], 1)
 		_GUICtrlListView_AddSubItem($DeviceList, $i-1, $aStr[2], 2)
 	Next
