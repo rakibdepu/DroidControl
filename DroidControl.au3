@@ -167,9 +167,10 @@ EndFunc   ;==>ReadSettings
 
 Func Refresh()
 	IniDelete ( $ini, "Devices" )
-	Local $iPID = Run(@ComSpec & " /c adb devices", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
+	Local $iPID = Run(@ComSpec & " /c adb devices -l", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 	ProcessWaitClose($iPID)
 	$adbdevices = StdoutRead($iPID)
+	ConsoleWrite($adbdevices & @CRLF)
 	$ADBOutput = StringReplace(StringStripWS(StringTrimLeft($adbdevices, 26), $STR_STRIPTRAILING), @CR, " =")
 	If $ADBOutput = "" Then
 		IniWriteSection($ini, "Devices", $WiFiAddressV & "	device =")
