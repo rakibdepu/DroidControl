@@ -188,14 +188,16 @@ Func DeviceRefresh()
 	ConsoleWrite('@@ Debug(' & @ScriptLineNumber & ') : 	$aList = ' & 	$aList & @CRLF & '>Error code: ' & @error & @CRLF) ;### Debug Console
 	ConsoleWrite($aList)
 	_GUICtrlListView_BeginUpdate($DeviceList)
-	For $i = 1 To $aList[0][0]
-		;ConsoleWrite($aList[$i][0] & @CRLF)
-		_GUICtrlListView_AddItem($DeviceList, $i)
-		$aStr = StringSplit($aList[$i][0], " ", 1)
-		_GUICtrlListView_AddSubItem($DeviceList, $i-1, $aStr[1], 1)
-		_GUICtrlListView_AddSubItem($DeviceList, $i-1, $aStr[2], 2)
-	Next
-	_GUICtrlListView_EndUpdate($DeviceList)
+	If Not @error Then
+		For $i = 1 To $aList[0][0]
+			;ConsoleWrite($aList[$i][0] & @CRLF)
+			_GUICtrlListView_AddItem($DeviceList, $i)
+			$aStr = StringSplit($aList[$i][0], " ", 1)
+			_GUICtrlListView_AddSubItem($DeviceList, $i-1, $aStr[1], 1)
+			_GUICtrlListView_AddSubItem($DeviceList, $i-1, $aStr[2], 2)
+		Next
+		_GUICtrlListView_EndUpdate($DeviceList)
+	EndIf
 EndFunc   ;==>DeviceRefresh
 
 Func GoWireless()
