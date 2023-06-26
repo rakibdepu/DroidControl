@@ -167,13 +167,13 @@ EndFunc   ;==>ReadSettings
 
 Func Refresh()
 	IniDelete ( $ini, "Devices" )
-	Local $iPID = Run(@ComSpec & " /c adb devices -l", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
+	Local $iPID = Run(@ComSpec & " /c adb devices", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 	ProcessWaitClose($iPID)
 	$adbdevices = StdoutRead($iPID)
-	Local $pattern = "(.*?)device\s+product:(.*?)\s+model:(.*?)\s+device:(.*?)\s+transport_id:(\d+)"
-	Local $replacement = "$1 $3"
-	Local $ADBOutput = StringReplace(StringRegExpReplace(StringTrimLeft($adbdevices, 26), $pattern, $replacement), @CR, "")
-	;ConsoleWrite($ADBOutput & @CRLF)
+	ConsoleWrite('@@ Debug(' & @ScriptLineNumber & ') : 	$adbdevices = ' & 	$adbdevices & @CRLF & '>Error code: ' & @error & @CRLF) ;### Debug Console
+	Local $pattern = "(?m)^(.*?)\s*device$"
+	Local $ADBOutput = StringRegExp($adbdevices, $pattern, 3)
+	ConsoleWrite('@@ Debug(' & @ScriptLineNumber & ') : 	$ADBOutput = ' & 	$ADBOutput & @CRLF & '>Error code: ' & @error & @CRLF) ;### Debug Console
 	If $ADBOutput = "" Then
 		IniWriteSection($ini, "Devices", $WiFiAddressV)
 	Else
@@ -185,8 +185,6 @@ EndFunc   ;==>Refresh
 
 Func DeviceRefresh()
 	$aList = IniReadSection($ini, "Devices")
-	ConsoleWrite('@@ Debug(' & @ScriptLineNumber & ') : 	$aList = ' & 	$aList & @CRLF & '>Error code: ' & @error & @CRLF) ;### Debug Console
-	ConsoleWrite($aList)
 	_GUICtrlListView_BeginUpdate($DeviceList)
 	If Not @error Then
 		For $i = 1 To $aList[0][0]
