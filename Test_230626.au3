@@ -21,7 +21,7 @@ Local $iPID = Run(@ComSpec & " /c adb devices", "", @SW_HIDE, $STDERR_CHILD + $S
 ProcessWaitClose($iPID)
 $adbdevices = StdoutRead($iPID)
 ConsoleWrite('(' & @ScriptLineNumber & ')' & $adbdevices & @CRLF)
-$ADBOutput = StringTrimRight(StringReplace(StringTrimLeft(StringStripWS($adbdevices, 8), 21), "device", "|"), 1)
+$ADBOutput = StringReplace(StringTrimLeft(StringStripWS($adbdevices, 4), 24), "device", " device =")
 ConsoleWrite('(' & @ScriptLineNumber & ')' & $ADBOutput & @CRLF)
 If $ADBOutput = "" Then
 	IniWrite($ini, "Main", "Devices", "No device . . .")

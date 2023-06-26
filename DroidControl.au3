@@ -170,32 +170,24 @@ Func Refresh()
 	Local $iPID = Run(@ComSpec & " /c adb devices", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 	ProcessWaitClose($iPID)
 	$adbdevices = StdoutRead($iPID)
-	ConsoleWrite('@@ Debug(' & @ScriptLineNumber & ') : 	$adbdevices = ' & 	$adbdevices & @CRLF & '>Error code: ' & @error & @CRLF) ;### Debug Console
-	Local $pattern = "(?m)^(.*?)\s*device$"
-	Local $ADBOutput = StringRegExp($adbdevices, $pattern, 3)
-	ConsoleWrite('@@ Debug(' & @ScriptLineNumber & ') : 	$ADBOutput = ' & 	$ADBOutput & @CRLF & '>Error code: ' & @error & @CRLF) ;### Debug Console
-	If $ADBOutput = "" Then
-		IniWriteSection($ini, "Devices", $WiFiAddressV)
-	Else
-		IniWriteSection($ini, "Devices", $ADBOutput)
-	EndIf
+	$ADBOutput = StringReplace(StringReplace(StringStripWS(StringTrimLeft($adbdevices, 26), $STR_STRIPTRAILING), @CR, ""), "	device", " device =")
+	ConsoleWrite('(' & @ScriptLineNumber & ')' & $ADBOutput & @CRLF)
+	IniWriteSection($ini, "Devices", $ADBOutput)
 	_GUICtrlListView_DeleteAllItems($DeviceList)
 	DeviceRefresh()
 EndFunc   ;==>Refresh
 
 Func DeviceRefresh()
 	$aList = IniReadSection($ini, "Devices")
+	ConsoleWrite('(' & @ScriptLineNumber & ')' & $aList & @CRLF)
 	_GUICtrlListView_BeginUpdate($DeviceList)
-	If Not @error Then
-		For $i = 1 To $aList[0][0]
-			;ConsoleWrite($aList[$i][0] & @CRLF)
-			_GUICtrlListView_AddItem($DeviceList, $i)
-			$aStr = StringSplit($aList[$i][0], " ", 1)
-			_GUICtrlListView_AddSubItem($DeviceList, $i-1, $aStr[1], 1)
-			_GUICtrlListView_AddSubItem($DeviceList, $i-1, $aStr[2], 2)
-		Next
-		_GUICtrlListView_EndUpdate($DeviceList)
-	EndIf
+	For $i = 1 To $aList[0][0]
+		_GUICtrlListView_AddItem($DeviceList, $i)
+		$aStr = StringSplit($aList[$i][0], " ", 1)
+		_GUICtrlListView_AddSubItem($DeviceList, $i-1, $aStr[1], 1)
+		_GUICtrlListView_AddSubItem($DeviceList, $i-1, $aStr[2], 2)
+	Next
+	_GUICtrlListView_EndUpdate($DeviceList)
 EndFunc   ;==>DeviceRefresh
 
 Func GoWireless()
