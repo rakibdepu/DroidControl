@@ -21,7 +21,7 @@ ReadSettings()
 ;GUISetBkColor(0x000000)
 ;_WinAPI_SetLayeredWindowAttributes($MainGUI, 0x000000, 250)
 
-$MainGUI = GUICreate("Scrcpy Helper", 400, 525, 0, Default, $WS_POPUP)
+$MainGUI = GUICreate("Scrcpy Helper", 400, 600, 0, Default, $WS_POPUP)
 GUISetOnEvent($GUI_EVENT_CLOSE, "Off")
 $MainGroup = GUICtrlCreateGroup("", 10, 6, 380, 489)
 $DeviceGroup = GUICtrlCreateGroup("Device List", 20, 18, 360, 118, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
@@ -136,7 +136,7 @@ GUICtrlSetData($Parameter, "")
 GUICtrlCreateGroup("", -99, -99, 1, 1)
 $StatusBar1 = _GUICtrlStatusBar_Create($MainGUI)
 _GUICtrlStatusBar_SetBkColor($StatusBar1, 0xD1B499)
-_GUICtrlStatusBar_SetMinHeight($StatusBar1, 20)
+_GUICtrlStatusBar_SetMinHeight($StatusBar1, 15)
 If IniRead($ini, "Main", "ShortCutCtrl", "") = 1 Then
 	GUICtrlSetState($ShortCutC,$GUI_CHECKED)
 ElseIf IniRead($ini, "Main", "ShortCutAlt", "") = 1 Then
