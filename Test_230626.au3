@@ -9,10 +9,25 @@
 #include <ListViewConstants.au3>
 #include <WindowsConstants.au3>
 #Include <WinAPI.au3>
+#include <Clipboard.au3>
 
 Opt("GUIOnEventMode", 1) ; Change to OnEvent mode
 
 Global $ini = "settings.ini"
+Global $ResolutionV = ""
+Global $AlwaysOnTopV = ""
+Global $FullScreenV = ""
+Global $HideBorderV = ""
+Global $WiFiAddressV = ""
+Global $NoScreenSaverV = ""
+Global $PowerOffOnCloseV = ""
+Global $ReadOnlyModeV = ""
+Global $SerialV = ""
+Global $ShowTouchV = ""
+Global $StayAwakeV = ""
+Global $TurnOffTheScreenV = ""
+Global $Parameter = ""
+Global $ipBat = ""
 
 ReadSettings()
 
@@ -25,7 +40,7 @@ $MainGUI = GUICreate("Scrcpy Helper", 400, 600, 0, Default, $WS_POPUP)
 GUISetOnEvent($GUI_EVENT_CLOSE, "Off")
 $MainGroup = GUICtrlCreateGroup("", 10, 6, 380, 489)
 $DeviceGroup = GUICtrlCreateGroup("Device List", 20, 18, 360, 118, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
-Local $DeviceList = GUICtrlCreateListView("#|Serial|Connection", 30, 36, 260, 90, BitOR($GUI_SS_DEFAULT_LISTVIEW,$WS_HSCROLL,$WS_BORDER,$BS_CENTER), BitOR($WS_EX_CLIENTEDGE,$LVS_EX_GRIDLINES,$LVS_EX_FULLROWSELECT))
+Local $DeviceList = GUICtrlCreateListView("#|Serial|Connection", 30, 36, 260, 90, BitOR($GUI_SS_DEFAULT_LISTVIEW,$WS_HSCROLL,$WS_BORDER,$BS_CENTER), BitOR($WS_EX_CLIENTEDGE,$LVS_EX_GRIDLINES, $LVS_SHOWSELALWAYS, $LVS_EX_FULLROWSELECT))
 GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 0, 30)
 GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 1, 139)
 GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 2, 80)
@@ -45,12 +60,12 @@ $GoWireless = GUICtrlCreateButton("Go Air", 300, 160, 70, 20, $BS_MULTILINE)
 GUICtrlSetTip(-1, "Enter IP address")
 GUICtrlSetOnEvent($GoWireless, "GoWireless")
 $IPAddress = _GUICtrlIpAddress_Create($MainGUI, 110, 160, 180, 20, -1, 0)
-_GUICtrlIpAddress_Set($IPAddress,$WiFiAddressV)
+_GUICtrlIpAddress_Set($IPAddress, $WiFiAddressV)
 $DetailsGroup = GUICtrlCreateGroup("Details", 20, 206, 360, 100, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
-GUICtrlCreateLabel("Model:", 30, 224, 70, 20)
-GUICtrlCreateLabel("SM", 70, 224, 70, 20)
-GUICtrlCreateLabel("Model:", 30, 240, 70, 20)
-GUICtrlCreateLabel("SM", 70, 240, 70, 20)
+GUICtrlCreateLabel("Serial:", 30, 224, 70, 20)
+GUICtrlCreateLabel($SerialV, 70, 224, 170, 20)
+GUICtrlCreateLabel("IP:", 30, 240, 70, 20)
+GUICtrlCreateLabel("IP1", 70, 240, 170, 20)
 
 GUICtrlCreateGroup("", -99, -99, 1, 1)
 $ScrcpyGroup = GUICtrlCreateGroup("Scrcpy", 20, 306, 360, 49, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
@@ -158,26 +173,26 @@ While 1
 WEnd
 
 Func ReadSettings()
-	Global $ResolutionV = IniRead($ini, "Main", "Size", "Max")
-	Global $AlwaysOnTopV = IniRead($ini, "Main", "AlwaysOnTop", 4)
-	Global $FullScreenV = IniRead($ini, "Main", "FullScreen", 4)
-	Global $HideBorderV = IniRead($ini, "Main", "HideBorder", 1)
-	Global $WiFiAddressV = IniRead($ini, "Main", "WiFiAddress", "192.168.1.2")
-	Global $NoScreenSaverV = IniRead($ini, "Main", "NoScreenSaver", 4)
-	Global $PowerOffOnCloseV = IniRead($ini, "Main", "PowerOffOnClose", 1)
-	Global $ReadOnlyModeV = IniRead($ini, "Main", "ReadOnlyMode", 4)
-	Global $SerialV = IniRead($ini, "Main", "Serial", "")
-	Global $ShowTouchV = IniRead($ini, "Main", "ShowTouch", 4)
-	Global $StayAwakeV = IniRead($ini, "Main", "StayAwake", 4)
-	Global $TurnOffTheScreenV = IniRead($ini, "Main", "TurnOffTheScreen", 1)
-	Global $Parameter = IniRead($ini, "Main", "Parameter", "")
+	$ResolutionV = IniRead($ini, "Main", "Size", "Max")
+	$AlwaysOnTopV = IniRead($ini, "Main", "AlwaysOnTop", 4)
+	$FullScreenV = IniRead($ini, "Main", "FullScreen", 4)
+	$HideBorderV = IniRead($ini, "Main", "HideBorder", 1)
+	$WiFiAddressV = IniRead($ini, "Main", "WiFiAddress", "192.168.1.2")
+	$NoScreenSaverV = IniRead($ini, "Main", "NoScreenSaver", 4)
+	$PowerOffOnCloseV = IniRead($ini, "Main", "PowerOffOnClose", 1)
+	$ReadOnlyModeV = IniRead($ini, "Main", "ReadOnlyMode", 4)
+	$SerialV = IniRead($ini, "Main", "Serial", "")
+	$ShowTouchV = IniRead($ini, "Main", "ShowTouch", 4)
+	$StayAwakeV = IniRead($ini, "Main", "StayAwake", 4)
+	$TurnOffTheScreenV = IniRead($ini, "Main", "TurnOffTheScreen", 1)
+	$Parameter = IniRead($ini, "Main", "Parameter", "")
 EndFunc   ;==>ReadSettings
 
 Func Refresh()
 	IniDelete ( $ini, "Devices" )
-	Local $iPID = Run(@ComSpec & " /c adb devices", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
-	ProcessWaitClose($iPID)
-	$adbdevices = StdoutRead($iPID)
+	Local $iPID1 = Run(@ComSpec & " /c adb devices", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
+	ProcessWaitClose($iPID1)
+	$adbdevices = StdoutRead($iPID1)
 	$ADBOutput1 = StringReplace(StringReplace(StringStripWS(StringTrimLeft($adbdevices, 26), $STR_STRIPTRAILING), @CR, ""), "	device", " USB =")
 	ConsoleWrite('(' & @ScriptLineNumber & ')' & $ADBOutput1 & @CRLF)
     $ADBOutput2 = StringReplace($ADBOutput1, ":5555 USB =", ":5555 Wireless =")
@@ -200,13 +215,24 @@ Func DeviceRefresh()
 	_GUICtrlListView_EndUpdate($DeviceList)
 EndFunc   ;==>DeviceRefresh
 
+Func GetIP()
+	;Local $command1 = "FOR /F ""tokens=2"" %%G IN (''adb -s "
+	;Local $command2 = " shell ip addr show wlan0 ^|find ""inet ""'') DO echo %%G"
+	Local $iPID2 = RunWait(@ComSpec & " /c " & @ScriptDir & "\Core\ip.bat", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
+	ProcessWaitClose($iPID2)
+	$ipBat = StringStripWS(_ClipBoard_GetData(), $STR_STRIPTRAILING)
+	GUICtrlSetData($IPAddress, $ipBat)
+	GUICtrlSetData("IP1", $ipBat)
+	_SaveIni("WiFiAddress", $ipBat)
+	ReadSettings()
+EndFunc   ;==>GetIP
+
 Func GoWireless()
 	If _GUICtrlIpAddress_IsBlank($IPAddress) Then
 		MsgBox($MB_SYSTEMMODAL, "", "Enter IP Address.")
 		_GUICtrlIpAddress_SetFocus($IPAddress, 0)
 	Else
 		RunWait(@ComSpec & " /c " & "adb connect " & _GUICtrlIpAddress_Get($IPAddress), "", @SW_HIDE)
-		_SaveIni("WiFiAddress", _GUICtrlIpAddress_Get($IPAddress))
 		Refresh()
 	EndIf
 EndFunc   ;==>GoWireless
@@ -221,12 +247,15 @@ Func ADBKill()
 	ADBStart()
 EndFunc   ;==>ADBReboot
 
-Func Param()
+Func DetailsExec()
+    
+EndFunc   ;==>DetailsExec
     For $i = 0 To _GUICtrlListView_GetItemCount($DeviceList)
-        If _GUICtrlListView_GetItemChecked($DeviceList, $i) Then
+        If _GUICtrlListView_GetItemSelected($DeviceList, $i) Then
             Global $SerialV = _GUICtrlListView_GetItemText($DeviceList, $i, 1)
         EndIf
     Next
+Func Param()
 	_SaveIni("Serial", $SerialV)
 	If GUICtrlRead($Resolution) = "Max" Then
 		Global $ResolutionP = " --window-height=691"
