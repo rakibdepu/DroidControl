@@ -10,6 +10,8 @@
 #include <WindowsConstants.au3>
 #Include <WinAPI.au3>
 #include <Clipboard.au3>
+#include <StaticConstants.au3>
+#include <File.au3>
 
 Opt("GUIOnEventMode", 1) ; Change to OnEvent mode
 
@@ -62,10 +64,10 @@ GUICtrlSetOnEvent($GoWireless, "GoWireless")
 $IPAddress = _GUICtrlIpAddress_Create($MainGUI, 110, 160, 180, 20, -1, 0)
 _GUICtrlIpAddress_Set($IPAddress, $WiFiAddressV)
 $DetailsGroup = GUICtrlCreateGroup("Details", 20, 206, 360, 100, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
-GUICtrlCreateLabel("Serial:", 30, 224, 70, 20)
-GUICtrlCreateLabel($SerialV, 70, 224, 170, 20)
-GUICtrlCreateLabel("IP:", 30, 240, 70, 20)
-GUICtrlCreateLabel("IP1", 70, 240, 170, 20)
+$SerialName = GUICtrlCreateLabel("Serial:", 30, 224, 70, 20)
+$SerialData = GUICtrlCreateLabel($SerialV, 70, 224, 170, 20)
+$ModelName = GUICtrlCreateLabel("IP:", 30, 240, 70, 20)
+$ModelData = GUICtrlCreateLabel("", 70, 240, 170, 20)
 
 GUICtrlCreateGroup("", -99, -99, 1, 1)
 $ScrcpyGroup = GUICtrlCreateGroup("Scrcpy", 20, 306, 360, 49, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
@@ -213,16 +215,17 @@ Func DeviceRefresh()
 		_GUICtrlListView_AddSubItem($DeviceList, $i-1, $aStr[2], 2)
 	Next
 	_GUICtrlListView_EndUpdate($DeviceList)
+	AdlibRegister("DetailsExec")
 EndFunc   ;==>DeviceRefresh
 
 Func GetIP()
-	;Local $command1 = "FOR /F ""tokens=2"" %%G IN (''adb -s "
-	;Local $command2 = " shell ip addr show wlan0 ^|find ""inet ""'') DO echo %%G"
+	$ipTxt = "FOR /F ""tokens=2"" %%G IN ('adb -s " & $SerialV & " shell ip addr show wlan0 ^|find ""inet ""') DO set ipfull=%%G"
+	_FileWriteToLine(@ScriptDir & "\Core\ip.bat", 1, $ipTxt, True, True)
 	Local $iPID2 = RunWait(@ComSpec & " /c " & @ScriptDir & "\Core\ip.bat", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 	ProcessWaitClose($iPID2)
 	$ipBat = StringStripWS(_ClipBoard_GetData(), $STR_STRIPTRAILING)
-	GUICtrlSetData($IPAddress, $ipBat)
-	GUICtrlSetData("IP1", $ipBat)
+	_GUICtrlIpAddress_Set($IPAddress, $ipBat)
+	GUICtrlSetData($ModelData, $ipBat)
 	_SaveIni("WiFiAddress", $ipBat)
 	ReadSettings()
 EndFunc   ;==>GetIP
@@ -248,13 +251,13 @@ Func ADBKill()
 EndFunc   ;==>ADBReboot
 
 Func DetailsExec()
-    
-EndFunc   ;==>DetailsExec
     For $i = 0 To _GUICtrlListView_GetItemCount($DeviceList)
         If _GUICtrlListView_GetItemSelected($DeviceList, $i) Then
-            Global $SerialV = _GUICtrlListView_GetItemText($DeviceList, $i, 1)
+            $SerialV = _GUICtrlListView_GetItemText($DeviceList, $i, 1)
         EndIf
+	AdlibRegister("Param")
     Next
+EndFunc   ;==>DetailsExec
 Func Param()
 	_SaveIni("Serial", $SerialV)
 	If GUICtrlRead($Resolution) = "Max" Then
