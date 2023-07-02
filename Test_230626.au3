@@ -36,7 +36,7 @@ Global $TurnOffTheScreenV = ""
 Global $Parameter = ""
 Global $ipBat = ""
 
-ReadSettings()
+Call(ReadSettings)
 
 #Region ### START Koda GUI section ### Form=
 $GUI = GUICreate("Droid Control", 400, 450, 960, -1, BitOR($WS_POPUP, $WS_CAPTION))
@@ -71,10 +71,12 @@ GUICtrlSetOnEvent(-1, "GoWirelessClick")
 GUICtrlCreateGroup("", -99, -99, 1, 1)
 $DetailsGroup = GUICtrlCreateGroup("Details", 5, 188, 390, 100, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 GUICtrlSetFont(-1, 8, 400, 0, "Arial")
-$SerialName_Label = GUICtrlCreateLabel("Serial:", 10, 198, 70, 20)
-$SerialData_Label = GUICtrlCreateLabel("SerialV", 100, 198, 170, 20)
-$ModelName_Label = GUICtrlCreateLabel("IP:", 10, 223, 70, 20)
-$ModelData_Label = GUICtrlCreateLabel("", 100, 223, 170, 20)
+$ModelName_Label = GUICtrlCreateLabel("", 10, 203, 380, 20, $SS_CENTER)
+GUICtrlSetFont(-1, 10, 700, 0, "")
+;$SerialName_Label = GUICtrlCreateLabel("Serial:", 10, 198, 70, 20)
+;$SerialData_Label = GUICtrlCreateLabel("SerialV", 100, 198, 170, 20)
+;$ModelName_Label = GUICtrlCreateLabel("IP:", 10, 223, 70, 20)
+;$ModelData_Label = GUICtrlCreateLabel("", 100, 223, 170, 20)
 GUICtrlCreateGroup("", -99, -99, 1, 1)
 $Viewer_Tab = GUICtrlCreateTabItem("Viewer")
 $Scrcpy_Tab = GUICtrlCreateTabItem("Scrcpy")
@@ -158,7 +160,7 @@ GUIRegisterMsg($WM_NOTIFY, "WM_NOTIFY")
 GUISetState(@SW_SHOW, $GUI)
 #EndRegion ### END Koda GUI section ###
 
-ADBStart()
+Call(ADBStart)
 
 While 1
 	Sleep(100)     ; Sleep to reduce CPU usage
@@ -185,13 +187,19 @@ Func RefreshClick()
 	Local $iPID1 = Run(@ComSpec & " /c adb devices", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 	ProcessWaitClose($iPID1)
 	$adbdevices = StdoutRead($iPID1)
+	ConsoleWrite(@ScriptLineNumber & ': ' & $adbdevices & @CRLF)
 	$ADBOutput1 = StringReplace(StringReplace(StringStripWS(StringTrimLeft($adbdevices, 26), $STR_STRIPTRAILING), @CR, ""), "	device", " USB =")
 	ConsoleWrite(@ScriptLineNumber & ': ' & $ADBOutput1 & @CRLF)
 	$ADBOutput2 = StringReplace($ADBOutput1, ":5555 USB =", ":5555 Wireless =")
 	ConsoleWrite(@ScriptLineNumber & ': ' & $ADBOutput2 & @CRLF)
-	IniWriteSection($ini, "Devices", $ADBOutput2)
+	;IniWriteSection($ini, "Devices", $ADBOutput2)
+	If $ADBOutput2 = "" Then
+		IniWriteSection($ini, "Devices", "NO USB =")
+	Else
+		IniWriteSection($ini, "Devices", $ADBOutput2)
+	EndIf
 	_GUICtrlListView_DeleteAllItems($DeviceList)
-	DeviceListRefresh()
+	Call(DeviceListRefresh)
 EndFunc   ;==>RefreshClick
 
 Func DeviceListRefresh()
@@ -208,6 +216,18 @@ Func DeviceListRefresh()
 	;AdlibRegister("DeviceListClick")
 EndFunc   ;==>DeviceListRefresh
 
+Func DeviceDetails()
+	If Not $SerialV = "" Then
+		Local $DeviceManufacturerCommand = Run(@ComSpec & " /c adb -s " & $SerialV & " shell getprop ro.product.manufacturer", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
+		ProcessWaitClose($DeviceManufacturerCommand)
+		$DeviceManufacturer = StringStripWS(StringUpper(StdoutRead($DeviceManufacturerCommand)),8)
+		Local $DeviceModelCommand = Run(@ComSpec & " /c adb -s " & $SerialV & " shell getprop ro.product.model", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
+		ProcessWaitClose($DeviceModelCommand)
+		$DeviceModel = StringStripWS(StdoutRead($DeviceModelCommand),8)
+		GUICtrlSetData($ModelName_Label, $DeviceManufacturer & " " & $DeviceModel)
+	EndIf
+EndFunc
+
 Func GetIPClick()
 	$ipTxt = "FOR /F ""tokens=2"" %%G IN ('adb -s " & $SerialV & " shell ip addr show wlan0 ^|find ""inet ""') DO set ipfull=%%G"
 	_FileWriteToLine(@ScriptDir & "\Core\ip.bat", 1, $ipTxt, True, True)
@@ -215,9 +235,8 @@ Func GetIPClick()
 	ProcessWaitClose($iPID2)
 	$ipBat = StringStripWS(_ClipBoard_GetData(), $STR_STRIPTRAILING)
 	_GUICtrlIpAddress_Set($IPAddress, $ipBat)
-	GUICtrlSetData($ModelData_Label, $ipBat)
 	_SaveIni("WiFiAddress", $ipBat)
-	ReadSettings()
+	Call(ReadSettings)
 EndFunc   ;==>GetIPClick
 
 Func GoWirelessClick()
@@ -226,18 +245,18 @@ Func GoWirelessClick()
 		_GUICtrlIpAddress_SetFocus($IPAddress, 0)
 	Else
 		RunWait(@ComSpec & " /c " & "adb connect " & _GUICtrlIpAddress_Get($IPAddress), "", @SW_HIDE)
-		RefreshClick()
+		Call(RefreshClick)
 	EndIf
 EndFunc   ;==>GoWirelessClick
 
 Func ADBStart()
 	RunWait(@ComSpec & " /c " & "adb start-server", "", @SW_HIDE)
-	RefreshClick()
+	Call(RefreshClick)
 EndFunc   ;==>ADBStart
 
 Func ResetClick()
 	RunWait(@ComSpec & " /c " & "adb kill-server", "", @SW_HIDE)
-	ADBStart()
+	Call(ADBStart)
 EndFunc   ;==>ResetClick
 
 Func TabChange()
@@ -341,14 +360,14 @@ Func Param()
 		_SaveIni("ShortCutCtrl", GUICtrlRead($ShortCutC_Radio))
 		_SaveIni("ShortCutAlt", GUICtrlRead($ShortCutA_Radio))
 	EndIf
-	SumParam()
+	Call(SumParam)
 EndFunc   ;==>Param
 
 Func SumParam()
 	Global $FinalParam = " -s " & $SerialV & $ResolutionP & $ShortCutP & $FullScreenP & $PowerOffOnCloseP & $AlwaysOnTopP & $ReadOnlyModeP & $ShowTouchP & $NoScreenSaverP & $TurnOffTheScreenP & $StayAwakeP & $HideBorderP
 	_SaveIni("FinalParameter", $FinalParam)
 	GUICtrlSetData($Parameter, $FinalParam)
-	RunScrcpy()
+	Call(RunScrcpy)
 EndFunc   ;==>SumParam
 
 Func RunScrcpy()
@@ -356,7 +375,7 @@ Func RunScrcpy()
 EndFunc   ;==>RunScrcpy
 
 Func OnClick()
-	Param()
+	Call(Param)
 EndFunc   ;==>OnClick
 
 Func OffClick()
@@ -449,28 +468,25 @@ EndFunc   ;==>SwitchClick
 
 Func WM_NOTIFY($hWnd, $Msg, $wParam, $lParam)
     Local $hListView, $tNMHDR, $hWndFrom, $iCode
-
     $hListView = $DeviceList
     If Not IsHWnd($hListView) Then $hListView = GUICtrlGetHandle($DeviceList)
-
     $tNMHDR = DllStructCreate($tagNMHDR, $lParam)
     $hWndFrom = HWnd(DllStructGetData($tNMHDR, "HwndFrom"))
     $iCode = DllStructGetData($tNMHDR, "Code")
-
     Switch $hWndFrom
         Case $hListView
             Switch $iCode
-                Case $LVN_ITEMCHANGED
+                Case $NM_CLICK
                     Local $tInfo = DllStructCreate($tagNMLISTVIEW, $lParam)
                     Local $iItem = DllStructGetData($tInfo, "Item")
                     If _GUICtrlListView_GetItemSelected($hListView, $iItem) = True Then
                         ConsoleWrite("---> Item " & $iItem + 1 & " has checked" & @LF)
 						$SerialV = _GUICtrlListView_GetItemText($DeviceList, $iItem, 1)
 						ConsoleWrite(@ScriptLineNumber & ': ' & $SerialV & @CRLF)
+						Call(DeviceDetails)
                     EndIf
             EndSwitch
     EndSwitch
-
     Return $GUI_RUNDEFMSG
 EndFunc
 
