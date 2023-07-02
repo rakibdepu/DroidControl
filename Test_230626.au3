@@ -154,6 +154,7 @@ GUICtrlCreateGroup("", -99, -99, 1, 1)
 GUICtrlCreateTabItem("")
 $StatusBar = _GUICtrlStatusBar_Create($GUI)
 _GUICtrlStatusBar_SetMinHeight($StatusBar, 25)
+GUIRegisterMsg($WM_NOTIFY, "WM_NOTIFY")
 GUISetState(@SW_SHOW, $GUI)
 #EndRegion ### END Koda GUI section ###
 
@@ -238,12 +239,6 @@ Func ResetClick()
 	RunWait(@ComSpec & " /c " & "adb kill-server", "", @SW_HIDE)
 	ADBStart()
 EndFunc   ;==>ResetClick
-
-Func DeviceListClick()
-	$SerialV = _GUICtrlListView_GetItemText($DeviceList, Int(_GUICtrlListView_GetSelectedIndices($DeviceList)), 1)
-	ConsoleWrite(@ScriptLineNumber & ': ' & $SerialV & @CRLF)
-	;AdlibRegister("Param")
-EndFunc   ;==>DeviceListClick
 
 Func TabChange()
 	If _GUICtrlTab_GetCurSel($Tab) = 0 Then ; zero based index of current selected TabItem
@@ -451,4 +446,32 @@ Func SwitchClick()
 		Send($ShortCutKey & "s")
 	EndIf
 EndFunc   ;==>SwitchClick
+
+Func WM_NOTIFY($hWnd, $Msg, $wParam, $lParam)
+    Local $hListView, $tNMHDR, $hWndFrom, $iCode
+
+    $hListView = $DeviceList
+    If Not IsHWnd($hListView) Then $hListView = GUICtrlGetHandle($DeviceList)
+
+    $tNMHDR = DllStructCreate($tagNMHDR, $lParam)
+    $hWndFrom = HWnd(DllStructGetData($tNMHDR, "HwndFrom"))
+    $iCode = DllStructGetData($tNMHDR, "Code")
+
+    Switch $hWndFrom
+        Case $hListView
+            Switch $iCode
+                Case $LVN_ITEMCHANGED
+                    Local $tInfo = DllStructCreate($tagNMLISTVIEW, $lParam)
+                    Local $iItem = DllStructGetData($tInfo, "Item")
+                    If _GUICtrlListView_GetItemSelected($hListView, $iItem) = True Then
+                        ConsoleWrite("---> Item " & $iItem + 1 & " has checked" & @LF)
+						$SerialV = _GUICtrlListView_GetItemText($DeviceList, $iItem, 1)
+						ConsoleWrite(@ScriptLineNumber & ': ' & $SerialV & @CRLF)
+                    EndIf
+            EndSwitch
+    EndSwitch
+
+    Return $GUI_RUNDEFMSG
+EndFunc
+
 ;==>"Made with️ ❤ in Bangladesh"
