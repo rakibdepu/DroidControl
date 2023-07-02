@@ -39,7 +39,7 @@ Global $ipBat = ""
 ReadSettings()
 
 #Region ### START Koda GUI section ### Form=
-$GUI = GUICreate("Droid Control", 400, 450, 960, -1, BitOR($WS_POPUP, $WS_CAPTION))
+$GUI = GUICreate("Droid Control", 400, 450, 860, -1, BitOR($WS_POPUP, $WS_CAPTION))
 GUISetOnEvent($GUI_EVENT_CLOSE, "OffClick")
 $Tab = GUICtrlCreateTab(0, 0, 400, 425)
 GUICtrlSetOnEvent(-1, "TabChange")
@@ -47,6 +47,7 @@ $Device_Manager_Tab = GUICtrlCreateTabItem("Device Manager")
 $DeviceListGroup = GUICtrlCreateGroup("Device List", 5, 25, 390, 120, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 GUICtrlSetFont(-1, 8, 400, 0, "Arial")
 $DeviceList = _GUICtrlListView_Create($GUI, "#|Device|Connection", 10, 40, 305, 100)
+GUISetOnEvent(-1, "DeviceListClick")
 _GUICtrlListView_SetExtendedListViewStyle($DeviceList, BitOR($LVS_EX_GRIDLINES, $LVS_EX_FULLROWSELECT))
 _GUICtrlListView_SetColumnWidth($DeviceList, 0, 50)
 _GUICtrlListView_SetColumnWidth($DeviceList, 1, 175)
@@ -204,7 +205,7 @@ Func DeviceListRefresh()
 		_GUICtrlListView_AddSubItem($DeviceList, $i - 1, $aStr[2], 2)
 	Next
 	_GUICtrlListView_EndUpdate($DeviceList)
-	AdlibRegister("DeviceListClick")
+	;AdlibRegister("DeviceListClick")
 EndFunc   ;==>DeviceListRefresh
 
 Func GetIPClick()
@@ -240,7 +241,8 @@ Func ResetClick()
 EndFunc   ;==>ResetClick
 
 Func DeviceListClick()
-	$DeviceClicked = _GUICtrlListView_GetItemText($DeviceList, Int(_GUICtrlListView_GetSelectedIndices($DeviceList)), 1)
+	$SerialV = _GUICtrlListView_GetItemText($DeviceList, Int(_GUICtrlListView_GetSelectedIndices($DeviceList)), 1)
+	ConsoleWrite(@ScriptLineNumber & ': ' & $SerialV & @CRLF)
 	;AdlibRegister("Param")
 EndFunc   ;==>DeviceListClick
 
