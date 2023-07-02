@@ -29,7 +29,7 @@ Global $WiFiAddressV = ""
 Global $NoScreenSaverV = ""
 Global $PowerOffOnCloseV = ""
 Global $ReadOnlyModeV = ""
-Global $SerialV = ""
+Global $SerialValue = ""
 Global $ShowTouchV = ""
 Global $StayAwakeV = ""
 Global $TurnOffTheScreenV = ""
@@ -175,7 +175,7 @@ Func ReadSettings()
 	$NoScreenSaverV = IniRead($ini, "Main", "NoScreenSaver", 4)
 	$PowerOffOnCloseV = IniRead($ini, "Main", "PowerOffOnClose", 1)
 	$ReadOnlyModeV = IniRead($ini, "Main", "ReadOnlyMode", 4)
-	$SerialV = IniRead($ini, "Main", "Serial", "")
+	$SerialValue = IniRead($ini, "Main", "Serial", "")
 	$ShowTouchV = IniRead($ini, "Main", "ShowTouch", 4)
 	$StayAwakeV = IniRead($ini, "Main", "StayAwake", 4)
 	$TurnOffTheScreenV = IniRead($ini, "Main", "TurnOffTheScreen", 1)
@@ -192,7 +192,6 @@ Func RefreshClick()
 	ConsoleWrite(@ScriptLineNumber & ': ' & $ADBOutput1 & @CRLF)
 	$ADBOutput2 = StringReplace($ADBOutput1, ":5555 USB =", ":5555 Wireless =")
 	ConsoleWrite(@ScriptLineNumber & ': ' & $ADBOutput2 & @CRLF)
-	;IniWriteSection($ini, "Devices", $ADBOutput2)
 	If $ADBOutput2 = "" Then
 		IniWriteSection($ini, "Devices", "NO USB =")
 	Else
@@ -213,15 +212,14 @@ Func DeviceListRefresh()
 		_GUICtrlListView_AddSubItem($DeviceList, $i - 1, $aStr[2], 2)
 	Next
 	_GUICtrlListView_EndUpdate($DeviceList)
-	;AdlibRegister("DeviceListClick")
 EndFunc   ;==>DeviceListRefresh
 
 Func DeviceDetails()
-	If Not $SerialV = "" Then
-		Local $DeviceManufacturerCommand = Run(@ComSpec & " /c adb -s " & $SerialV & " shell getprop ro.product.manufacturer", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
+	If Not $SerialValue = "" Then
+		Local $DeviceManufacturerCommand = Run(@ComSpec & " /c adb -s " & $SerialValue & " shell getprop ro.product.manufacturer", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 		ProcessWaitClose($DeviceManufacturerCommand)
 		$DeviceManufacturer = StringStripWS(StringUpper(StdoutRead($DeviceManufacturerCommand)), 8)
-		Local $DeviceModelCommand = Run(@ComSpec & " /c adb -s " & $SerialV & " shell getprop ro.product.model", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
+		Local $DeviceModelCommand = Run(@ComSpec & " /c adb -s " & $SerialValue & " shell getprop ro.product.model", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 		ProcessWaitClose($DeviceModelCommand)
 		$DeviceModel = StringStripWS(StdoutRead($DeviceModelCommand), 8)
 		GUICtrlSetData($ModelName_Label, $DeviceManufacturer & " " & $DeviceModel)
@@ -229,7 +227,7 @@ Func DeviceDetails()
 EndFunc   ;==>DeviceDetails
 
 Func GetIPClick()
-	$ipTxt = "FOR /F ""tokens=2"" %%G IN ('adb -s " & $SerialV & " shell ip addr show wlan0 ^|find ""inet ""') DO set ipfull=%%G"
+	$ipTxt = "FOR /F ""tokens=2"" %%G IN ('adb -s " & $SerialValue & " shell ip addr show wlan0 ^|find ""inet ""') DO set ipfull=%%G"
 	_FileWriteToLine(@ScriptDir & "\Core\ip.bat", 1, $ipTxt, True, True)
 	Local $iPID2 = RunWait(@ComSpec & " /c " & @ScriptDir & "\Core\ip.bat", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 	ProcessWaitClose($iPID2)
@@ -278,7 +276,6 @@ Func ShortCutRadio()
 EndFunc   ;==>ShortCutRadio
 
 Func Param()
-	_SaveIni("Serial", $SerialV)
 	If GUICtrlRead($Resolution_Combo) = "Max" Then
 		Global $ResolutionP = " --window-height=691"
 		_SaveIni("Size", "Max")
@@ -364,7 +361,7 @@ Func Param()
 EndFunc   ;==>Param
 
 Func SumParam()
-	Global $FinalParam = " -s " & $SerialV & $ResolutionP & $ShortCutP & $FullScreenP & $PowerOffOnCloseP & $AlwaysOnTopP & $ReadOnlyModeP & $ShowTouchP & $NoScreenSaverP & $TurnOffTheScreenP & $StayAwakeP & $HideBorderP
+	Global $FinalParam = " -s " & $SerialValue & $ResolutionP & $ShortCutP & $FullScreenP & $PowerOffOnCloseP & $AlwaysOnTopP & $ReadOnlyModeP & $ShowTouchP & $NoScreenSaverP & $TurnOffTheScreenP & $StayAwakeP & $HideBorderP
 	_SaveIni("FinalParameter", $FinalParam)
 	GUICtrlSetData($Parameter, $FinalParam)
 	Call(RunScrcpy)
@@ -481,8 +478,9 @@ Func WM_NOTIFY($hWnd, $Msg, $wParam, $lParam)
 					Local $iItem = DllStructGetData($tInfo, "Item")
 					If _GUICtrlListView_GetItemSelected($hListView, $iItem) = True Then
 						ConsoleWrite("---> Item " & $iItem + 1 & " has checked" & @LF)
-						$SerialV = _GUICtrlListView_GetItemText($DeviceList, $iItem, 1)
-						ConsoleWrite(@ScriptLineNumber & ': ' & $SerialV & @CRLF)
+						$SerialValue = _GUICtrlListView_GetItemText($DeviceList, $iItem, 1)
+						_SaveIni("Serial", $SerialValue)
+						ConsoleWrite(@ScriptLineNumber & ': ' & $SerialValue & @CRLF)
 						Call(DeviceDetails)
 					EndIf
 			EndSwitch
