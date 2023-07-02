@@ -220,13 +220,13 @@ Func DeviceDetails()
 	If Not $SerialV = "" Then
 		Local $DeviceManufacturerCommand = Run(@ComSpec & " /c adb -s " & $SerialV & " shell getprop ro.product.manufacturer", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 		ProcessWaitClose($DeviceManufacturerCommand)
-		$DeviceManufacturer = StringStripWS(StringUpper(StdoutRead($DeviceManufacturerCommand)),8)
+		$DeviceManufacturer = StringStripWS(StringUpper(StdoutRead($DeviceManufacturerCommand)), 8)
 		Local $DeviceModelCommand = Run(@ComSpec & " /c adb -s " & $SerialV & " shell getprop ro.product.model", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 		ProcessWaitClose($DeviceModelCommand)
-		$DeviceModel = StringStripWS(StdoutRead($DeviceModelCommand),8)
+		$DeviceModel = StringStripWS(StdoutRead($DeviceModelCommand), 8)
 		GUICtrlSetData($ModelName_Label, $DeviceManufacturer & " " & $DeviceModel)
 	EndIf
-EndFunc
+EndFunc   ;==>DeviceDetails
 
 Func GetIPClick()
 	$ipTxt = "FOR /F ""tokens=2"" %%G IN ('adb -s " & $SerialV & " shell ip addr show wlan0 ^|find ""inet ""') DO set ipfull=%%G"
@@ -467,27 +467,27 @@ Func SwitchClick()
 EndFunc   ;==>SwitchClick
 
 Func WM_NOTIFY($hWnd, $Msg, $wParam, $lParam)
-    Local $hListView, $tNMHDR, $hWndFrom, $iCode
-    $hListView = $DeviceList
-    If Not IsHWnd($hListView) Then $hListView = GUICtrlGetHandle($DeviceList)
-    $tNMHDR = DllStructCreate($tagNMHDR, $lParam)
-    $hWndFrom = HWnd(DllStructGetData($tNMHDR, "HwndFrom"))
-    $iCode = DllStructGetData($tNMHDR, "Code")
-    Switch $hWndFrom
-        Case $hListView
-            Switch $iCode
-                Case $NM_CLICK
-                    Local $tInfo = DllStructCreate($tagNMLISTVIEW, $lParam)
-                    Local $iItem = DllStructGetData($tInfo, "Item")
-                    If _GUICtrlListView_GetItemSelected($hListView, $iItem) = True Then
-                        ConsoleWrite("---> Item " & $iItem + 1 & " has checked" & @LF)
+	Local $hListView, $tNMHDR, $hWndFrom, $iCode
+	$hListView = $DeviceList
+	If Not IsHWnd($hListView) Then $hListView = GUICtrlGetHandle($DeviceList)
+	$tNMHDR = DllStructCreate($tagNMHDR, $lParam)
+	$hWndFrom = HWnd(DllStructGetData($tNMHDR, "HwndFrom"))
+	$iCode = DllStructGetData($tNMHDR, "Code")
+	Switch $hWndFrom
+		Case $hListView
+			Switch $iCode
+				Case $NM_CLICK
+					Local $tInfo = DllStructCreate($tagNMLISTVIEW, $lParam)
+					Local $iItem = DllStructGetData($tInfo, "Item")
+					If _GUICtrlListView_GetItemSelected($hListView, $iItem) = True Then
+						ConsoleWrite("---> Item " & $iItem + 1 & " has checked" & @LF)
 						$SerialV = _GUICtrlListView_GetItemText($DeviceList, $iItem, 1)
 						ConsoleWrite(@ScriptLineNumber & ': ' & $SerialV & @CRLF)
 						Call(DeviceDetails)
-                    EndIf
-            EndSwitch
-    EndSwitch
-    Return $GUI_RUNDEFMSG
-EndFunc
+					EndIf
+			EndSwitch
+	EndSwitch
+	Return $GUI_RUNDEFMSG
+EndFunc   ;==>WM_NOTIFY
 
 ;==>"Made with️ ❤ in Bangladesh"
