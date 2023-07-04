@@ -20,27 +20,12 @@ Opt("GUICoordMode", 1) ;1=absolute, 0=relative, 2=cell
 Opt("GUICloseOnESC", 1) ;1=ESC  closes, 0=ESC won't close
 Opt("MustDeclareVars", 1) ;0=disabled, 1=MustDeclareVars mode enabled
 
-;Global $GUI, $WiFiAddressV, $SelectedTab, $DeviceManufacturer, $DeviceModel, $FinalParam, $Tab, $Device_Manager_Tab
-Global $ADBOutput1, $ADBOutput2, $AlwaysOnTopP, $AlwaysOnTopV, $AlwaysOnTop_Check, $DetailsGroup, $DeviceList, $DeviceListGroup, $DeviceManufacturer, $DeviceManufacturerCommand, $DeviceModel, $DeviceModelCommand, $Device_Manager_Tab, $FinalParam, $FullScreenP, $FullScreenV, $FullScreen_Check, $GUI, $GetIP_Button, $GoWireless_Button, $HideBorderP, $HideBorderV, $HideBorder_Check, $IPAddress, $ModelName_Label, $NoScreenSaverP, $NoScreenSaverV, $NoScreenSaver_Check, $On_Button, $Options, $Parameter, $ParameterGroup, $PowerOffOnCloseP, $PowerOffOnCloseV, $PowerOffOnClose_Check, $ReadOnlyModeP, $ReadOnlyModeV, $ReadOnlyMode_Check, $Refresh_Button, $Reset_Button, $ResolutionP, $ResolutionV, $Resolution_Combo, $SOptions, $Scrcpy_Tab, $SelectedDeviceGroupScrcpy, $SelectedDeviceGroupViewer, $SelectedDeviceScrcpyValue, $SelectedDeviceViewerValue, $SelectedTab, $SerialValue, $ShortCutA_Radio, $ShortCutC_Radio, $ShortCutKey, $ShortCutP, $ShowTouchP, $ShowTouchV, $ShowTouch_Check, $StatusBar, $StayAwakeP, $StayAwakeV, $StayAwake_Check, $Tab, $TurnOffTheScreenP, $TurnOffTheScreenV, $TurnOffTheScreen_Check, $Viewer_Tab, $WiFiAddressV, $WirlessGroup, $adbdevices
+Global $adbdevices, $ADBOutput1, $ADBOutput2, $AlwaysOnTopP, $AlwaysOnTopV, $AlwaysOnTop_Check, $DetailsGroup, $DeviceList, $DeviceListGroup, $DeviceManufacturer, $DeviceManufacturerCommand, $DeviceModel, $DeviceModelCommand, $Device_Manager_Tab, $FinalParam, $FullScreenP, $FullScreenV, $FullScreen_Check, $GetIP_Button, $GoWireless_Button, $GUI, $HideBorderP, $HideBorderV, $HideBorder_Check, $ini, $IPAddress, $ipBat, $ModelName_Label, $NoScreenSaverP, $NoScreenSaverV, $NoScreenSaver_Check, $On_Button, $Options, $Parameter, $ParameterGroup, $PowerOffOnCloseP, $PowerOffOnCloseV, $PowerOffOnClose_Check, $ReadOnlyModeP, $ReadOnlyModeV, $ReadOnlyMode_Check, $Refresh_Button, $Reset_Button, $ResolutionP, $ResolutionV, $Resolution_Combo, $Scrcpy_Tab, $SelectedDeviceGroupScrcpy, $SelectedDeviceGroupViewer, $SelectedDeviceScrcpyValue, $SelectedDeviceViewerValue, $SelectedTab, $SerialValue, $ShortCutA_Radio, $ShortCutC_Radio, $ShortCutKey, $ShortCutP, $ShowTouchP, $ShowTouchV, $ShowTouch_Check, $SOptions, $StatusBar, $StayAwakeP, $StayAwakeV, $StayAwake_Check, $Tab, $TurnOffTheScreenP, $TurnOffTheScreenV, $TurnOffTheScreen_Check, $Viewer_Tab, $WiFiAddressV, $WirlessGroup
 Global $ini = "settings.ini"
-Global $ResolutionV = ""
-Global $AlwaysOnTopV = ""
-Global $FullScreenV = ""
-Global $HideBorderV = ""
-Global $WiFiAddressV = ""
-Global $NoScreenSaverV = ""
-Global $PowerOffOnCloseV = ""
-Global $ReadOnlyModeV = ""
-Global $SerialValue = ""
-Global $ShowTouchV = ""
-Global $StayAwakeV = ""
-Global $TurnOffTheScreenV = ""
-Global $Parameter = ""
-Global $ipBat = ""
 
 Call(ReadSettings)
 
-$GUI = GUICreate("Droid Control", 400, 450, 950, -1, BitOR($WS_POPUP, $WS_CAPTION))
+$GUI = GUICreate("Droid Control", 400, 450, 1, -1, BitOR($WS_POPUP, $WS_CAPTION))
 GUISetOnEvent($GUI_EVENT_CLOSE, "OffClick")
 $Tab = GUICtrlCreateTab(1, 1, 400, 425)
 GUICtrlSetOnEvent(-1, "TabChange")
@@ -61,6 +46,7 @@ GUICtrlSetOnEvent(-1, "RefreshClick")
 $Reset_Button = GUICtrlCreateButton("Reset", 320, 93, 70, 47, $BS_MULTILINE)
 GUICtrlSetOnEvent(-1, "ResetClick")
 GUICtrlCreateGroup("", -99, -99, 1, 1)
+
 $WirlessGroup = GUICtrlCreateGroup("Wireless", 5, 150, 390, 40, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 GUICtrlSetFont(-1, 8, 400, 0, "Arial")
 $GetIP_Button = GUICtrlCreateButton("Get IP", 10, 165, 70, 20, $BS_MULTILINE)
@@ -70,21 +56,25 @@ _GUICtrlIpAddress_Set($IPAddress, $WiFiAddressV)
 $GoWireless_Button = GUICtrlCreateButton("Go Air", 320, 165, 70, 20, $BS_MULTILINE)
 GUICtrlSetOnEvent(-1, "GoWirelessClick")
 GUICtrlCreateGroup("", -99, -99, 1, 1)
+
 $DetailsGroup = GUICtrlCreateGroup("Details", 5, 195, 390, 100, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 GUICtrlSetFont(-1, 8, 400, 0, "Arial")
 $ModelName_Label = GUICtrlCreateLabel("", 10, 210, 380, 20, $SS_CENTER)
 GUICtrlSetFont(-1, 10, 700, 0, "")
 GUICtrlCreateGroup("", -99, -99, 1, 1)
+
 $Viewer_Tab = GUICtrlCreateTabItem("Viewer")
 $SelectedDeviceGroupViewer = GUICtrlCreateGroup("Selected Device", 5, 25, 390, 40, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 $SelectedDeviceViewerValue = GUICtrlCreateLabel("", 10, 40, 380, 20, $SS_CENTER)
 GUICtrlSetFont(-1, 10, 700, 0, "")
 GUICtrlCreateGroup("", -99, -99, 1, 1)
+
 $Scrcpy_Tab = GUICtrlCreateTabItem("Scrcpy")
 $SelectedDeviceGroupScrcpy = GUICtrlCreateGroup("Selected Device", 5, 25, 390, 40, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 $SelectedDeviceScrcpyValue = GUICtrlCreateLabel("", 10, 40, 380, 20, $SS_CENTER)
 GUICtrlSetFont(-1, 10, 700, 0, "")
 GUICtrlCreateGroup("", -99, -99, 1, 1)
+
 $Options = GUICtrlCreateGroup("Resolution", 5, 70, 80, 40, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 GUICtrlSetFont(-1, 8, 400, 0, "Arial")
 $Resolution_Combo = GUICtrlCreateCombo("", 10, 85, 70, 20)
@@ -92,12 +82,14 @@ GUICtrlSetOnEvent(-1, "Param")
 GUICtrlSetData($Resolution_Combo, "Max|Auto", "Max")
 _GUICtrlComboBox_SelectString($Resolution_Combo, $ResolutionV)
 GUICtrlCreateGroup("", -99, -99, 1, 1)
+
 $SOptions = GUICtrlCreateGroup("ShortCut", 90, 70, 305, 40, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 $ShortCutC_Radio = GUICtrlCreateRadio("", 95, 85, 145, 20, $GUI_SS_DEFAULT_RADIO)
 GUICtrlSetOnEvent(-1, "Param")
 $ShortCutA_Radio = GUICtrlCreateRadio("", 240, 85, 145, 20, $GUI_SS_DEFAULT_RADIO)
 GUICtrlSetOnEvent(-1, "Param")
 GUICtrlCreateGroup("", -99, -99, 1, 1)
+
 $Options = GUICtrlCreateGroup("Options", 5, 115, 390, 120, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 $FullScreen_Check = GUICtrlCreateCheckbox("", 19, 130, 20, 20, $GUI_SS_DEFAULT_CHECKBOX)
 GUICtrlSetState($FullScreen_Check, $FullScreenV)
@@ -127,6 +119,7 @@ $HideBorder_Check = GUICtrlCreateCheckbox("", 259, 130, 20, 20, $GUI_SS_DEFAULT_
 GUICtrlSetState($HideBorder_Check, $HideBorderV)
 GUICtrlSetOnEvent(-1, "Param")
 GUICtrlCreateGroup("", -99, -99, 1, 1)
+
 ;~ $TouchGroup = GUICtrlCreateGroup("Touch", 5, 125, 280, 183, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 ;~ GUICtrlSetFont(-1, 8, 400, 0, "Arial")
 ;~ $VolumeUP_Button = GUICtrlCreateButton("+", 19, 128, 50, 35)
@@ -187,6 +180,11 @@ Func ReadSettings()
 	$StayAwakeV = IniRead($ini, "Main", "StayAwake", 4)
 	$TurnOffTheScreenV = IniRead($ini, "Main", "TurnOffTheScreen", 1)
 	$FinalParam =IniRead($ini, "Main", "FinalParameter", "")
+	If IniRead($ini, "Main", "ShortCutCtrl", "") = 1 Then
+		GUICtrlSetState($ShortCutC_Radio,$GUI_CHECKED)
+	ElseIf IniRead($ini, "Main", "ShortCutAlt", "") = 1 Then
+		GUICtrlSetState($ShortCutA_Radio,$GUI_CHECKED)
+	EndIf
 EndFunc   ;==>ReadSettings
 
 Func RefreshClick()
@@ -270,9 +268,11 @@ Func TabChange()
 	If _GUICtrlTab_GetCurSel($Tab) = 0 Then ; zero based index of current selected TabItem
 		WinSetState($DeviceList, "", @SW_SHOW)
 		_GUICtrlIpAddress_ShowHide($IPAddress, @SW_SHOW)
+		Call(SumParam)
 	Else
 		WinSetState($DeviceList, "", @SW_HIDE)
 		_GUICtrlIpAddress_ShowHide($IPAddress, @SW_HIDE)
+		Call(SumParam)
 	EndIf
 EndFunc   ;==>TabChange
 
@@ -379,9 +379,13 @@ Func OffClick()
 	If WinExists("[CLASS:SDL_app]", "") Then
 		WinClose("[CLASS:SDL_app]", "")
 		RunWait(@ComSpec & " /c " & "adb kill-server", "", @SW_HIDE)
+		_SaveIni("Serial", "")
+		_SaveIni("FinalParameter", "")
 		Exit
 	Else
 		RunWait(@ComSpec & " /c " & "adb kill-server", "", @SW_HIDE)
+		_SaveIni("Serial", "")
+		_SaveIni("FinalParameter", "")
 		Exit
 	EndIf
 EndFunc   ;==>OffClick
