@@ -1,5 +1,10 @@
 ;==>"Made with️ ❤ in Bangladesh"
 
+Opt("GUIOnEventMode", 1) ;0=disabled, 1=OnEvent mode enabled
+Opt("GUICoordMode", 1) ;1=absolute, 0=relative, 2=cell
+Opt("GUICloseOnESC", 1) ;1=ESC  closes, 0=ESC won't close
+Opt("MustDeclareVars", 1) ;0=disabled, 1=MustDeclareVars mode enabled
+
 #include <ButtonConstants.au3>
 #include <Clipboard.au3>
 #include <ComboConstants.au3>
@@ -17,61 +22,89 @@
 #include <WinAPI.au3>
 #include <WindowsConstants.au3>
 
-Opt("GUIOnEventMode", 1) ;0=disabled, 1=OnEvent mode enabled
-Opt("GUICoordMode", 1) ;1=absolute, 0=relative, 2=cell
-Opt("GUICloseOnESC", 1) ;1=ESC  closes, 0=ESC won't close
-Opt("MustDeclareVars", 1) ;0=disabled, 1=MustDeclareVars mode enabled
+Global $adbdevices, $ADBOutput1, $ADBOutput2, $AlwaysOnTopP, $AlwaysOnTopV, $AlwaysOnTop_Check, $BatFile, $BatTxt1, $BatTxt2, $BatTxt3, $BorderlessP, $BorderlessV, $Borderless_Check, $DetailsGroup, $DeviceList, $DeviceListGroup, $DeviceManufacturer, $DeviceManufacturerCommand, $DeviceModel, $DeviceModelCommand, $Device_Manager_Tab, $FinalParam, $FullScreenP, $FullScreenV, $FullScreen_Check, $GetIP_Button, $GoWireless_Button, $mGUI, $cGUI, $ini, $IPAddress, $ipBat, $ModelName_Label, $NoScreenSaverP, $NoScreenSaverV, $NoScreenSaver_Check, $On_Button, $OptionsGroup, $Parameter, $ParameterGroup, $PowerOffOnExitP, $PowerOffOnExitV, $PowerOffOnExit_Check, $Refresh_Button, $Reset_Button, $ResolutionGroup, $ResolutionA_Radio, $ResolutionM_Radio, $ResolutionP, $Scrcpy_Tab, $SelectedDeviceGroupScrcpy, $SelectedDeviceGroupViewer, $SelectedDeviceScrcpyValue, $SelectedDeviceViewerValue, $SelectedTab, $SerialValue, $ShortCutA_Radio, $ShortCutC_Radio, $ShortCutKey, $ShortCutP, $ShowTouchP, $ShowTouchV, $ShowTouch_Check, $ShortCutGroup, $StatusBar, $StayAwakeP, $StayAwakeV, $StayAwake_Check, $Tab, $TurnOffTheScreenP, $TurnOffTheScreenV, $TurnOffTheScreen_Check, $Viewer_Tab, $ViewOnlyModeP, $ViewOnlyModeV, $ViewOnlyMode_Check, $WiFiAddressV, $WirlessGroup, $TouchGroup, $VolumeUP_Button, $VolumeDown_Button, $NotificationOn_Button, $NotificationOff_Button, $ScreenOn_Button, $ScreenOff_Button, $Menu_Button, $Power_Button, $Back_Button, $Home_Button, $Switch_Button, $SelectedDeviceGroupControl, $SelectedDeviceControlValue
+Global $ini = @ScriptDir & "\Core\Config.ini"
 
-Global $adbdevices, $ADBOutput1, $ADBOutput2, $AlwaysOnTopP, $AlwaysOnTopV, $AlwaysOnTop_Check, $BorderlessP, $BorderlessV, $Borderless_Check, $DetailsGroup, $DeviceList, $DeviceListGroup, $DeviceManufacturer, $DeviceManufacturerCommand, $DeviceModel, $DeviceModelCommand, $Device_Manager_Tab, $FinalParam, $FullScreenP, $FullScreenV, $FullScreen_Check, $GetIP_Button, $GoWireless_Button, $mGUI, $cGUI, $ini, $IPAddress, $ipBat, $ModelName_Label, $NoScreenSaverP, $NoScreenSaverV, $NoScreenSaver_Check, $On_Button, $OptionsGroup, $Parameter, $ParameterGroup, $PowerOffOnExitP, $PowerOffOnExitV, $PowerOffOnExit_Check, $Refresh_Button, $Reset_Button, $ResolutionGroup, $ResolutionA_Radio, $ResolutionM_Radio, $ResolutionP, $Scrcpy_Tab, $SelectedDeviceGroupScrcpy, $SelectedDeviceGroupViewer, $SelectedDeviceScrcpyValue, $SelectedDeviceViewerValue, $SelectedTab, $SerialValue, $ShortCutA_Radio, $ShortCutC_Radio, $ShortCutKey, $ShortCutP, $ShowTouchP, $ShowTouchV, $ShowTouch_Check, $ShortCutGroup, $StatusBar, $StayAwakeP, $StayAwakeV, $StayAwake_Check, $Tab, $TurnOffTheScreenP, $TurnOffTheScreenV, $TurnOffTheScreen_Check, $Viewer_Tab, $ViewOnlyModeP, $ViewOnlyModeV, $ViewOnlyMode_Check, $WiFiAddressV, $WirlessGroup, $TouchGroup, $VolumeUP_Button, $VolumeDown_Button, $NotificationOn_Button, $NotificationOff_Button, $ScreenOn_Button, $ScreenOff_Button, $Menu_Button, $Power_Button, $Back_Button, $Home_Button, $Switch_Button, $SelectedDeviceGroupControl, $SelectedDeviceControlValue
-Global $ini = "settings.ini"
-
-Call(MainProgram)
+MainProgram()
 
 Func MainProgram()
-	Call(GUIMain)
-	Call(ReadSettings)
-	Call(ADBStart)
-	Call(DeviceListGet)
-	Call(DeviceListSet)
-
+	StartupCheck()
+	StatusBarWrite("Installing required components")
+	GUIMain()
+	StatusBarWrite("Reading settings")
+	ReadSettings()
+	StatusBarWrite("Starting ADB Server")
+	ADBStart()
+	StatusBarWrite("Searching for device")
+	DeviceListGet()
+	StatusBarWrite("Making a device list")
+	DeviceListSet()
+	StatusBarWrite("Select a device from list")
 	While 1
 		Sleep(100)     ; Sleep to reduce CPU usage
 	WEnd
 EndFunc   ;==>MainProgram
 
 Func RefreshClick()
-	Call(DeviceListGet)
-	Call(DeviceListSet)
+	StatusBarWrite("Searching for device")
+	DeviceListGet()
+	StatusBarWrite("Making a device list")
+	DeviceListSet()
+	StatusBarWrite("Select a device from list")
 EndFunc   ;==>RefreshClick
 
 Func ResetClick()
-	Call(ADBStop)
-	Call(ADBStart)
-	Call(DeviceListGet)
-	Call(DeviceListSet)
+	StatusBarWrite("Restarting ADB Server")
+	ADBStop()
+	ADBStart()
+	StatusBarWrite("Searching for device")
+	DeviceListGet()
+	StatusBarWrite("Making a device list")
+	DeviceListSet()
+	StatusBarWrite("Select a device from list")
 EndFunc   ;==>ResetClick
 
 Func GetIPClick()
-	Call(GetIP)
-	Call(ReadSettings)
+	StatusBarWrite("Geting IP Address from selected device")
+	GetIP()
+	ReadSettings()
 EndFunc   ;==>GetIPClick
 
 Func GoWirelessClick()
-	Call(GoWireless)
-	Call(DeviceListGet)
-	Call(DeviceListSet)
+	StatusBarWrite("Try connecting to given IP")
+	GoWireless()
+	StatusBarWrite("Searching for device")
+	DeviceListGet()
+	StatusBarWrite("Making a device list")
+	DeviceListSet()
+	StatusBarWrite("Select a device from list")
 EndFunc   ;==>GoWirelessClick
 
 Func ParameterClick()
-	Call(ParameterUpdate)
-	Call(Parameters)
+	StatusBarWrite("Adding select parameter in the scrcpy command line")
+	ParameterUpdate()
+	Parameters()
 EndFunc   ;==>ParameterClick
 
 Func OnClick()
-	Call(ScrcpyOn)
-	Call(GUIChild)
-	Call(ScrcpyRun)
+	StatusBarWrite("Starting scrcpy command")
+	ScrcpyOn()
+	GUIChild()
+	ScrcpyRun()
 EndFunc   ;==>OnClick
+
+Func StartupCheck()
+	$BatFile = @ScriptDir & "\Core\ip.bat"
+	$BatTxt1 = "FOR /F ""tokens=2"" %%G IN ('adb -s " & $SerialValue & " shell ip addr show wlan0 ^|find ""inet ""') DO set ipfull=%%G"
+	$BatTxt2 = "FOR /F ""tokens=1 delims=/"" %%G in (""%ipfull%"") DO set ip=%%G"
+	$BatTxt3 = "echo %ip%|clip"
+	If Not FileExists($BatFile) Then
+		_FileCreate($BatFile)
+		_FileWriteToLine($BatFile, 1, $BatTxt1, True, True)
+		_FileWriteToLine($BatFile, 2, $BatTxt2, True, True)
+		_FileWriteToLine($BatFile, 3, $BatTxt3, True, True)
+	EndIf
+EndFunc   ;==>StartupCheck
 
 Func GUIMain()
 	$mGUI = GUICreate("Droid Control", 400, 450, -1, -1, BitOR($WS_POPUP, $WS_CAPTION))
@@ -90,17 +123,21 @@ Func GUIMain()
 	_GUICtrlListView_JustifyColumn($DeviceList, 2, 2)
 	$Refresh_Button = GUICtrlCreateButton("Refresh", 320, 40, 70, 48)
 	GUICtrlSetOnEvent(-1, "RefreshClick")
+	GUICtrlSetTip(-1, "Click to refresh device list.")
 	$Reset_Button = GUICtrlCreateButton("Reset", 320, 93, 70, 47)
 	GUICtrlSetOnEvent(-1, "ResetClick")
+	GUICtrlSetTip(-1, "Click to reset device list.")
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	$WirlessGroup = GUICtrlCreateGroup("Wireless", 5, 150, 390, 40, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 	$GetIP_Button = GUICtrlCreateButton("Get IP", 10, 165, 70, 20)
 	GUICtrlSetOnEvent(-1, "GetIPClick")
+	GUICtrlSetTip(-1, "Get IP from usb device.")
 	$IPAddress = _GUICtrlIpAddress_Create($mGUI, 115, 165, 170, 20)
 	_GUICtrlIpAddress_Set($IPAddress, $WiFiAddressV)
 	$GoWireless_Button = GUICtrlCreateButton("Go Air", 320, 165, 70, 20)
 	GUICtrlSetOnEvent(-1, "GoWirelessClick")
+	GUICtrlSetTip(-1, "Click to connect with IP.")
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	$DetailsGroup = GUICtrlCreateGroup("Details", 5, 195, 390, 100, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
@@ -123,40 +160,54 @@ Func GUIMain()
 	$ResolutionGroup = GUICtrlCreateGroup("Resolution", 325, 70, 70, 65, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 	$ResolutionA_Radio = GUICtrlCreateRadio("Auto", 330, 85, 60, 20, $GUI_SS_DEFAULT_RADIO)
 	GUICtrlSetOnEvent(-1, "ParameterClick")
+	GUICtrlSetTip(-1, "Set window height automatic.")
 	$ResolutionM_Radio = GUICtrlCreateRadio("Max", 330, 110, 60, 20, $GUI_SS_DEFAULT_RADIO)
 	GUICtrlSetOnEvent(-1, "ParameterClick")
+	GUICtrlSetTip(-1, "Set window height maximum.")
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	$ShortCutGroup = GUICtrlCreateGroup("ShortCut", 325, 140, 70, 65, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 	$ShortCutC_Radio = GUICtrlCreateRadio("Ctrl", 330, 155, 60, 20, $GUI_SS_DEFAULT_RADIO)
 	GUICtrlSetOnEvent(-1, "ParameterClick")
+	GUICtrlSetTip(-1, "Set 'Ctrl' as shortcut key.")
 	$ShortCutA_Radio = GUICtrlCreateRadio("Alt", 330, 180, 60, 20, $GUI_SS_DEFAULT_RADIO)
 	GUICtrlSetOnEvent(-1, "ParameterClick")
+	GUICtrlSetTip(-1, "Set 'Alt' as shortcut key.")
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	$OptionsGroup = GUICtrlCreateGroup("Options", 5, 70, 315, 190, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 	$FullScreen_Check = GUICtrlCreateCheckbox("Full Screen", 10, 85, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
 	GUICtrlSetOnEvent(-1, "ParameterClick")
+	GUICtrlSetTip(-1, "Start in fullscreen.")
 	$PowerOffOnExit_Check = GUICtrlCreateCheckbox("Power Off On Exit", 112, 85, 96, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
 	GUICtrlSetOnEvent(-1, "ParameterClick")
+	GUICtrlSetTip(-1, "Turn the device screen off when closing scrcpy.")
 	$AlwaysOnTop_Check = GUICtrlCreateCheckbox("Always On Top", 213, 85, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
 	GUICtrlSetOnEvent(-1, "ParameterClick")
+	GUICtrlSetTip(-1, "Make scrcpy window always on top (above other windows).")
 	$ViewOnlyMode_Check = GUICtrlCreateCheckbox("View Only Mode", 10, 120, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
 	GUICtrlSetOnEvent(-1, "ParameterClick")
+	GUICtrlSetTip(-1, "Disable device control (mirror the device in read-only).")
 	$ShowTouch_Check = GUICtrlCreateCheckbox("Show Touch", 112, 120, 96, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
 	GUICtrlSetOnEvent(-1, "ParameterClick")
+	GUICtrlSetTip(-1, "Enable 'show touches' on start, restore the initial value on exit.")
 	$NoScreenSaver_Check = GUICtrlCreateCheckbox("No ScreenSaver", 213, 120, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
 	GUICtrlSetOnEvent(-1, "ParameterClick")
+	GUICtrlSetTip(-1, "Disable screensaver while scrcpy is running.")
 	$TurnOffTheScreen_Check = GUICtrlCreateCheckbox("Turn Off The Screen", 10, 155, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
 	GUICtrlSetOnEvent(-1, "ParameterClick")
+	GUICtrlSetTip(-1, "Turn the device screen off immediately.")
 	$StayAwake_Check = GUICtrlCreateCheckbox("Stay Awake", 112, 155, 96, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
 	GUICtrlSetOnEvent(-1, "ParameterClick")
+	GUICtrlSetTip(-1, "Keep the device on while scrcpy is running.")
 	$Borderless_Check = GUICtrlCreateCheckbox("Borderless", 213, 155, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
 	GUICtrlSetOnEvent(-1, "ParameterClick")
+	GUICtrlSetTip(-1, "Disable window decorations (display borderless window).")
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	$On_Button = GUICtrlCreateButton("On", 325, 210, 70, 50)
 	GUICtrlSetOnEvent(-1, "OnClick")
+	GUICtrlSetTip(-1, "Click to start SCRCPY.")
 
 	$ParameterGroup = GUICtrlCreateGroup("Parameter", 5, 300, 390, 120, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 	$Parameter = GUICtrlCreateLabel($FinalParam, 10, 315, 380, 100, -1)
@@ -174,26 +225,26 @@ EndFunc   ;==>GUIMain
 Func ReadSettings()
 	$AlwaysOnTopV = IniRead($ini, "Main", "AlwaysOnTop", 4)
 	GUICtrlSetState($AlwaysOnTop_Check, $AlwaysOnTopV)
-	$FullScreenV = IniRead($ini, "Main", "FullScreen", 4)
-	GUICtrlSetState($FullScreen_Check, $FullScreenV)
 	$BorderlessV = IniRead($ini, "Main", "Borderless", 1)
 	GUICtrlSetState($Borderless_Check, $BorderlessV)
-	$WiFiAddressV = IniRead($ini, "Main", "WiFiAddress", "192.168.1.2")
+	$FinalParam = IniRead($ini, "Main", "FinalParameter", "")
+	GUICtrlSetData($Parameter, $FinalParam)
+	$FullScreenV = IniRead($ini, "Main", "FullScreen", 4)
+	GUICtrlSetState($FullScreen_Check, $FullScreenV)
 	$NoScreenSaverV = IniRead($ini, "Main", "NoScreenSaver", 4)
 	GUICtrlSetState($NoScreenSaver_Check, $NoScreenSaverV)
 	$PowerOffOnExitV = IniRead($ini, "Main", "PowerOffOnExit", 1)
 	GUICtrlSetState($PowerOffOnExit_Check, $PowerOffOnExitV)
-	$ViewOnlyModeV = IniRead($ini, "Main", "ViewOnlyMode", 4)
-	GUICtrlSetState($ViewOnlyMode_Check, $ViewOnlyModeV)
-	$SerialValue = IniRead($ini, "Main", "Serial", "")
 	$ShowTouchV = IniRead($ini, "Main", "ShowTouch", 4)
 	GUICtrlSetState($ShowTouch_Check, $ShowTouchV)
 	$StayAwakeV = IniRead($ini, "Main", "StayAwake", 4)
 	GUICtrlSetState($StayAwake_Check, $StayAwakeV)
 	$TurnOffTheScreenV = IniRead($ini, "Main", "TurnOffTheScreen", 1)
 	GUICtrlSetState($TurnOffTheScreen_Check, $TurnOffTheScreenV)
-	$FinalParam = IniRead($ini, "Main", "FinalParameter", "")
-	GUICtrlSetData($Parameter, $FinalParam)
+	$ViewOnlyModeV = IniRead($ini, "Main", "ViewOnlyMode", 4)
+	GUICtrlSetState($ViewOnlyMode_Check, $ViewOnlyModeV)
+	$WiFiAddressV = IniRead($ini, "Main", "WiFiAddress", "192.168.1.2")
+	_GUICtrlIpAddress_Set($IPAddress, $WiFiAddressV)
 
 	If IniRead($ini, "Main", "ResolutionAuto", "") = 1 Then
 		GUICtrlSetState($ResolutionA_Radio, $GUI_CHECKED)
@@ -219,7 +270,6 @@ Func DeviceListGet()
 	$adbdevices = StdoutRead($iPID1)
 	$ADBOutput1 = StringReplace(StringReplace(StringStripWS(StringTrimLeft($adbdevices, 26), $STR_STRIPTRAILING), @CR, ""), "	device", " USB =")
 	$ADBOutput2 = StringReplace($ADBOutput1, ":5555 USB =", ":5555 Wireless =")
-	StatusBarWrite($ADBOutput2)
 	If $ADBOutput2 = "" Then
 		IniWriteSection($ini, "Devices", "NO USB =")
 	Else
@@ -246,8 +296,8 @@ Func ADBStop()
 EndFunc   ;==>ADBStop
 
 Func GetIP()
-	Local $ipTxt = "FOR /F ""tokens=2"" %%G IN ('adb -s " & $SerialValue & " shell ip addr show wlan0 ^|find ""inet ""') DO set ipfull=%%G"
-	_FileWriteToLine(@ScriptDir & "\Core\ip.bat", 1, $ipTxt, True, True)
+	$BatTxt1 = "FOR /F ""tokens=2"" %%G IN ('adb -s " & $SerialValue & " shell ip addr show wlan0 ^|find ""inet ""') DO set ipfull=%%G"
+	_FileWriteToLine(@ScriptDir & "\Core\ip.bat", 1, $BatTxt1, True, True)
 	Local $iPID2 = RunWait(@ComSpec & " /c " & @ScriptDir & "\Core\ip.bat", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 	ProcessWaitClose($iPID2)
 	$ipBat = StringStripWS(_ClipBoard_GetData(), $STR_STRIPTRAILING)
@@ -265,11 +315,14 @@ Func GoWireless()
 EndFunc   ;==>GoWireless
 
 Func DeviceDetails()
-	If Not $SerialValue = "" Then
-		Local $DeviceManufacturerCommand = Run(@ComSpec & " /c adb -s " & $SerialValue & " shell getprop ro.product.manufacturer", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
+	If $SerialValue = "No" Then
+		StatusBarWrite("No device found")
+	Else
+		StatusBarWrite("Selected device: " & $SerialValue)
+		$DeviceManufacturerCommand = Run(@ComSpec & " /c adb -s " & $SerialValue & " shell getprop ro.product.manufacturer", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 		ProcessWaitClose($DeviceManufacturerCommand)
 		Global $DeviceManufacturer = StringStripWS(StringUpper(StdoutRead($DeviceManufacturerCommand)), 8)
-		Local $DeviceModelCommand = Run(@ComSpec & " /c adb -s " & $SerialValue & " shell getprop ro.product.model", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
+		$DeviceModelCommand = Run(@ComSpec & " /c adb -s " & $SerialValue & " shell getprop ro.product.model", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 		ProcessWaitClose($DeviceModelCommand)
 		Global $DeviceModel = StringStripWS(StdoutRead($DeviceModelCommand), 8)
 		GUICtrlSetData($ModelName_Label, $DeviceManufacturer & " " & $DeviceModel)
@@ -282,11 +335,11 @@ Func TabChange()
 	If _GUICtrlTab_GetCurSel($Tab) = 0 Then ; zero based index of current selected TabItem
 		WinSetState($DeviceList, "", @SW_SHOW)
 		_GUICtrlIpAddress_ShowHide($IPAddress, @SW_SHOW)
-		Call(Parameters)
+		Parameters()
 	Else
 		WinSetState($DeviceList, "", @SW_HIDE)
 		_GUICtrlIpAddress_ShowHide($IPAddress, @SW_HIDE)
-		Call(Parameters)
+		Parameters()
 	EndIf
 EndFunc   ;==>TabChange
 
@@ -498,18 +551,20 @@ Func GUIChildClose()
 		WinClose("[CLASS:SDL_app]", "")
 		GUIDelete($cGUI)
 		GUISetState(@SW_SHOW, $mGUI)
+		StatusBarWrite("Selected device: " & $SerialValue)
 		GUICtrlSetState($On_Button, $GUI_ENABLE)
 	Else
 		GUIDelete($cGUI)
 		GUISetState(@SW_SHOW, $mGUI)
+		StatusBarWrite("Selected device: " & $SerialValue)
 		GUICtrlSetState($On_Button, $GUI_ENABLE)
 	EndIf
 EndFunc   ;==>GUIChildClose
 
 Func GUIMainClose()
-	Call(ADBStop)
-		_SaveIni("Serial", "")
-		Exit
+	ADBStop()
+	_SaveIni("Serial", "")
+	Exit
 EndFunc   ;==>GUIMainClose
 
 ;==>Supporting Function<==;
@@ -545,7 +600,7 @@ Func WM_NOTIFY($hWnd, $Msg, $wParam, $lParam)
 					If _GUICtrlListView_GetItemSelected($hListView, $iItem) = True Then
 						$SerialValue = _GUICtrlListView_GetItemText($DeviceList, $iItem, 1)
 						_SaveIni("Serial", $SerialValue)
-						Call(DeviceDetails)
+						DeviceDetails()
 					EndIf
 			EndSwitch
 	EndSwitch
