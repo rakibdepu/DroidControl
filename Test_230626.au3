@@ -1,3 +1,5 @@
+;==>"Made with️ ❤ in Bangladesh"
+
 #include <ButtonConstants.au3>
 #include <Clipboard.au3>
 #include <ComboConstants.au3>
@@ -198,6 +200,7 @@ Func ReadSettings()
 	ElseIf IniRead($ini, "Main", "ResolutionMax", "") = 1 Then
 		GUICtrlSetState($ResolutionM_Radio, $GUI_CHECKED)
 	EndIf
+
 	If IniRead($ini, "Main", "ShortCutCtrl", "") = 1 Then
 		GUICtrlSetState($ShortCutC_Radio, $GUI_CHECKED)
 	ElseIf IniRead($ini, "Main", "ShortCutAlt", "") = 1 Then
@@ -493,12 +496,10 @@ EndFunc   ;==>SwitchClick
 Func GUIChildClose()
 	If WinExists("[CLASS:SDL_app]", "") Then
 		WinClose("[CLASS:SDL_app]", "")
-		_SaveIni("Serial", "")
 		GUIDelete($cGUI)
 		GUISetState(@SW_SHOW, $mGUI)
 		GUICtrlSetState($On_Button, $GUI_ENABLE)
 	Else
-		_SaveIni("Serial", "")
 		GUIDelete($cGUI)
 		GUISetState(@SW_SHOW, $mGUI)
 		GUICtrlSetState($On_Button, $GUI_ENABLE)
@@ -506,16 +507,9 @@ Func GUIChildClose()
 EndFunc   ;==>GUIChildClose
 
 Func GUIMainClose()
-	If WinExists("[CLASS:SDL_app]", "") Then
-		WinClose("[CLASS:SDL_app]", "")
-		RunWait(@ComSpec & " /c " & "adb kill-server", "", @SW_HIDE)
+	Call(ADBStop)
 		_SaveIni("Serial", "")
 		Exit
-	Else
-		RunWait(@ComSpec & " /c " & "adb kill-server", "", @SW_HIDE)
-		_SaveIni("Serial", "")
-		Exit
-	EndIf
 EndFunc   ;==>GUIMainClose
 
 ;==>Supporting Function<==;
@@ -586,4 +580,3 @@ Func _GetworkingAreaRect()
 		Return SetError(1, 0, 0)
 	EndIf
 EndFunc   ;==>_GetworkingAreaRect
-;==>"Made with️ ❤ in Bangladesh"
