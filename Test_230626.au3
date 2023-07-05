@@ -33,7 +33,7 @@ Func MainProgram()
 	Call(DeviceListSet)
 
 	While 1
-	Sleep(100)     ; Sleep to reduce CPU usage
+		Sleep(100)     ; Sleep to reduce CPU usage
 	WEnd
 EndFunc   ;==>MainProgram
 
@@ -533,7 +533,7 @@ EndFunc   ;==>_IsChecked
 
 Func StatusBarWrite($sMessage = "")
 	_GUICtrlStatusBar_SetText($StatusBar, $sMessage)
-EndFunc   ;==>MemoWrite
+EndFunc   ;==>StatusBarWrite
 
 Func WM_NOTIFY($hWnd, $Msg, $wParam, $lParam)
 	Local $hListView, $tNMHDR, $hWndFrom, $iCode
