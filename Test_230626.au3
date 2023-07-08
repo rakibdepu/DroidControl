@@ -1,4 +1,4 @@
-;==>"Made with️ ❤ in Bangladesh"
+;==>"Made with️ ❤ in Bangladesh."
 
 Opt("GUIOnEventMode", 1) ;0=disabled, 1=OnEvent mode enabled
 Opt("GUICoordMode", 1) ;1=absolute, 0=relative, 2=cell
