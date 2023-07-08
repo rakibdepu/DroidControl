@@ -142,6 +142,20 @@ Func GUIMain()
 
 	$DetailsGroup = GUICtrlCreateGroup("Details", 5, 195, 390, 100, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 	$ModelName_Label = GUICtrlCreateLabel("", 10, 210, 380, 20, $SS_CENTER)
+	$1Name_Label_1 = GUICtrlCreateLabel("", 20, 235, 100, 20)
+	$1Name_Label_2 = GUICtrlCreateLabel("", 20, 235, 100, 20)
+
+	$2Name_Label_1 = GUICtrlCreateLabel("", 20, 260, 100, 20)
+	$2Name_Label_2 = GUICtrlCreateLabel("", 20, 260, 100, 20)
+
+	$3Name_Label_1 = GUICtrlCreateLabel("", 20, 285, 100, 20)
+	$3Name_Label_2 = GUICtrlCreateLabel("", 20, 285, 100, 20)
+
+	$4Name_Label_1 = GUICtrlCreateLabel("", 20, 310, 100, 20)
+	$4Name_Label_2 = GUICtrlCreateLabel("", 20, 310, 100, 20)
+
+	$5Name_Label_1 = GUICtrlCreateLabel("", 20, 335, 100, 20)
+	$5Name_Label_2 = GUICtrlCreateLabel("", 20, 335, 100, 20)
 	GUICtrlSetFont(-1, 10, 700, 0, "")
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
