@@ -1,9 +1,9 @@
 ;==>"Made with️ ❤ in Bangladesh"
 
-Opt("GUIOnEventMode", 1) ;0=disabled, 1=OnEvent mode enabled
-Opt("GUICoordMode", 1) ;1=absolute, 0=relative, 2=cell
-Opt("GUICloseOnESC", 1) ;1=ESC  closes, 0=ESC won't close
-Opt("MustDeclareVars", 1) ;0=disabled, 1=MustDeclareVars mode enabled
+Opt("GUIOnEventMode", 1)
+Opt("GUICoordMode", 1)
+Opt("GUICloseOnESC", 1)
+Opt("MustDeclareVars", 1)
 
 #include <ButtonConstants.au3>
 #include <Clipboard.au3>
@@ -41,7 +41,7 @@ Func MainProgram()
 	DeviceListSet()
 	StatusBarWrite("Select a device from list")
 	While 1
-		Sleep(100)     ; Sleep to reduce CPU usage
+		Sleep(100)
 	WEnd
 EndFunc   ;==>MainProgram
 
@@ -107,13 +107,10 @@ Func StartupCheck()
 EndFunc   ;==>StartupCheck
 
 Func GUIMain()
-	$mGUI = GUICreate("Droid Control", 400, 450, -1, -1, BitOR($WS_POPUP, $WS_CAPTION))
+	$mGUI = GUICreate("Droid Control", 400, 595, -1, -1, BitOR($WS_POPUP, $WS_CAPTION))
 	GUISetOnEvent($GUI_EVENT_CLOSE, "GUIMainClose")
-	$Tab = GUICtrlCreateTab(1, 1, 400, 425)
-	GUICtrlSetOnEvent(-1, "TabChange")
-	$Device_Manager_Tab = GUICtrlCreateTabItem("Device Manager")
-	$DeviceListGroup = GUICtrlCreateGroup("Device List", 5, 25, 390, 120, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
-	$DeviceList = _GUICtrlListView_Create($mGUI, "#|Device|Connection", 10, 40, 305, 100)
+	$DeviceListGroup = GUICtrlCreateGroup("Device List", 5, 5, 390, 120, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
+	$DeviceList = _GUICtrlListView_Create($mGUI, "#|Device|Connection", 10, 20, 305, 100)
 	_GUICtrlListView_SetExtendedListViewStyle($DeviceList, BitOR($LVS_EX_GRIDLINES, $LVS_EX_FULLROWSELECT))
 	_GUICtrlListView_SetColumnWidth($DeviceList, 0, 50)
 	_GUICtrlListView_SetColumnWidth($DeviceList, 1, 175)
@@ -121,113 +118,84 @@ Func GUIMain()
 	_GUICtrlListView_JustifyColumn($DeviceList, 0, 2)
 	_GUICtrlListView_JustifyColumn($DeviceList, 1, 2)
 	_GUICtrlListView_JustifyColumn($DeviceList, 2, 2)
-	$Refresh_Button = GUICtrlCreateButton("Refresh", 320, 40, 70, 48)
+	$Refresh_Button = GUICtrlCreateButton("Refresh", 320, 20, 70, 48)
 	GUICtrlSetOnEvent(-1, "RefreshClick")
 	GUICtrlSetTip(-1, "Click to refresh device list.")
-	$Reset_Button = GUICtrlCreateButton("Reset", 320, 93, 70, 47)
+	$Reset_Button = GUICtrlCreateButton("Reset", 320, 73, 70, 47)
 	GUICtrlSetOnEvent(-1, "ResetClick")
 	GUICtrlSetTip(-1, "Click to reset device list.")
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
-	$WirlessGroup = GUICtrlCreateGroup("Wireless", 5, 150, 390, 40, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
-	$GetIP_Button = GUICtrlCreateButton("Get IP", 10, 165, 70, 20)
+	$WirlessGroup = GUICtrlCreateGroup("Wireless", 5, 130, 390, 40, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
+	$GetIP_Button = GUICtrlCreateButton("Get IP", 10, 145, 70, 20)
 	GUICtrlSetOnEvent(-1, "GetIPClick")
 	GUICtrlSetTip(-1, "Get IP from usb device.")
-	$IPAddress = _GUICtrlIpAddress_Create($mGUI, 115, 165, 170, 20)
+	$IPAddress = _GUICtrlIpAddress_Create($mGUI, 115, 145, 170, 20)
 	_GUICtrlIpAddress_Set($IPAddress, $WiFiAddressV)
-	$GoWireless_Button = GUICtrlCreateButton("Go Air", 320, 165, 70, 20)
+	$GoWireless_Button = GUICtrlCreateButton("Go Air", 320, 145, 70, 20)
 	GUICtrlSetOnEvent(-1, "GoWirelessClick")
 	GUICtrlSetTip(-1, "Click to connect with IP.")
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
-	$DetailsGroup = GUICtrlCreateGroup("Details", 5, 195, 390, 100, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
-	$ModelName_Label = GUICtrlCreateLabel("", 10, 210, 380, 20, $SS_CENTER)
-	$1Name_Label_1 = GUICtrlCreateLabel("", 20, 235, 100, 20)
-	$1Name_Label_2 = GUICtrlCreateLabel("", 20, 235, 100, 20)
-
-	$2Name_Label_1 = GUICtrlCreateLabel("", 20, 260, 100, 20)
-	$2Name_Label_2 = GUICtrlCreateLabel("", 20, 260, 100, 20)
-
-	$3Name_Label_1 = GUICtrlCreateLabel("", 20, 285, 100, 20)
-	$3Name_Label_2 = GUICtrlCreateLabel("", 20, 285, 100, 20)
-
-	$4Name_Label_1 = GUICtrlCreateLabel("", 20, 310, 100, 20)
-	$4Name_Label_2 = GUICtrlCreateLabel("", 20, 310, 100, 20)
-
-	$5Name_Label_1 = GUICtrlCreateLabel("", 20, 335, 100, 20)
-	$5Name_Label_2 = GUICtrlCreateLabel("", 20, 335, 100, 20)
+	$DetailsGroup = GUICtrlCreateGroup("Details", 5, 175, 390, 120, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
+	$ModelName_Label = GUICtrlCreateLabel("", 10, 190, 380, 20, $SS_CENTER)
 	GUICtrlSetFont(-1, 10, 700, 0, "")
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
-
-	$Viewer_Tab = GUICtrlCreateTabItem("Viewer")
-	$SelectedDeviceGroupViewer = GUICtrlCreateGroup("Selected Device", 5, 25, 390, 40, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
-	$SelectedDeviceViewerValue = GUICtrlCreateLabel("", 10, 40, 380, 20, $SS_CENTER)
-	GUICtrlSetFont(-1, 10, 700, 0, "")
-	GUICtrlCreateGroup("", -99, -99, 1, 1)
-
-	$Scrcpy_Tab = GUICtrlCreateTabItem("Scrcpy")
-	$SelectedDeviceGroupScrcpy = GUICtrlCreateGroup("Selected Device", 5, 25, 390, 40, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
-	$SelectedDeviceScrcpyValue = GUICtrlCreateLabel("", 10, 40, 380, 20, $SS_CENTER)
-	GUICtrlSetFont(-1, 10, 700, 0, "")
-	GUICtrlCreateGroup("", -99, -99, 1, 1)
-
-	$ResolutionGroup = GUICtrlCreateGroup("Resolution", 325, 70, 70, 65, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
-	$ResolutionA_Radio = GUICtrlCreateRadio("Auto", 330, 85, 60, 20, $GUI_SS_DEFAULT_RADIO)
-	GUICtrlSetOnEvent(-1, "ParameterClick")
-	GUICtrlSetTip(-1, "Set window height automatic.")
-	$ResolutionM_Radio = GUICtrlCreateRadio("Max", 330, 110, 60, 20, $GUI_SS_DEFAULT_RADIO)
-	GUICtrlSetOnEvent(-1, "ParameterClick")
-	GUICtrlSetTip(-1, "Set window height maximum.")
-	GUICtrlCreateGroup("", -99, -99, 1, 1)
-
-	$ShortCutGroup = GUICtrlCreateGroup("ShortCut", 325, 140, 70, 65, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
-	$ShortCutC_Radio = GUICtrlCreateRadio("Ctrl", 330, 155, 60, 20, $GUI_SS_DEFAULT_RADIO)
-	GUICtrlSetOnEvent(-1, "ParameterClick")
-	GUICtrlSetTip(-1, "Set 'Ctrl' as shortcut key.")
-	$ShortCutA_Radio = GUICtrlCreateRadio("Alt", 330, 180, 60, 20, $GUI_SS_DEFAULT_RADIO)
-	GUICtrlSetOnEvent(-1, "ParameterClick")
-	GUICtrlSetTip(-1, "Set 'Alt' as shortcut key.")
-	GUICtrlCreateGroup("", -99, -99, 1, 1)
-
-	$OptionsGroup = GUICtrlCreateGroup("Options", 5, 70, 315, 190, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
-	$FullScreen_Check = GUICtrlCreateCheckbox("Full Screen", 10, 85, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
+	$OptionsGroup = GUICtrlCreateGroup("Options", 5, 300, 315, 190, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
+	$FullScreen_Check = GUICtrlCreateCheckbox("Full Screen", 10, 315, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
 	GUICtrlSetOnEvent(-1, "ParameterClick")
 	GUICtrlSetTip(-1, "Start in fullscreen.")
-	$PowerOffOnExit_Check = GUICtrlCreateCheckbox("Power Off On Exit", 112, 85, 96, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
+	$PowerOffOnExit_Check = GUICtrlCreateCheckbox("Power Off On Exit", 112, 315, 96, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
 	GUICtrlSetOnEvent(-1, "ParameterClick")
 	GUICtrlSetTip(-1, "Turn the device screen off when closing scrcpy.")
-	$AlwaysOnTop_Check = GUICtrlCreateCheckbox("Always On Top", 213, 85, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
+	$AlwaysOnTop_Check = GUICtrlCreateCheckbox("Always On Top", 213, 315, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
 	GUICtrlSetOnEvent(-1, "ParameterClick")
 	GUICtrlSetTip(-1, "Make scrcpy window always on top (above other windows).")
-	$ViewOnlyMode_Check = GUICtrlCreateCheckbox("View Only Mode", 10, 120, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
+	$ViewOnlyMode_Check = GUICtrlCreateCheckbox("View Only Mode", 10, 350, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
 	GUICtrlSetOnEvent(-1, "ParameterClick")
 	GUICtrlSetTip(-1, "Disable device control (mirror the device in read-only).")
-	$ShowTouch_Check = GUICtrlCreateCheckbox("Show Touch", 112, 120, 96, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
+	$ShowTouch_Check = GUICtrlCreateCheckbox("Show Touch", 112, 350, 96, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
 	GUICtrlSetOnEvent(-1, "ParameterClick")
 	GUICtrlSetTip(-1, "Enable 'show touches' on start, restore the initial value on exit.")
-	$NoScreenSaver_Check = GUICtrlCreateCheckbox("No ScreenSaver", 213, 120, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
+	$NoScreenSaver_Check = GUICtrlCreateCheckbox("No ScreenSaver", 213, 350, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
 	GUICtrlSetOnEvent(-1, "ParameterClick")
 	GUICtrlSetTip(-1, "Disable screensaver while scrcpy is running.")
-	$TurnOffTheScreen_Check = GUICtrlCreateCheckbox("Turn Off The Screen", 10, 155, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
+	$TurnOffTheScreen_Check = GUICtrlCreateCheckbox("Turn Off The Screen", 10, 385, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
 	GUICtrlSetOnEvent(-1, "ParameterClick")
 	GUICtrlSetTip(-1, "Turn the device screen off immediately.")
-	$StayAwake_Check = GUICtrlCreateCheckbox("Stay Awake", 112, 155, 96, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
+	$StayAwake_Check = GUICtrlCreateCheckbox("Stay Awake", 112, 385, 96, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
 	GUICtrlSetOnEvent(-1, "ParameterClick")
 	GUICtrlSetTip(-1, "Keep the device on while scrcpy is running.")
-	$Borderless_Check = GUICtrlCreateCheckbox("Borderless", 213, 155, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
+	$Borderless_Check = GUICtrlCreateCheckbox("Borderless", 213, 385, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
 	GUICtrlSetOnEvent(-1, "ParameterClick")
 	GUICtrlSetTip(-1, "Disable window decorations (display borderless window).")
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
-	$On_Button = GUICtrlCreateButton("On", 325, 210, 70, 50)
+	$ResolutionGroup = GUICtrlCreateGroup("Resolution", 325, 300, 70, 65, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
+	$ResolutionA_Radio = GUICtrlCreateRadio("Auto", 330, 315, 60, 20, $GUI_SS_DEFAULT_RADIO)
+	GUICtrlSetOnEvent(-1, "ParameterClick")
+	GUICtrlSetTip(-1, "Set window height automatic.")
+	$ResolutionM_Radio = GUICtrlCreateRadio("Max", 330, 340, 60, 20, $GUI_SS_DEFAULT_RADIO)
+	GUICtrlSetOnEvent(-1, "ParameterClick")
+	GUICtrlSetTip(-1, "Set window height maximum.")
+	GUICtrlCreateGroup("", -99, -99, 1, 1)
+
+	$ShortCutGroup = GUICtrlCreateGroup("ShortCut", 325, 370, 70, 65, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
+	$ShortCutC_Radio = GUICtrlCreateRadio("Ctrl", 330, 385, 60, 20, $GUI_SS_DEFAULT_RADIO)
+	GUICtrlSetOnEvent(-1, "ParameterClick")
+	GUICtrlSetTip(-1, "Set 'Ctrl' as shortcut key.")
+	$ShortCutA_Radio = GUICtrlCreateRadio("Alt", 330, 410, 60, 20, $GUI_SS_DEFAULT_RADIO)
+	GUICtrlSetOnEvent(-1, "ParameterClick")
+	GUICtrlSetTip(-1, "Set 'Alt' as shortcut key.")
+	GUICtrlCreateGroup("", -99, -99, 1, 1)
+
+	$On_Button = GUICtrlCreateButton("On", 325, 440, 70, 50)
 	GUICtrlSetOnEvent(-1, "OnClick")
 	GUICtrlSetTip(-1, "Click to start SCRCPY.")
 
-	$ParameterGroup = GUICtrlCreateGroup("Parameter", 5, 300, 390, 120, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
-	$Parameter = GUICtrlCreateLabel($FinalParam, 10, 315, 380, 100, -1)
+	$ParameterGroup = GUICtrlCreateGroup("Parameter", 5, 495, 390, 70, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
+	$Parameter = GUICtrlCreateLabel($FinalParam, 10, 510, 380, 50, -1)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
-	GUICtrlCreateTabItem("")
-
 	$StatusBar = _GUICtrlStatusBar_Create($mGUI)
 	_GUICtrlStatusBar_SetMinHeight($StatusBar, 25)
 
@@ -239,7 +207,7 @@ EndFunc   ;==>GUIMain
 Func ReadSettings()
 	$AlwaysOnTopV = IniRead($ini, "Main", "AlwaysOnTop", 4)
 	GUICtrlSetState($AlwaysOnTop_Check, $AlwaysOnTopV)
-	$BorderlessV = IniRead($ini, "Main", "Borderless", 1)
+	$BorderlessV = IniRead($ini, "Main", "Borderless", 4)
 	GUICtrlSetState($Borderless_Check, $BorderlessV)
 	$FinalParam = IniRead($ini, "Main", "FinalParameter", "")
 	GUICtrlSetData($Parameter, $FinalParam)
@@ -332,6 +300,7 @@ Func DeviceDetails()
 	If $SerialValue = "No" Then
 		StatusBarWrite("No device found")
 	Else
+		ParameterClick()
 		StatusBarWrite("Selected device: " & $SerialValue)
 		$DeviceManufacturerCommand = Run(@ComSpec & " /c adb -s " & $SerialValue & " shell getprop ro.product.manufacturer", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 		ProcessWaitClose($DeviceManufacturerCommand)
@@ -344,19 +313,6 @@ Func DeviceDetails()
 		GUICtrlSetData($SelectedDeviceScrcpyValue, $DeviceManufacturer & " " & $DeviceModel & " (" & $SerialValue & ")")
 	EndIf
 EndFunc   ;==>DeviceDetails
-
-Func TabChange()
-	If _GUICtrlTab_GetCurSel($Tab) = 0 Then ; zero based index of current selected TabItem
-		WinSetState($DeviceList, "", @SW_SHOW)
-		_GUICtrlIpAddress_ShowHide($IPAddress, @SW_SHOW)
-		Parameters()
-	Else
-		WinSetState($DeviceList, "", @SW_HIDE)
-		_GUICtrlIpAddress_ShowHide($IPAddress, @SW_HIDE)
-		Parameters()
-	EndIf
-EndFunc   ;==>TabChange
-
 Func ParameterUpdate()
 	If _IsChecked($ResolutionA_Radio) Then
 		Global $ResolutionP = ""
