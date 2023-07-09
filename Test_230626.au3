@@ -10,6 +10,7 @@ Opt("MustDeclareVars", 1)
 #include <ComboConstants.au3>
 #include <EditConstants.au3>
 #include <File.au3>
+#include <FontConstants.au3>
 #include <GuiComboBox.au3>
 #include <GUIConstantsEx.au3>
 #include <GuiIPAddress.au3>
@@ -22,8 +23,11 @@ Opt("MustDeclareVars", 1)
 #include <WinAPI.au3>
 #include <WindowsConstants.au3>
 
-Global $adbdevices, $ADBOutput1, $ADBOutput2, $AlwaysOnTopP, $AlwaysOnTopV, $AlwaysOnTop_Check, $BatFile, $BatTxt1, $BatTxt2, $BatTxt3, $BorderlessP, $BorderlessV, $Borderless_Check, $DetailsGroup, $DeviceList, $DeviceListGroup, $DeviceManufacturer, $DeviceManufacturerCommand, $DeviceModel, $DeviceModelCommand, $Device_Manager_Tab, $FinalParam, $FullScreenP, $FullScreenV, $FullScreen_Check, $GetIP_Button, $GoWireless_Button, $mGUI, $cGUI, $ini, $IPAddress, $ipBat, $ModelName_Label, $NoScreenSaverP, $NoScreenSaverV, $NoScreenSaver_Check, $On_Button, $OptionsGroup, $Parameter, $ParameterGroup, $PowerOffOnExitP, $PowerOffOnExitV, $PowerOffOnExit_Check, $Refresh_Button, $Reset_Button, $ResolutionGroup, $ResolutionA_Radio, $ResolutionM_Radio, $ResolutionP, $Scrcpy_Tab, $SelectedDeviceGroupScrcpy, $SelectedDeviceGroupViewer, $SelectedDeviceScrcpyValue, $SelectedDeviceViewerValue, $SelectedTab, $SerialValue, $ShortCutA_Radio, $ShortCutC_Radio, $ShortCutKey, $ShortCutP, $ShowTouchP, $ShowTouchV, $ShowTouch_Check, $ShortCutGroup, $StatusBar, $StayAwakeP, $StayAwakeV, $StayAwake_Check, $Tab, $TurnOffTheScreenP, $TurnOffTheScreenV, $TurnOffTheScreen_Check, $Viewer_Tab, $ViewOnlyModeP, $ViewOnlyModeV, $ViewOnlyMode_Check, $WiFiAddressV, $WirlessGroup, $TouchGroup, $VolumeUP_Button, $VolumeDown_Button, $NotificationOn_Button, $NotificationOff_Button, $ScreenOn_Button, $ScreenOff_Button, $Menu_Button, $Power_Button, $Back_Button, $Home_Button, $Switch_Button, $SelectedDeviceGroupControl, $SelectedDeviceControlValue, $Slogan
+Global $adbdevices, $ADBOutput1, $ADBOutput2, $AlwaysOnTopP, $AlwaysOnTopV, $AlwaysOnTop_Check, $BatFile, $BatTxt1, $BatTxt2, $BatTxt3, $BorderlessP, $BorderlessV, $Borderless_Check, $DetailsGroup, $DeviceList, $DeviceListGroup, $DeviceManufacturer, $DeviceManufacturerCommand, $DeviceModel, $DeviceModelCommand, $Device_Manager_Tab, $FinalParam, $FullScreenP, $FullScreenV, $FullScreen_Check, $GetIP_Button, $GoWireless_Button, $mGUI, $cGUI, $ini, $IPAddress, $ipBat, $ModelName_Label, $NoScreenSaverP, $NoScreenSaverV, $NoScreenSaver_Check, $On_Button, $OptionsGroup, $Parameter, $ParameterGroup, $PowerOffOnExitP, $PowerOffOnExitV, $PowerOffOnExit_Check, $Refresh_Button, $Reset_Button, $ResolutionGroup, $ResolutionA_Radio, $ResolutionM_Radio, $ResolutionP, $Scrcpy_Tab, $SelectedDeviceGroupScrcpy, $SelectedDeviceGroupViewer, $SelectedDeviceScrcpyValue, $SelectedDeviceViewerValue, $SelectedTab, $SerialValue, $ShortCutA_Radio, $ShortCutC_Radio, $ShortCutKey, $ShortCutP, $ShowTouchP, $ShowTouchV, $ShowTouch_Check, $ShortCutGroup, $StatusBar, $StayAwakeP, $StayAwakeV, $StayAwake_Check, $Tab, $TurnOffTheScreenP, $TurnOffTheScreenV, $TurnOffTheScreen_Check, $Viewer_Tab, $ViewOnlyModeP, $ViewOnlyModeV, $ViewOnlyMode_Check, $WiFiAddressV, $WirlessGroup, $TouchGroup, $VolumeUP_Button, $VolumeDown_Button, $NotificationOn_Button, $NotificationOff_Button, $ScreenOn_Button, $ScreenOff_Button, $Menu_Button, $Power_Button, $Back_Button, $Home_Button, $Switch_Button, $SelectedDeviceGroupControl, $SelectedDeviceControlValue, $Slogan, $Title_Label_1, $Title_Label_2, $Account_Label_1, $Account_Label_2, $Model_Label_1, $Model_Label_2, $Serial_Label_1, $Serial_Label_2, $Wifi_Label_1, $Wifi_Label_2, $IP_Label_1, $IP_Label_2, $Connection_Label_1, $Connection_Label_2, $Battery_Label_1, $Battey_Label_2, $Uptime_Label_1, $Uptime_Label_2
 Global $ini = @ScriptDir & "\Core\Config.ini"
+Global $sFontName = "Baloo Da 2"
+Global $sFontSize = 10
+Global $sFontBold = 700
 
 MainProgram()
 
@@ -132,15 +136,33 @@ Func GUIMain()
 	GUICtrlSetTip(-1, "Get IP from usb device.")
 	$IPAddress = _GUICtrlIpAddress_Create($mGUI, 115, 145, 170, 20)
 	_GUICtrlIpAddress_Set($IPAddress, $WiFiAddressV)
-	$GoWireless_Button = GUICtrlCreateButton("Go Air", 320, 145, 70, 20)
+	$GoWireless_Button = GUICtrlCreateButton("Connect", 320, 145, 70, 20)
 	GUICtrlSetOnEvent(-1, "GoWirelessClick")
 	GUICtrlSetTip(-1, "Click to connect with IP.")
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	$DetailsGroup = GUICtrlCreateGroup("Details", 5, 175, 390, 120, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
-	$ModelName_Label = GUICtrlCreateLabel("", 10, 190, 380, 20, $SS_CENTER)
-	GUICtrlSetFont(-1, 10, 700, 0, "Ubuntu")
+	$Title_Label_1 = GUICtrlCreateLabel("User: ", 10, 190, 100, 12)
+	$Title_Label_2 = GUICtrlCreateLabel("", 100, 190, 200, 12)
+	;GUICtrlSetFont(-1, $sFontSize, $sFontBold, 0, $sFontName, 5)
+	$Account_Label_1 = GUICtrlCreateLabel("Account:", 10, 205, 100, 12)
+	$Account_Label_2 = GUICtrlCreateLabel("", 100, 205, 200, 12)
+	$Model_Label_1 = GUICtrlCreateLabel("Model:", 10, 220, 100, 12)
+	$Model_Label_2 = GUICtrlCreateLabel("", 100, 220, 200, 12)
+	$Serial_Label_1 = GUICtrlCreateLabel("Serial:", 10, 235, 100, 12)
+	$Serial_Label_2 = GUICtrlCreateLabel("", 100, 235, 200, 12)
+	$Wifi_Label_1 = GUICtrlCreateLabel("Wireless Network:", 10, 250, 100, 12)
+	$Wifi_Label_2 = GUICtrlCreateLabel("", 100, 250, 200, 12)
+	$IP_Label_1 = GUICtrlCreateLabel("IP Address:", 10, 265, 100, 12)
+	$IP_Label_2 = GUICtrlCreateLabel("", 100, 265, 200, 12)
+	$Connection_Label_1 = GUICtrlCreateLabel("Connected by:", 10, 280, 100, 12)
+	$Connection_Label_2 = GUICtrlCreateLabel("", 100, 280, 200, 12)
+	$Battery_Label_1 = GUICtrlCreateLabel("Battery Status:", 10, 295, 100, 12)
+	$Battey_Label_2 = GUICtrlCreateLabel("", 100, 295, 200, 12)
+	$Uptime_Label_1 = GUICtrlCreateLabel("Up Time:", 10, 310, 100, 12)
+	$Uptime_Label_2 = GUICtrlCreateLabel("", 100, 310, 200, 12)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
+
 	$OptionsGroup = GUICtrlCreateGroup("Options", 5, 300, 315, 190, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 	$FullScreen_Check = GUICtrlCreateCheckbox("Full Screen", 10, 315, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
 	GUICtrlSetOnEvent(-1, "ParameterClick")
@@ -170,7 +192,7 @@ Func GUIMain()
 	GUICtrlSetOnEvent(-1, "ParameterClick")
 	GUICtrlSetTip(-1, "Disable window decorations (display borderless window).")
 	$Slogan = GUICtrlCreateLabel("Made with️ ❤ in Bangladesh", 10, 460, 290, 30, $SS_CENTER)
-	GUICtrlSetFont(-1, 10, 700, 0, "Ubuntu")
+	GUICtrlSetFont(-1, $sFontSize, $sFontBold, 0, $sFontName, 5)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	$ResolutionGroup = GUICtrlCreateGroup("Resolution", 325, 300, 70, 65, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
@@ -198,6 +220,7 @@ Func GUIMain()
 	$ParameterGroup = GUICtrlCreateGroup("Parameter", 5, 495, 390, 70, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 	$Parameter = GUICtrlCreateLabel($FinalParam, 10, 510, 380, 50, -1)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
+
 	$StatusBar = _GUICtrlStatusBar_Create($mGUI)
 	_GUICtrlStatusBar_SetMinHeight($StatusBar, 25)
 
@@ -287,6 +310,9 @@ Func GetIP()
 	$ipBat = StringStripWS(_ClipBoard_GetData(), $STR_STRIPTRAILING)
 	_GUICtrlIpAddress_Set($IPAddress, $ipBat)
 	_SaveIni("WiFiAddress", $ipBat)
+	_ClipBoard_Open($mGUI)
+	_ClipBoard_Empty()
+	_ClipBoard_Close()
 EndFunc   ;==>GetIP
 
 Func GoWireless()
@@ -310,11 +336,18 @@ Func DeviceDetails()
 		$DeviceModelCommand = Run(@ComSpec & " /c adb -s " & $SerialValue & " shell getprop ro.product.model", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 		ProcessWaitClose($DeviceModelCommand)
 		Global $DeviceModel = StringStripWS(StdoutRead($DeviceModelCommand), 8)
-		GUICtrlSetData($ModelName_Label, $DeviceManufacturer & " " & $DeviceModel)
-		GUICtrlSetData($SelectedDeviceViewerValue, $DeviceManufacturer & " " & $DeviceModel & " (" & $SerialValue & ")")
-		GUICtrlSetData($SelectedDeviceScrcpyValue, $DeviceManufacturer & " " & $DeviceModel & " (" & $SerialValue & ")")
+		GUICtrlSetData($Title_Label_2, $DeviceManufacturer & " " & $DeviceModel)
+		GUICtrlSetData($Account_Label_2, $DeviceManufacturer & " " & $DeviceModel)
+		GUICtrlSetData($Model_Label_2, $DeviceManufacturer & " " & $DeviceModel)
+		GUICtrlSetData($Serial_Label_2, $DeviceManufacturer & " " & $DeviceModel)
+		GUICtrlSetData($Wifi_Label_2, $DeviceManufacturer & " " & $DeviceModel)
+		GUICtrlSetData($IP_Label_2, $DeviceManufacturer & " " & $DeviceModel)
+		GUICtrlSetData($Connection_Label_2, $DeviceManufacturer & " " & $DeviceModel)
+		GUICtrlSetData($Battey_Label_2, $DeviceManufacturer & " " & $DeviceModel)
+		GUICtrlSetData($Uptime_Label_2, $DeviceManufacturer & " " & $DeviceModel)
 	EndIf
 EndFunc   ;==>DeviceDetails
+
 Func ParameterUpdate()
 	If _IsChecked($ResolutionA_Radio) Then
 		Global $ResolutionP = ""
@@ -422,7 +455,7 @@ Func GUIChild()
 	$SelectedDeviceGroupControl = GUICtrlCreateGroup("Selected Device", 5, 5, 245, 55, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 	$SelectedDeviceControlValue = GUICtrlCreateLabel("", 10, 20, 235, 35, $SS_CENTER)
 	GUICtrlSetData($SelectedDeviceControlValue, $DeviceManufacturer & " " & $DeviceModel & " (" & $SerialValue & ")")
-	GUICtrlSetFont(-1, 10, 700, 0, "")
+	GUICtrlSetFont(-1, $sFontSize, $sFontBold, 0, $sFontName, 5)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	$TouchGroup = GUICtrlCreateGroup("Scrcpy Control", 5, 65, 245, 215, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
@@ -430,14 +463,14 @@ Func GUIChild()
 	GUICtrlSetOnEvent(-1, "VolumeUPClick")
 	$VolumeDown_Button = GUICtrlCreateButton("Volume -", 130, 80, 75, 35)
 	GUICtrlSetOnEvent(-1, "VolumeDownClick")
-	$NotificationOn_Button = GUICtrlCreateButton("Notification On", 50, 120, 75, 35, $BS_MULTILINE)
-	GUICtrlSetOnEvent(-1, "NotificationOnClick")
-	$NotificationOff_Button = GUICtrlCreateButton("Notification Off", 130, 120, 75, 35, $BS_MULTILINE)
-	GUICtrlSetOnEvent(-1, "NotificationOffClick")
-	$ScreenOn_Button = GUICtrlCreateButton("Screen On", 50, 160, 75, 35, $BS_MULTILINE)
+	$ScreenOn_Button = GUICtrlCreateButton("Screen On", 50, 120, 75, 35, $BS_MULTILINE)
 	GUICtrlSetOnEvent(-1, "ScreenOnClick")
-	$ScreenOff_Button = GUICtrlCreateButton("Screen Off", 130, 160, 75, 35, $BS_MULTILINE)
+	$ScreenOff_Button = GUICtrlCreateButton("Screen Off", 130, 120, 75, 35, $BS_MULTILINE)
 	GUICtrlSetOnEvent(-1, "ScreenOffClick")
+	$NotificationOn_Button = GUICtrlCreateButton("Notification On", 50, 160, 75, 35, $BS_MULTILINE)
+	GUICtrlSetOnEvent(-1, "NotificationOnClick")
+	$NotificationOff_Button = GUICtrlCreateButton("Notification Off", 130, 160, 75, 35, $BS_MULTILINE)
+	GUICtrlSetOnEvent(-1, "NotificationOffClick")
 	$Menu_Button = GUICtrlCreateButton("Menu", 50, 200, 75, 35)
 	GUICtrlSetOnEvent(-1, "MenuClick")
 	$Power_Button = GUICtrlCreateButton("Power", 130, 200, 75, 35)
