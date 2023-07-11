@@ -24,10 +24,10 @@ Opt("MustDeclareVars", 1)
 #include <WinAPI.au3>
 #include <WindowsConstants.au3>
 
-Global $adbdevices, $ADBOutput1, $ADBOutput2, $AlwaysOnTopP, $AlwaysOnTopV, $AlwaysOnTop_Check, $BatFile, $BatTxt1, $BatTxt2, $BatTxt3, $BorderlessP, $BorderlessV, $Borderless_Check, $DetailsGroup, $DeviceList, $DeviceListGroup, $DeviceTitle, $DeviceTitleCommand, $DeviceModel, $DeviceModelCommand, $Device_Manager_Tab, $FinalParam, $FullScreenP, $FullScreenV, $FullScreen_Check, $GetIP_Button, $GoWireless_Button, $mGUI, $cGUI, $ini, $IPAddress, $ipBat, $ModelName_Label, $NoScreenSaverP, $NoScreenSaverV, $NoScreenSaver_Check, $On_Button, $OptionsGroup, $Parameter, $ParameterGroup, $PowerOffOnExitP, $PowerOffOnExitV, $PowerOffOnExit_Check, $Refresh_Button, $Reset_Button, $ResolutionGroup, $ResolutionA_Radio, $ResolutionM_Radio, $ResolutionP, $Scrcpy_Tab, $SelectedDeviceGroupScrcpy, $SelectedDeviceGroupViewer, $SelectedDeviceScrcpyValue, $SelectedDeviceViewerValue, $SelectedTab, $SerialValue, $ShortCutA_Radio, $ShortCutC_Radio, $ShortCutKey, $ShortCutP, $ShowTouchP, $ShowTouchV, $ShowTouch_Check, $ShortCutGroup, $StatusBar, $StayAwakeP, $StayAwakeV, $StayAwake_Check, $Tab, $TurnOffTheScreenP, $TurnOffTheScreenV, $TurnOffTheScreen_Check, $Viewer_Tab, $ViewOnlyModeP, $ViewOnlyModeV, $ViewOnlyMode_Check, $WiFiAddressV, $WirlessGroup, $TouchGroup, $VolumeUP_Button, $VolumeDown_Button, $NotificationOn_Button, $NotificationOff_Button, $ScreenOn_Button, $ScreenOff_Button, $Menu_Button, $Power_Button, $Back_Button, $Home_Button, $Switch_Button, $SelectedDeviceGroupControl, $SelectedDeviceControlValue, $Slogan, $Title_Label_1, $Title_Label_2, $Account_Label_1, $Account_Label_2, $Model_Label_1, $Model_Label_2, $Serial_Label_1, $Serial_Label_2, $Wifi_Label_1, $Wifi_Label_2, $IP_Label_1, $IP_Label_2, $Connection_Label_1, $Connection_Label_2, $Battery_Label_1, $Battery_Label_2, $Uptime_Label_1, $Uptime_Label_2, $DeviceConnection
+Global $adbdevices, $ADBOutput1, $ADBOutput2, $AlwaysOnTopP, $AlwaysOnTopV, $AlwaysOnTop_Check, $BatFile, $BatTxt1, $BatTxt2, $BatTxt3, $BorderlessP, $BorderlessV, $Borderless_Check, $DetailsGroup, $DeviceList, $DeviceListGroup, $DeviceTitle, $DeviceTitleCommand, $DeviceModel, $DeviceModelCommand, $Device_Manager_Tab, $FinalParam, $FullScreenP, $FullScreenV, $FullScreen_Check, $GetIP_Button, $GoWireless_Button, $mGUI, $cGUI, $ini, $IPAddress, $ipBat, $ModelName_Label, $NoScreenSaverP, $NoScreenSaverV, $NoScreenSaver_Check, $On_Button, $OptionsGroup, $Parameter, $ParameterGroup, $PowerOffOnExitP, $PowerOffOnExitV, $PowerOffOnExit_Check, $Refresh_Button, $Reset_Button, $ResolutionGroup, $ResolutionA_Radio, $ResolutionM_Radio, $ResolutionP, $Scrcpy_Tab, $SelectedDeviceGroupScrcpy, $SelectedDeviceGroupViewer, $SelectedDeviceScrcpyValue, $SelectedDeviceViewerValue, $SelectedTab, $SerialValue, $ShortCutA_Radio, $ShortCutC_Radio, $ShortCutKey, $ShortCutP, $ShowTouchP, $ShowTouchV, $ShowTouch_Check, $ShortCutGroup, $StatusBar, $StayAwakeP, $StayAwakeV, $StayAwake_Check, $Tab, $TurnOffTheScreenP, $TurnOffTheScreenV, $TurnOffTheScreen_Check, $Viewer_Tab, $ViewOnlyModeP, $ViewOnlyModeV, $ViewOnlyMode_Check, $WiFiAddressV, $WirlessGroup, $TouchGroup, $VolumeUP_Button, $VolumeDown_Button, $NotificationOn_Button, $NotificationOff_Button, $ScreenOn_Button, $ScreenOff_Button, $Menu_Button, $Power_Button, $Back_Button, $Home_Button, $Switch_Button, $SelectedDeviceGroupControl, $SelectedDeviceControlValue, $SelectedDeviceControlValue1, $Slogan, $Title_Label_1, $Title_Label_1_1, $Title_Label_2, $Account_Label_1, $Account_Label_1_1, $Account_Label_2, $Model_Label_1, $Model_Label_1_1, $Model_Label_2, $Serial_Label_1, $Serial_Label_1_1, $Serial_Label_2, $Wifi_Label_1, $Wifi_Label_1_1, $Wifi_Label_2, $IP_Label_1, $IP_Label_1_1, $IP_Label_2, $Connection_Label_1, $Connection_Label_1_1, $Connection_Label_2, $Battery_Label_1, $Battery_Label_1_1, $Battery_Label_2, $Uptime_Label_1, $Uptime_Label_1_1, $Uptime_Label_2, $DeviceConnection
 Global $ini = @ScriptDir & "\Core\Config.ini"
 Global $sFontName = "Baloo Da 2"
-Global $sFontSize = 10
+Global $sFontSize = 9.5
 Global $sFontBold = 700
 
 MainProgram()
@@ -143,25 +143,58 @@ Func GUIMain()
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	$DetailsGroup = GUICtrlCreateGroup("Details", 5, 175, 390, 140, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
-	$Title_Label_1 = GUICtrlCreateLabel("User: ", 10, 190, 75, 15)
-	$Title_Label_2 = GUICtrlCreateLabel(".....", 85, 190, 305, 15)
-	;GUICtrlSetFont(-1, $sFontSize, $sFontBold, 0, $sFontName, 5)
-	$Account_Label_1 = GUICtrlCreateLabel("Account:", 10, 208, 75, 30)
-	$Account_Label_2 = GUICtrlCreateLabel(".....", 85, 208, 305, 30)
-	$Model_Label_1 = GUICtrlCreateLabel("Device Model:", 10, 241, 75, 15)
-	$Model_Label_2 = GUICtrlCreateLabel(".....", 85, 241, 113, 15)
-	$Serial_Label_1 = GUICtrlCreateLabel("Device Serial:", 10, 259, 75, 15)
-	$Serial_Label_2 = GUICtrlCreateLabel(".....", 85, 259, 113, 15)
-	$Battery_Label_1 = GUICtrlCreateLabel("Battery Status:", 10, 277, 75, 15)
-	$Battery_Label_2 = GUICtrlCreateLabel(".....", 85, 277, 113, 15)
-	$Uptime_Label_1 = GUICtrlCreateLabel("Up Time:", 10, 295, 75, 15)
-	$Uptime_Label_2 = GUICtrlCreateLabel(".....", 85, 295, 113, 15)
-	$Connection_Label_1 = GUICtrlCreateLabel("Connected by:", 202, 259, 75, 15)
-	$Connection_Label_2 = GUICtrlCreateLabel(".....", 277, 259, 113, 15)
-	$Wifi_Label_1 = GUICtrlCreateLabel("Wi-Fi SSID:", 202, 277, 75, 15)
-	$Wifi_Label_2 = GUICtrlCreateLabel(".....", 277, 277, 113, 15)
-	$IP_Label_1 = GUICtrlCreateLabel("IP Address:", 202, 295, 75, 15)
-	$IP_Label_2 = GUICtrlCreateLabel(".....", 277, 295, 113, 15)
+	Local $Line_1 = GUICtrlCreateGraphic(81, 205, 309, 140)
+	GUICtrlSetGraphic($Line_1, $GUI_GR_PENSIZE, 1)
+	GUICtrlSetGraphic($Line_1, $GUI_GR_COLOR, 0xDCDCDC)
+	GUICtrlSetGraphic($Line_1, $GUI_GR_LINE, 309, 0)
+	GUICtrlSetGraphic($Line_1, $GUI_GR_MOVE, 0, 33)
+	GUICtrlSetGraphic($Line_1, $GUI_GR_LINE, 309, 33)
+	GUICtrlSetGraphic($Line_1, $GUI_GR_MOVE, 0, 51)
+	GUICtrlSetGraphic($Line_1, $GUI_GR_LINE, 309, 51)
+	GUICtrlSetGraphic($Line_1, $GUI_GR_MOVE, 0, 69)
+	GUICtrlSetGraphic($Line_1, $GUI_GR_LINE, 117, 69)
+	GUICtrlSetGraphic($Line_1, $GUI_GR_MOVE, 0, 87)
+	GUICtrlSetGraphic($Line_1, $GUI_GR_LINE, 117, 87)
+	GUICtrlSetGraphic($Line_1, $GUI_GR_MOVE, 192, 69)
+	GUICtrlSetGraphic($Line_1, $GUI_GR_LINE, 309, 69)
+	GUICtrlSetGraphic($Line_1, $GUI_GR_MOVE, 192, 87)
+	GUICtrlSetGraphic($Line_1, $GUI_GR_LINE, 309, 87)
+
+	$Title_Label_1 = GUICtrlCreateLabel("User", 10, 190, 66, 15)
+	$Title_Label_1_1 = GUICtrlCreateLabel(":", 76, 190, 5, 15)
+	$Title_Label_2 = GUICtrlCreateLabel("", 81, 190, 309, 15)
+
+	$Account_Label_1 = GUICtrlCreateLabel("Account", 10, 208, 73, 30)
+	$Account_Label_1_1 = GUICtrlCreateLabel(":", 76, 208, 2, 30)
+	$Account_Label_2 = GUICtrlCreateLabel("", 81, 208, 309, 30)
+
+	$Model_Label_1 = GUICtrlCreateLabel("Device Model", 10, 241, 66, 15)
+	$Model_Label_1_1 = GUICtrlCreateLabel(":", 76, 241, 5, 15)
+	$Model_Label_2 = GUICtrlCreateLabel("", 81, 241, 309, 15)
+
+	$Serial_Label_1 = GUICtrlCreateLabel("Device Serial", 10, 259, 66, 15)
+	$Serial_Label_1_1 = GUICtrlCreateLabel(":", 76, 259, 5, 15)
+	$Serial_Label_2 = GUICtrlCreateLabel("", 81, 259, 117, 15)
+
+	$Battery_Label_1 = GUICtrlCreateLabel("Battery Status", 10, 277, 66, 15)
+	$Battery_Label_1_1 = GUICtrlCreateLabel(":", 76, 277, 5, 15)
+	$Battery_Label_2 = GUICtrlCreateLabel("", 81, 277, 117, 15)
+
+	$Uptime_Label_1 = GUICtrlCreateLabel("Up Time", 10, 295, 66, 15)
+	$Uptime_Label_1_1 = GUICtrlCreateLabel(":", 76, 295, 5, 15)
+	$Uptime_Label_2 = GUICtrlCreateLabel("", 81, 295, 117, 15)
+
+	$Connection_Label_1 = GUICtrlCreateLabel("Connected by", 202, 259, 66, 15)
+	$Connection_Label_1_1 = GUICtrlCreateLabel(":", 268, 259, 5, 15)
+	$Connection_Label_2 = GUICtrlCreateLabel("", 273, 259, 117, 15)
+
+	$Wifi_Label_1 = GUICtrlCreateLabel("Wi-Fi SSID", 202, 277, 66, 15)
+	$Wifi_Label_1_1 = GUICtrlCreateLabel(":", 268, 277, 5, 15)
+	$Wifi_Label_2 = GUICtrlCreateLabel("", 273, 277, 117, 15)
+
+	$IP_Label_1 = GUICtrlCreateLabel("IP Address", 202, 295, 66, 15)
+	$IP_Label_1_1 = GUICtrlCreateLabel(":", 268, 295, 5, 15)
+	$IP_Label_2 = GUICtrlCreateLabel("", 273, 295, 117, 15)
 
 	$OptionsGroup = GUICtrlCreateGroup("Options", 5, 320, 315, 190, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 	$FullScreen_Check = GUICtrlCreateCheckbox("Full Screen", 10, 335, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
@@ -342,7 +375,7 @@ Func DeviceDetails()
 		ProcessWaitClose($DeviceAccountCommand)
 		Local $DeviceAccountCommand1 = StdoutRead($DeviceAccountCommand)
 		Local $DeviceAccount1 = StringRegExp($DeviceAccountCommand1, "{name=(.*), type=com.google}", 3)
-		for $x = 0 to UBound($DeviceAccount1) -1
+		For $x = 0 To UBound($DeviceAccount1) - 1
 			$DeviceAccount1[$x] = $DeviceAccount1[$x]
 		Next
 		Local $DeviceAccount = _ArrayToString($DeviceAccount1, ", ")
@@ -502,8 +535,11 @@ Func GUIChild()
 	$cGUI = GUICreate("Scrcpy Control", 255, 285, 1, -1, BitOR($WS_POPUP, $WS_CAPTION))
 	GUISetOnEvent($GUI_EVENT_CLOSE, "GUIChildClose")
 	$SelectedDeviceGroupControl = GUICtrlCreateGroup("Selected Device", 5, 5, 245, 55, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
-	$SelectedDeviceControlValue = GUICtrlCreateLabel("", 10, 20, 235, 40, $SS_CENTER)
-	GUICtrlSetData($SelectedDeviceControlValue, $DeviceTitle & "'s Phone (" & $SerialValue & ")")
+	$SelectedDeviceControlValue = GUICtrlCreateLabel("", 10, 20, 235, 18, $SS_CENTER)
+	GUICtrlSetFont(-1, $sFontSize, $sFontBold, 0, $sFontName, 5)
+	$SelectedDeviceControlValue1 = GUICtrlCreateLabel("", 10, 38, 235, 17, $SS_CENTER)
+	GUICtrlSetData($SelectedDeviceControlValue, $DeviceTitle & "'s Phone")
+	GUICtrlSetData($SelectedDeviceControlValue1, "(" & $SerialValue & ")")
 	GUICtrlSetFont(-1, $sFontSize, $sFontBold, 0, $sFontName, 5)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
