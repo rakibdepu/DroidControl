@@ -195,6 +195,7 @@ Func GUIMain()
 	$IP_Label_1 = GUICtrlCreateLabel("IP Address", 202, 295, 66, 15)
 	$IP_Label_1_1 = GUICtrlCreateLabel(":", 268, 295, 5, 15)
 	$IP_Label_2 = GUICtrlCreateLabel("", 273, 295, 117, 15)
+	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	$OptionsGroup = GUICtrlCreateGroup("Options", 5, 320, 315, 190, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 	$FullScreen_Check = GUICtrlCreateCheckbox("Full Screen", 10, 335, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
