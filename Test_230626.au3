@@ -1,3 +1,4 @@
+#NoTrayIcon
 ;==>"Made with️ ❤ in Bangladesh"
 
 Opt("GUIOnEventMode", 1)
@@ -8,6 +9,7 @@ Opt("MustDeclareVars", 1)
 #include <Array.au3>
 #include <ButtonConstants.au3>
 #include <Clipboard.au3>
+#include <ColorConstants.au3>
 #include <ComboConstants.au3>
 #include <EditConstants.au3>
 #include <File.au3>
@@ -24,9 +26,9 @@ Opt("MustDeclareVars", 1)
 #include <WinAPI.au3>
 #include <WindowsConstants.au3>
 
-Global $g_array_Devices, $g_btn_Back, $g_btn_Connect, $g_btn_GetIP, $g_btn_Home, $g_btn_Menu, $g_btn_NotificationOff, $g_btn_NotificationOn, $g_btn_On, $g_btn_Power, $g_btn_Refresh, $g_btn_Reset, $g_btn_ScreenOff, $g_btn_ScreenOn, $g_btn_Switch, $g_btn_VolumeDown, $g_btn_VolumeUP, $g_chk_AlwaysOnTop, $g_chk_Borderless, $g_chk_FullScreen, $g_chk_NoScreenSaver, $g_chk_PowerOffOnExit, $g_chk_ShowTouch, $g_chk_StayAwake, $g_chk_TurnOffTheScreen, $g_chk_ViewOnlyMode, $g_cmd_DeviceAccount, $g_cmd_DeviceBattery, $g_cmd_DeviceIP, $g_cmd_DeviceListGet, $g_cmd_DeviceModel, $g_cmd_DeviceSerial, $g_cmd_DeviceUser, $g_cmd_DeviceUptime, $g_cmd_DeviceWifi, $g_cmd_GetIP, $g_cmdout_DeviceAccount, $g_cmdout_DeviceBattery, $g_cmdout_DeviceListGet, $g_cmdout_DeviceUser, $g_cmdout_DeviceUptime, $g_cmdout_DeviceWifi, $g_cmdout_GetIP, $g_data_Account, $g_data_AlwaysOnTop, $g_data_Battery, $g_data_Borderless, $g_data_Connection, $g_data_DeviceAccount, $g_data_DeviceBattery
+Global $g_array_Devices, $g_btn_Back, $g_btn_Connect, $g_btn_GetIP, $g_btn_Home, $g_btn_Menu, $g_btn_NotificationOff, $g_btn_NotificationOn, $g_btn_ScrcpyOn, $g_btn_Power, $g_btn_Refresh, $g_btn_Reset, $g_btn_ScreenOff, $g_btn_ScreenOn, $g_btn_Switch, $g_btn_VolumeDown, $g_btn_VolumeUP, $g_chk_AlwaysOnTop, $g_chk_Borderless, $g_chk_FullScreen, $g_chk_NoScreenSaver, $g_chk_PowerOffOnExit, $g_chk_ShowTouch, $g_chk_StayAwake, $g_chk_TurnOffTheScreen, $g_chk_ViewOnlyMode, $g_cmd_DeviceAccount, $g_cmd_DeviceBattery, $g_cmd_DeviceIP, $g_cmd_DeviceListGet, $g_cmd_DeviceModel, $g_cmd_DeviceSerial, $g_cmd_DeviceUser, $g_cmd_DeviceUptime, $g_cmd_DeviceWifi, $g_cmd_GetIP, $g_cmdout_DeviceAccount, $g_cmdout_DeviceBattery, $g_cmdout_DeviceListGet, $g_cmdout_DeviceUser, $g_cmdout_DeviceUptime, $g_cmdout_DeviceWifi, $g_cmdout_GetIP, $g_data_Account, $g_data_AlwaysOnTop, $g_data_Battery, $g_data_Borderless, $g_data_Connection, $g_data_DeviceAccount, $g_data_DeviceBattery
 Global $g_data_DeviceBatteryAC, $g_data_DeviceBatteryUSB, $g_data_DeviceConnection, $g_data_DeviceIP, $g_data_DeviceListGet, $g_data_DeviceModel, $g_data_DeviceSerial, $g_data_DeviceUser, $g_data_DeviceUptime, $g_data_DeviceWifi, $g_data_FullScreen, $g_data_IP, $g_data_Model, $g_data_NoScreenSaver, $g_data_PowerOffOnExit, $g_data_Resolution, $g_data_Serial_1, $g_data_Serial_2, $g_data_Shortcut, $g_data_ShowTouch, $g_data_StayAwake, $g_data_Title, $g_data_User, $g_data_TurnOffTheScreen, $g_data_Uptime, $g_data_ViewOnlyMode, $g_data_Wifi, $g_extfile_IP, $g_graphic_Line, $g_group_Details, $g_group_DeviceList, $g_group_Options, $g_group_Parameter, $g_group_Resolution, $g_group_SelectedDevice, $g_group_Shortcut, $g_group_Touch, $g_group_Wireless, $g_gui_Child, $g_gui_Main, $g_ini_AlwaysOnTop, $g_ini_Borderless, $g_ini_Devices, $g_ini_FullScreen, $g_ini_NoScreenSaver, $g_ini_PowerOffOnExit, $g_ini_ScrcpyCommand, $g_ini_ShowTouch, $g_ini_StayAwake, $g_ini_TurnOffTheScreen, $g_ini_ViewOnlyMode
-Global $g_ini_WiFiAddress, $g_input_IPAddress, $g_key_Shortcut, $g_lbl_Account_1, $g_lbl_Account_2, $g_lbl_Battery_1, $g_lbl_Battery_2, $g_lbl_Connection_1, $g_lbl_Connection_2, $g_lbl_IP_1, $g_lbl_IP_2, $g_lbl_Model_1, $g_lbl_Model_2, $g_lbl_Parameter, $g_lbl_SelectedDevice_1, $g_lbl_SelectedDevice_2, $g_lbl_Serial_1, $g_lbl_Serial_2, $g_lbl_User_1, $g_lbl_User_2, $g_lbl_Uptime_1, $g_lbl_Uptime_2, $g_lbl_Wifi_1, $g_lbl_Wifi_2, $g_lvw_DeviceList, $g_rad_ResolutionAuto, $g_rad_ResolutionMax, $g_rad_ShortcutAlt, $g_rad_ShortcutCtrl, $g_regex_DeviceAccount, $g_regex_DeviceBattery, $g_regex_DeviceBatteryAC, $g_regex_DeviceBatteryUSB, $g_regex_DeviceUser, $g_regex_DeviceWifi, $g_Slogan, $g_Status, $g_txt_IP_1, $g_txt_IP_2, $g_txt_IP_3, $g_txt_IP_4, $g_lbl_Title_1, $g_lbl_Title_2, $g_input_Title
+Global $g_ini_WiFiAddress, $g_input_IPAddress, $g_key_Shortcut, $g_lbl_Account_1, $g_lbl_Account_2, $g_lbl_Battery_1, $g_lbl_Battery_2, $g_lbl_Connection_1, $g_lbl_Connection_2, $g_lbl_IP_1, $g_lbl_IP_2, $g_lbl_Model_1, $g_lbl_Model_2, $g_lbl_Parameter, $g_lbl_SelectedDevice_1, $g_lbl_SelectedDevice_2, $g_lbl_Serial_1, $g_lbl_Serial_2, $g_lbl_User_1, $g_lbl_User_2, $g_lbl_Uptime_1, $g_lbl_Uptime_2, $g_lbl_Wifi_1, $g_lbl_Wifi_2, $g_lvw_DeviceList, $g_rad_ResolutionAuto, $g_rad_ResolutionMax, $g_rad_ShortcutAlt, $g_rad_ShortcutCtrl, $g_regex_DeviceAccount, $g_regex_DeviceBattery, $g_regex_DeviceBatteryAC, $g_regex_DeviceBatteryUSB, $g_regex_DeviceUser, $g_regex_DeviceWifi, $g_Slogan, $g_Status, $g_txt_IP_1, $g_txt_IP_2, $g_txt_IP_3, $g_txt_IP_4, $g_lbl_Title_1, $g_lbl_Title_2, $g_input_Title, $g_btn_DeviceShutdown, $g_btn_DeviceReboot, $g_btn_DisplayPowerOnOff, $g_btn_DeviceUnlock, $g_data_ScrcpyTitle
 Global $g_ini_Config = @ScriptDir & "\Core\Config.ini"
 Global $g_font_Name = "Baloo Da 2"
 Global $g_font_Size = 9.5
@@ -36,75 +38,90 @@ _f_sub_MainProgram()
 
 Func _f_sub_MainProgram()
 	_f_sub_StartupCheck()
-	StatusBarWrite("Installing required components")
+	_f_sub_StatusBar("Installing required components")
 	_f_sub_GUIMain()
-	StatusBarWrite("Reading settings")
+	_f_sub_StatusBar("Reading settings")
 	_f_sub_ReadIni()
-	StatusBarWrite("Starting ADB Server")
+	_f_sub_StatusBar("Starting ADB Server")
 	_f_sub_AdbStart()
-	StatusBarWrite("Searching for device")
+	_f_sub_StatusBar("Searching for device")
 	_f_sub_DeviceListGet()
-	StatusBarWrite("Making a device list")
+	_f_sub_StatusBar("Making a device list")
 	_f_sub_DeviceListSet()
-	StatusBarWrite("Select a device from list")
+	_f_sub_StatusBar("Select a device from list")
 	While 1
 		Sleep(100)
 	WEnd
 EndFunc   ;==>_f_sub_MainProgram
 
 Func _f_btn_Refresh()
-	StatusBarWrite("Searching for device")
+	_f_sub_StatusBar("Searching for device")
 	_f_sub_DeviceListGet()
-	StatusBarWrite("Making a device list")
+	_f_sub_StatusBar("Making a device list")
 	_f_sub_DeviceListSet()
-	StatusBarWrite("Select a device from list")
+	_f_sub_StatusBar("Select a device from list")
 EndFunc   ;==>_f_btn_Refresh
 
 Func _f_btn_Reset()
-	StatusBarWrite("Restarting ADB Server")
+	_f_sub_StatusBar("Restarting ADB Server")
 	_f_sub_AdbStop()
 	_f_sub_AdbStart()
-	StatusBarWrite("Searching for device")
+	_f_sub_StatusBar("Searching for device")
 	_f_sub_DeviceListGet()
-	StatusBarWrite("Making a device list")
+	_f_sub_StatusBar("Making a device list")
 	_f_sub_DeviceListSet()
-	StatusBarWrite("Select a device from list")
+	_f_sub_StatusBar("Select a device from list")
 EndFunc   ;==>_f_btn_Reset
 
 Func _f_btn_GetIP()
-	StatusBarWrite("Geting IP Address from selected device")
+	_f_sub_StatusBar("Geting IP Address from selected device")
 	_f_sub_GetIP()
 	_f_sub_ReadIni()
 EndFunc   ;==>_f_btn_GetIP
 
 Func _f_btn_Connect()
-	StatusBarWrite("Try connecting to given IP")
+	_f_sub_StatusBar("Try connecting to given IP")
 	_f_sub_Connect()
-	StatusBarWrite("Searching for device")
+	_f_sub_StatusBar("Searching for device")
 	_f_sub_DeviceListGet()
-	StatusBarWrite("Making a device list")
+	_f_sub_StatusBar("Making a device list")
 	_f_sub_DeviceListSet()
-	StatusBarWrite("Select a device from list")
+	_f_sub_StatusBar("Select a device from list")
 EndFunc   ;==>_f_btn_Connect
 
 Func _f_btn_Parameter()
-	StatusBarWrite("Adding select parameter in the scrcpy command line")
+	_f_sub_StatusBar("Adding select parameter in the scrcpy command line")
 	_f_sub_ParameterUpdate()
 	_f_sub_ScrcpyCommand()
 EndFunc   ;==>_f_btn_Parameter
 
 Func _f_btn_ScrcpyOn()
-	StatusBarWrite("Starting scrcpy command")
-	_f_sub_ParameterUpdate()
-	_f_sub_ScrcpyCommand()
+	_f_sub_StatusBar("Starting scrcpy command")
+	_f_btn_Parameter()
 	_f_sub_ScrcpyOn()
 	_f_sub_GUIChild()
 	_f_sub_ScrcpyRun()
 EndFunc   ;==>_f_btn_ScrcpyOn
 
+Func _f_btn_DeviceShutdown()
+
+EndFunc   ;==>_f_btn_DeviceShutdown
+
+Func _f_btn_DeviceReboot()
+
+EndFunc   ;==>_f_btn_DeviceReboot
+
+Func _f_btn_DevicePowerOnOff()
+
+EndFunc   ;==>_f_btn_DevicePowerOnOff
+
+Func _f_btn_DeviceUnlock()
+
+EndFunc   ;==>_f_btn_DeviceUnlock
+
 Func _f_sub_StartupCheck()
 	$g_extfile_IP = @ScriptDir & "\Core\ip.bat"
-	$g_txt_IP_1 = "FOR /F ""tokens=2"" %%G IN ('adb -s " & $g_data_Serial_1 & " shell ip addr show wlan0 ^|find ""inet ""') DO set ipfull=%%G"
+	$g_txt_IP_1 = "FOR /F ""tokens=2"" %%G IN ('adb -s shell ip addr show wlan0 ^|find ""inet ""') DO set ipfull=%%G"
 	$g_txt_IP_2 = "FOR /F ""tokens=1 delims=/"" %%G in (""%ipfull%"") DO set ip=%%G"
 	$g_txt_IP_3 = "echo %ip%|clip"
 	If Not FileExists($g_extfile_IP) Then
@@ -118,9 +135,10 @@ EndFunc   ;==>_f_sub_StartupCheck
 Func _f_sub_GUIMain()
 	$g_gui_Main = GUICreate("Droid Control", 400, 595, -1, -1, BitOR($WS_POPUP, $WS_CAPTION))
 	GUISetOnEvent($GUI_EVENT_CLOSE, "_f_sub_GUIMainClose")
+	GUISetBkColor($CLR_WHITE)
 	$g_group_DeviceList = GUICtrlCreateGroup("Device List", 5, 5, 390, 120, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 	$g_lvw_DeviceList = _GUICtrlListView_Create($g_gui_Main, "#|Device|Connection", 10, 20, 305, 100)
-	_GUICtrlListView_SetExtendedListViewStyle($g_lvw_DeviceList, BitOR($LVS_EX_GRIDLINES, $LVS_EX_FULLROWSELECT))
+	_GUICtrlListView_SetExtendedListViewStyle($g_lvw_DeviceList, $LVS_EX_FULLROWSELECT)
 	_GUICtrlListView_SetColumnWidth($g_lvw_DeviceList, 0, 50)
 	_GUICtrlListView_SetColumnWidth($g_lvw_DeviceList, 1, 175)
 	_GUICtrlListView_SetColumnWidth($g_lvw_DeviceList, 2, 80)
@@ -167,69 +185,87 @@ Func _f_sub_GUIMain()
 	$g_lbl_User_1 = GUICtrlCreateLabel("User", 10, 190, 66, 15)
 	$g_lbl_User_2 = GUICtrlCreateLabel(":", 76, 190, 5, 15)
 	$g_data_User = GUICtrlCreateLabel("", 81, 190, 309, 15)
+	GUICtrlSetColor(-1, 0x006A4E)
+	GUICtrlSetFont(-1, 8.5, $g_font_Bold)
 
-	$g_lbl_Account_1 = GUICtrlCreateLabel("Account", 10, 208, 73, 30)
+	$g_lbl_Account_1 = GUICtrlCreateLabel("Accounts", 10, 208, 73, 30)
 	$g_lbl_Account_2 = GUICtrlCreateLabel(":", 76, 208, 2, 30)
 	$g_data_Account = GUICtrlCreateLabel("", 81, 208, 309, 30)
+	GUICtrlSetColor(-1, 0x006A4E)
+	GUICtrlSetFont(-1, 8.5, $g_font_Bold)
 
 	$g_lbl_Model_1 = GUICtrlCreateLabel("Device Model", 10, 241, 66, 15)
 	$g_lbl_Model_2 = GUICtrlCreateLabel(":", 76, 241, 5, 15)
 	$g_data_Model = GUICtrlCreateLabel("", 81, 241, 309, 15)
+	GUICtrlSetColor(-1, 0x006A4E)
+	GUICtrlSetFont(-1, 8.5, $g_font_Bold)
 
 	$g_lbl_Serial_1 = GUICtrlCreateLabel("Device Serial", 10, 259, 66, 15)
 	$g_lbl_Serial_2 = GUICtrlCreateLabel(":", 76, 259, 5, 15)
 	$g_data_Serial_2 = GUICtrlCreateLabel("", 81, 259, 117, 15)
+	GUICtrlSetColor(-1, 0x006A4E)
+	GUICtrlSetFont(-1, 8.5, $g_font_Bold)
 
 	$g_lbl_Battery_1 = GUICtrlCreateLabel("Battery Status", 10, 277, 66, 15)
 	$g_lbl_Battery_2 = GUICtrlCreateLabel(":", 76, 277, 5, 15)
 	$g_data_Battery = GUICtrlCreateLabel("", 81, 277, 117, 15)
+	GUICtrlSetColor(-1, 0x006A4E)
+	GUICtrlSetFont(-1, 8.5, $g_font_Bold)
 
 	$g_lbl_Uptime_1 = GUICtrlCreateLabel("Up Time", 10, 295, 66, 15)
 	$g_lbl_Uptime_2 = GUICtrlCreateLabel(":", 76, 295, 5, 15)
 	$g_data_Uptime = GUICtrlCreateLabel("", 81, 295, 117, 15)
+	GUICtrlSetColor(-1, 0x006A4E)
+	GUICtrlSetFont(-1, 8.5, $g_font_Bold)
 
 	$g_lbl_Connection_1 = GUICtrlCreateLabel("Connected by", 202, 259, 66, 15)
 	$g_lbl_Connection_2 = GUICtrlCreateLabel(":", 268, 259, 5, 15)
 	$g_data_Connection = GUICtrlCreateLabel("", 273, 259, 117, 15)
+	GUICtrlSetColor(-1, 0x006A4E)
+	GUICtrlSetFont(-1, 8.5, $g_font_Bold)
 
 	$g_lbl_Wifi_1 = GUICtrlCreateLabel("Wi-Fi SSID", 202, 277, 66, 15)
 	$g_lbl_Wifi_2 = GUICtrlCreateLabel(":", 268, 277, 5, 15)
 	$g_data_Wifi = GUICtrlCreateLabel("", 273, 277, 117, 15)
+	GUICtrlSetColor(-1, 0x006A4E)
+	GUICtrlSetFont(-1, 8.5, $g_font_Bold)
 
 	$g_lbl_IP_1 = GUICtrlCreateLabel("IP Address", 202, 295, 66, 15)
 	$g_lbl_IP_2 = GUICtrlCreateLabel(":", 268, 295, 5, 15)
 	$g_data_IP = GUICtrlCreateLabel("", 273, 295, 117, 15)
+	GUICtrlSetColor(-1, 0x006A4E)
+	GUICtrlSetFont(-1, 8.5, $g_font_Bold)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
-	$g_group_Options = GUICtrlCreateGroup("Options", 5, 320, 315, 190, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
+	$g_group_Options = GUICtrlCreateGroup("Options", 5, 320, 315, 135, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 	$g_lbl_Title_1 = GUICtrlCreateLabel("Window Title", 10, 337, 62, 15)
 	$g_lbl_Title_2 = GUICtrlCreateLabel(":", 72, 337, 5, 15)
 	$g_input_Title = GUICtrlCreateEdit("", 78, 335, 237, 17, BitOR($ES_AUTOVSCROLL, $ES_AUTOHSCROLL))
-	$g_chk_AlwaysOnTop = GUICtrlCreateCheckbox("Always On Top", 10, 357, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
+	$g_chk_AlwaysOnTop = GUICtrlCreateCheckbox("Always On Top", 10, 358, 97, 25, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE, $BS_RIGHTBUTTON))
 	GUICtrlSetOnEvent(-1, "_f_btn_Parameter")
 	GUICtrlSetTip(-1, "Make scrcpy window always on top (above other windows).")
-	$g_chk_Borderless = GUICtrlCreateCheckbox("Borderless", 112, 357, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
+	$g_chk_Borderless = GUICtrlCreateCheckbox("Borderless", 112, 358, 97, 25, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE, $BS_RIGHTBUTTON))
 	GUICtrlSetOnEvent(-1, "_f_btn_Parameter")
 	GUICtrlSetTip(-1, "Disable window decorations (display borderless window).")
-	$g_chk_FullScreen = GUICtrlCreateCheckbox("Full Screen", 213, 357, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
+	$g_chk_FullScreen = GUICtrlCreateCheckbox("Full Screen", 213, 358, 97, 25, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE, $BS_RIGHTBUTTON))
 	GUICtrlSetOnEvent(-1, "_f_btn_Parameter")
 	GUICtrlSetTip(-1, "Start in fullscreen.")
-	$g_chk_NoScreenSaver = GUICtrlCreateCheckbox("No ScreenSaver", 10, 392, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
+	$g_chk_NoScreenSaver = GUICtrlCreateCheckbox("No ScreenSaver", 10, 389, 97, 25, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE, $BS_RIGHTBUTTON))
 	GUICtrlSetOnEvent(-1, "_f_btn_Parameter")
 	GUICtrlSetTip(-1, "Disable screensaver while scrcpy is running.")
-	$g_chk_PowerOffOnExit = GUICtrlCreateCheckbox("Power Off On Exit", 112, 392, 96, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
+	$g_chk_PowerOffOnExit = GUICtrlCreateCheckbox("Power Off On Exit", 112, 389, 96, 25, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE, $BS_RIGHTBUTTON))
 	GUICtrlSetOnEvent(-1, "_f_btn_Parameter")
 	GUICtrlSetTip(-1, "Turn the device screen off when closing scrcpy.")
-	$g_chk_ShowTouch = GUICtrlCreateCheckbox("Show Touch", 213, 392, 96, 25, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
+	$g_chk_ShowTouch = GUICtrlCreateCheckbox("Show Touch", 213, 389, 96, 25, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE, $BS_RIGHTBUTTON))
 	GUICtrlSetOnEvent(-1, "_f_btn_Parameter")
 	GUICtrlSetTip(-1, "Enable 'show touches' on start, restore the initial value on exit.")
-	$g_chk_StayAwake = GUICtrlCreateCheckbox("Stay Awake", 10, 427, 96, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
+	$g_chk_StayAwake = GUICtrlCreateCheckbox("Stay Awake", 10, 420, 96, 25, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE, $BS_RIGHTBUTTON))
 	GUICtrlSetOnEvent(-1, "_f_btn_Parameter")
 	GUICtrlSetTip(-1, "Keep the device on while scrcpy is running.")
-	$g_chk_TurnOffTheScreen = GUICtrlCreateCheckbox("Turn Off The Screen", 112, 427, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
+	$g_chk_TurnOffTheScreen = GUICtrlCreateCheckbox("Turn Off The Screen", 112, 420, 97, 25, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE, $BS_RIGHTBUTTON))
 	GUICtrlSetOnEvent(-1, "_f_btn_Parameter")
 	GUICtrlSetTip(-1, "Turn the device screen off immediately.")
-	$g_chk_ViewOnlyMode = GUICtrlCreateCheckbox("View Only Mode", 213, 427, 97, 30, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE))
+	$g_chk_ViewOnlyMode = GUICtrlCreateCheckbox("View Only Mode", 213, 420, 97, 25, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE, $BS_RIGHTBUTTON))
 	GUICtrlSetOnEvent(-1, "_f_btn_Parameter")
 	GUICtrlSetTip(-1, "Disable device control (mirror the device in read-only).")
 ;~ 	$g_Slogan = GUICtrlCreateLabel("Made with️ ❤ in Bangladesh", 10, 467, 290, 30, $SS_CENTER)
@@ -254,9 +290,25 @@ Func _f_sub_GUIMain()
 	GUICtrlSetTip(-1, "Set 'Alt' as shortcut key.")
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
-	$g_btn_On = GUICtrlCreateButton("Scrcpy" & @CRLF & "On", 325, 460, 70, 50, $BS_MULTILINE)
+	$g_btn_DeviceShutdown = GUICtrlCreateButton("Device" & @CRLF & "Shutdown", 5, 460, 70, 50, $BS_MULTILINE)
+	GUICtrlSetOnEvent(-1, "_f_btn_DeviceShutdown")
+	GUICtrlSetTip(-1, "Shutdown Device")
+
+	$g_btn_DeviceReboot = GUICtrlCreateButton("Device" & @CRLF & "Reboot", 85, 460, 70, 50, $BS_MULTILINE)
+	GUICtrlSetOnEvent(-1, "_f_btn_DeviceReboot")
+	GUICtrlSetTip(-1, "Reboot Device")
+
+	$g_btn_DisplayPowerOnOff = GUICtrlCreateButton("Display" & @CRLF & "On / Off", 165, 460, 70, 50, $BS_MULTILINE)
+	GUICtrlSetOnEvent(-1, "_f_btn_DevicePowerOnOff")
+	GUICtrlSetTip(-1, "Display On or Off")
+
+	$g_btn_DeviceUnlock = GUICtrlCreateButton("Device" & @CRLF & "Unlock", 245, 460, 70, 50, $BS_MULTILINE)
+	GUICtrlSetOnEvent(-1, "_f_btn_DeviceUnlock")
+	GUICtrlSetTip(-1, "Unlock Device")
+
+	$g_btn_ScrcpyOn = GUICtrlCreateButton("Scrcpy" & @CRLF & "On", 325, 460, 70, 50, $BS_MULTILINE)
 	GUICtrlSetOnEvent(-1, "_f_btn_ScrcpyOn")
-	GUICtrlSetTip(-1, "Click to start SCRCPY.")
+	GUICtrlSetTip(-1, "Start SCRCPY.")
 
 	$g_group_Parameter = GUICtrlCreateGroup("Parameter", 5, 515, 390, 50, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 	$g_lbl_Parameter = GUICtrlCreateLabel($g_ini_ScrcpyCommand, 10, 530, 380, 30, -1)
@@ -344,7 +396,7 @@ EndFunc   ;==>_f_sub_AdbStop
 
 Func _f_sub_GetIP()
 	$g_txt_IP_4 = "FOR /F ""tokens=2"" %%G IN ('adb -s " & $g_data_Serial_1 & " shell ip addr show wlan0 ^|find ""inet ""') DO set ipfull=%%G"
-	_FileWriteToLine(@ScriptDir & "\Core\ip.bat", 1, $g_txt_IP_1, True, True)
+	_FileWriteToLine(@ScriptDir & "\Core\ip.bat", 1, $g_txt_IP_4, True, True)
 	$g_cmd_GetIP = RunWait(@ComSpec & " /c " & @ScriptDir & "\Core\ip.bat", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 	ProcessWaitClose($g_cmd_GetIP)
 	$g_cmdout_GetIP = StringStripWS(_ClipBoard_GetData(), $STR_STRIPTRAILING)
@@ -364,12 +416,11 @@ Func _f_sub_Connect()
 	EndIf
 EndFunc   ;==>_f_sub_Connect
 
-Func DeviceDetails()
+Func _f_sub_DeviceInfo()
 	If $g_data_Serial_1 = "No" Then
-		StatusBarWrite("No device found")
+		_f_sub_StatusBar("No device found")
 	Else
-		_f_btn_Parameter()
-		StatusBarWrite("Selected device: " & $g_data_Serial_1)
+		_f_sub_StatusBar("Selected device: " & $g_data_Serial_1)
 
 		$g_cmd_DeviceUser = Run(@ComSpec & " /c adb -s " & $g_data_Serial_1 & " shell dumpsys user", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 		ProcessWaitClose($g_cmd_DeviceUser)
@@ -436,13 +487,14 @@ Func DeviceDetails()
 		GUICtrlSetData($g_data_IP, $g_data_DeviceIP)
 		GUICtrlSetData($g_input_Title, $g_data_DeviceUser & "'s Phone")
 	EndIf
-EndFunc   ;==>DeviceDetails
+EndFunc   ;==>_f_sub_DeviceInfo
 
 Func _f_sub_ParameterUpdate()
-	If GUICtrlRead($g_input_Title) = "" Then
+	$g_data_ScrcpyTitle = GUICtrlRead($g_input_Title)
+	If $g_data_ScrcpyTitle = "" Then
 		$g_data_Title = ""
-	ElseIf GUICtrlRead($g_input_Title) = $g_data_DeviceUser & "'s Phone" Then
-		$g_data_Title = " --window-title=""" & $g_data_DeviceUser & "'s Phone"""
+	Else
+		$g_data_Title = " --window-title=" & $g_data_ScrcpyTitle
 	EndIf
 	If _IsChecked($g_rad_ResolutionAuto) Then
 		$g_data_Resolution = ""
@@ -536,7 +588,7 @@ Func _f_sub_ScrcpyCommand()
 EndFunc   ;==>_f_sub_ScrcpyCommand
 
 Func _f_sub_ScrcpyOn()
-	GUICtrlSetState($g_btn_On, $GUI_DISABLE)
+	GUICtrlSetState($g_btn_ScrcpyOn, $GUI_DISABLE)
 	GUISetState(@SW_HIDE, $g_gui_Main)
 EndFunc   ;==>_f_sub_ScrcpyOn
 
@@ -546,7 +598,8 @@ EndFunc   ;==>_f_sub_ScrcpyRun
 
 Func _f_sub_GUIChild()
 	$g_gui_Child = GUICreate("Scrcpy Control", 255, 285, 1, -1, BitOR($WS_POPUP, $WS_CAPTION))
-	GUISetOnEvent($GUI_EVENT_CLOSE, "GUIChildClose")
+	GUISetOnEvent($GUI_EVENT_CLOSE, "_f_sub_GUIChildClose")
+	GUISetBkColor($COLOR_WHITE)
 	$g_group_SelectedDevice = GUICtrlCreateGroup("Selected Device", 5, 5, 245, 55, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 	$g_lbl_SelectedDevice_1 = GUICtrlCreateLabel("", 10, 20, 235, 18, $SS_CENTER)
 	GUICtrlSetFont(-1, $g_font_Size, $g_font_Bold, 0, $g_font_Name, 5)
@@ -558,115 +611,116 @@ Func _f_sub_GUIChild()
 
 	$g_group_Touch = GUICtrlCreateGroup("Scrcpy Control", 5, 65, 245, 215, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 	$g_btn_VolumeUP = GUICtrlCreateButton("Volume +", 50, 80, 75, 35)
-	GUICtrlSetOnEvent(-1, "VolumeUPClick")
+	GUICtrlSetOnEvent(-1, "_f_btn_VolumeUP")
 	$g_btn_VolumeDown = GUICtrlCreateButton("Volume -", 130, 80, 75, 35)
-	GUICtrlSetOnEvent(-1, "VolumeDownClick")
+	GUICtrlSetOnEvent(-1, "_f_btn_VolumeDown")
 	$g_btn_ScreenOn = GUICtrlCreateButton("Screen On", 50, 120, 75, 35, $BS_MULTILINE)
-	GUICtrlSetOnEvent(-1, "ScreenOnClick")
+	GUICtrlSetOnEvent(-1, "_f_btn_ScreenOn")
 	$g_btn_ScreenOff = GUICtrlCreateButton("Screen Off", 130, 120, 75, 35, $BS_MULTILINE)
-	GUICtrlSetOnEvent(-1, "ScreenOffClick")
+	GUICtrlSetOnEvent(-1, "_f_btn_ScreenOff")
 	$g_btn_NotificationOn = GUICtrlCreateButton("Notification On", 50, 160, 75, 35, $BS_MULTILINE)
-	GUICtrlSetOnEvent(-1, "NotificationOnClick")
+	GUICtrlSetOnEvent(-1, "_f_btn_NotificationOn")
 	$g_btn_NotificationOff = GUICtrlCreateButton("Notification Off", 130, 160, 75, 35, $BS_MULTILINE)
-	GUICtrlSetOnEvent(-1, "NotificationOffClick")
+	GUICtrlSetOnEvent(-1, "_f_btn_NotificationOff")
 	$g_btn_Menu = GUICtrlCreateButton("Menu", 50, 200, 75, 35)
-	GUICtrlSetOnEvent(-1, "MenuClick")
+	GUICtrlSetOnEvent(-1, "_f_btn_Menu")
 	$g_btn_Power = GUICtrlCreateButton("Power", 130, 200, 75, 35)
-	GUICtrlSetOnEvent(-1, "PowerClick")
+	GUICtrlSetOnEvent(-1, "_f_btn_Power")
 	$g_btn_Back = GUICtrlCreateButton("<", 10, 240, 75, 35)
-	GUICtrlSetOnEvent(-1, "BackClick")
+	GUICtrlSetOnEvent(-1, "_f_btn_Back")
 	$g_btn_Home = GUICtrlCreateButton("?", 90, 240, 75, 35)
-	GUICtrlSetOnEvent(-1, "HomeClick")
+	GUICtrlSetOnEvent(-1, "_f_btn_Home")
 	$g_btn_Switch = GUICtrlCreateButton("=", 170, 240, 75, 35)
-	GUICtrlSetOnEvent(-1, "SwitchClick")
+	GUICtrlSetOnEvent(-1, "_f_btn_Switch")
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 	GUISetState(@SW_SHOW, $g_gui_Child)
 EndFunc   ;==>_f_sub_GUIChild
 
-Func VolumeUPClick()
+Func _f_btn_VolumeUP()
 	If WinActivate("[CLASS:SDL_app]", "") Then
 		Send($g_key_Shortcut & "{UP}")
 	EndIf
-EndFunc   ;==>VolumeUPClick
+EndFunc   ;==>_f_btn_VolumeUP
 
-Func ScreenOnClick()
+Func _f_btn_ScreenOn()
 	If WinActivate("[CLASS:SDL_app]", "") Then
 		Send($g_key_Shortcut & "+o")
 	EndIf
-EndFunc   ;==>ScreenOnClick
+EndFunc   ;==>_f_btn_ScreenOn
 
-Func NotificationOnClick()
+Func _f_btn_NotificationOn()
 	If WinActivate("[CLASS:SDL_app]", "") Then
 		Send($g_key_Shortcut & "n")
 	EndIf
-EndFunc   ;==>NotificationOnClick
+EndFunc   ;==>_f_btn_NotificationOn
 
-Func MenuClick()
+Func _f_btn_Menu()
 	If WinActivate("[CLASS:SDL_app]", "") Then
 		Send($g_key_Shortcut & "m")
 	EndIf
-EndFunc   ;==>MenuClick
+EndFunc   ;==>_f_btn_Menu
 
-Func VolumeDownClick()
+Func _f_btn_VolumeDown()
 	If WinActivate("[CLASS:SDL_app]", "") Then
 		Send($g_key_Shortcut & "{DOWN}")
 	EndIf
-EndFunc   ;==>VolumeDownClick
+EndFunc   ;==>_f_btn_VolumeDown
 
-Func ScreenOffClick()
+Func _f_btn_ScreenOff()
 	If WinActivate("[CLASS:SDL_app]", "") Then
 		Send($g_key_Shortcut & "o")
 	EndIf
-EndFunc   ;==>ScreenOffClick
+EndFunc   ;==>_f_btn_ScreenOff
 
-Func NotificationOffClick()
+Func _f_btn_NotificationOff()
 	If WinActivate("[CLASS:SDL_app]", "") Then
 		Send($g_key_Shortcut & "+n")
 	EndIf
-EndFunc   ;==>NotificationOffClick
+EndFunc   ;==>_f_btn_NotificationOff
 
-Func PowerClick()
+Func _f_btn_Power()
 	If WinActivate("[CLASS:SDL_app]", "") Then
 		Send($g_key_Shortcut & "p")
 	EndIf
-EndFunc   ;==>PowerClick
+EndFunc   ;==>_f_btn_Power
 
-Func BackClick()
+Func _f_btn_Back()
 	If WinActivate("[CLASS:SDL_app]", "") Then
 		Send($g_key_Shortcut & "b")
 	EndIf
-EndFunc   ;==>BackClick
+EndFunc   ;==>_f_btn_Back
 
-Func HomeClick()
+Func _f_btn_Home()
 	If WinActivate("[CLASS:SDL_app]", "") Then
 		Send($g_key_Shortcut & "h")
 	EndIf
-EndFunc   ;==>HomeClick
+EndFunc   ;==>_f_btn_Home
 
-Func SwitchClick()
+Func _f_btn_Switch()
 	If WinActivate("[CLASS:SDL_app]", "") Then
 		Send($g_key_Shortcut & "s")
 	EndIf
-EndFunc   ;==>SwitchClick
+EndFunc   ;==>_f_btn_Switch
 
-Func GUIChildClose()
+Func _f_sub_GUIChildClose()
 	If WinExists("[CLASS:SDL_app]", "") Then
 		WinClose("[CLASS:SDL_app]", "")
 		GUIDelete($g_gui_Child)
 		GUISetState(@SW_SHOW, $g_gui_Main)
-		StatusBarWrite("Selected device: " & $g_data_Serial_1)
-		GUICtrlSetState($g_btn_On, $GUI_ENABLE)
+		_f_sub_StatusBar("Selected device: " & $g_data_Serial_1)
+		GUICtrlSetState($g_btn_ScrcpyOn, $GUI_ENABLE)
 	Else
 		GUIDelete($g_gui_Child)
 		GUISetState(@SW_SHOW, $g_gui_Main)
-		StatusBarWrite("Selected device: " & $g_data_Serial_1)
-		GUICtrlSetState($g_btn_On, $GUI_ENABLE)
+		_f_sub_StatusBar("Selected device: " & $g_data_Serial_1)
+		GUICtrlSetState($g_btn_ScrcpyOn, $GUI_ENABLE)
 	EndIf
-EndFunc   ;==>GUIChildClose
+EndFunc   ;==>_f_sub_GUIChildClose
 
 Func _f_sub_GUIMainClose()
 	_f_sub_AdbStop()
 	_SaveIni("Serial", "")
+	_SaveIni("FinalParameter", "")
 	Exit
 EndFunc   ;==>_f_sub_GUIMainClose
 
@@ -683,9 +737,9 @@ Func _IsChecked($idControlID)
 	Return BitAND(GUICtrlRead($idControlID), $GUI_CHECKED) = $GUI_CHECKED
 EndFunc   ;==>_IsChecked
 
-Func StatusBarWrite($sMessage = "")
+Func _f_sub_StatusBar($sMessage = "")
 	_GUICtrlStatusBar_SetText($g_Status, $sMessage)
-EndFunc   ;==>StatusBarWrite
+EndFunc   ;==>_f_sub_StatusBar
 
 Func WM_NOTIFY($hWnd, $Msg, $wParam, $lParam)
 	Local $hListView, $tNMHDR, $hWndFrom, $iCode
@@ -704,7 +758,8 @@ Func WM_NOTIFY($hWnd, $Msg, $wParam, $lParam)
 						$g_data_Serial_1 = _GUICtrlListView_GetItemText($g_lvw_DeviceList, $iItem, 1)
 						$g_data_DeviceConnection = _GUICtrlListView_GetItemText($g_lvw_DeviceList, $iItem, 2)
 						_SaveIni("Serial", $g_data_Serial_1)
-						DeviceDetails()
+						_f_sub_DeviceInfo()
+						_f_btn_Parameter()
 					EndIf
 			EndSwitch
 	EndSwitch
