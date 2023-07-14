@@ -25,10 +25,11 @@ Opt("MustDeclareVars", 1)
 #include <TabConstants.au3>
 #include <WinAPI.au3>
 #include <WindowsConstants.au3>
+;#include "GUIExtender.au3"
 
 Global $g_array_Devices, $g_btn_Back, $g_btn_Connect, $g_btn_GetIP, $g_btn_Home, $g_btn_Menu, $g_btn_NotificationOff, $g_btn_NotificationOn, $g_btn_ScrcpyOn, $g_btn_Power, $g_btn_Refresh, $g_btn_Reset, $g_btn_ScreenOff, $g_btn_ScreenOn, $g_btn_Switch, $g_btn_VolumeDown, $g_btn_VolumeUP, $g_chk_AlwaysOnTop, $g_chk_Borderless, $g_chk_FullScreen, $g_chk_NoScreenSaver, $g_chk_PowerOffOnExit, $g_chk_ShowTouch, $g_chk_StayAwake, $g_chk_TurnOffTheScreen, $g_chk_ViewOnlyMode, $g_cmd_DeviceAccount, $g_cmd_DeviceBattery, $g_cmd_DeviceIP, $g_cmd_DeviceListGet, $g_cmd_DeviceModel, $g_cmd_DeviceSerial, $g_cmd_DeviceUser, $g_cmd_DeviceUptime, $g_cmd_DeviceWifi, $g_cmd_GetIP, $g_cmdout_DeviceAccount, $g_cmdout_DeviceBattery, $g_cmdout_DeviceListGet, $g_cmdout_DeviceUser, $g_cmdout_DeviceUptime, $g_cmdout_DeviceWifi, $g_cmdout_GetIP, $g_data_Account, $g_data_AlwaysOnTop, $g_data_Battery, $g_data_Borderless, $g_data_Connection, $g_data_DeviceAccount, $g_data_DeviceBattery
 Global $g_data_DeviceBatteryAC, $g_data_DeviceBatteryUSB, $g_data_DeviceConnection, $g_data_DeviceIP, $g_data_DeviceListGet, $g_data_DeviceModel, $g_data_DeviceSerial, $g_data_DeviceUser, $g_data_DeviceUptime, $g_data_DeviceWifi, $g_data_FullScreen, $g_data_IP, $g_data_Model, $g_data_NoScreenSaver, $g_data_PowerOffOnExit, $g_data_Resolution, $g_data_Serial_1, $g_data_Serial_2, $g_data_Shortcut, $g_data_ShowTouch, $g_data_StayAwake, $g_data_Title, $g_data_User, $g_data_TurnOffTheScreen, $g_data_Uptime, $g_data_ViewOnlyMode, $g_data_Wifi, $g_extfile_IP, $g_graphic_Line, $g_group_Details, $g_group_DeviceList, $g_group_Options, $g_group_Parameter, $g_group_Resolution, $g_group_SelectedDevice, $g_group_Shortcut, $g_group_Touch, $g_group_Wireless, $g_gui_Child, $g_gui_Main, $g_ini_AlwaysOnTop, $g_ini_Borderless, $g_ini_Devices, $g_ini_FullScreen, $g_ini_NoScreenSaver, $g_ini_PowerOffOnExit, $g_ini_ScrcpyCommand, $g_ini_ShowTouch, $g_ini_StayAwake, $g_ini_TurnOffTheScreen, $g_ini_ViewOnlyMode
-Global $g_ini_WiFiAddress, $g_input_IPAddress, $g_key_Shortcut, $g_lbl_Account_1, $g_lbl_Account_2, $g_lbl_Battery_1, $g_lbl_Battery_2, $g_lbl_Connection_1, $g_lbl_Connection_2, $g_lbl_IP_1, $g_lbl_IP_2, $g_lbl_Model_1, $g_lbl_Model_2, $g_lbl_Parameter, $g_lbl_SelectedDevice_1, $g_lbl_SelectedDevice_2, $g_lbl_Serial_1, $g_lbl_Serial_2, $g_lbl_User_1, $g_lbl_User_2, $g_lbl_Uptime_1, $g_lbl_Uptime_2, $g_lbl_Wifi_1, $g_lbl_Wifi_2, $g_lvw_DeviceList, $g_rad_ResolutionAuto, $g_rad_ResolutionMax, $g_rad_ShortcutAlt, $g_rad_ShortcutCtrl, $g_regex_DeviceAccount, $g_regex_DeviceBattery, $g_regex_DeviceBatteryAC, $g_regex_DeviceBatteryUSB, $g_regex_DeviceUser, $g_regex_DeviceWifi, $g_Slogan, $g_Status, $g_txt_IP_1, $g_txt_IP_2, $g_txt_IP_3, $g_txt_IP_4, $g_lbl_Title_1, $g_lbl_Title_2, $g_input_Title, $g_btn_DeviceShutdown, $g_btn_DeviceReboot, $g_btn_DisplayPowerOnOff, $g_btn_DeviceUnlock, $g_data_ScrcpyTitle
+Global $g_ini_WiFiAddress, $g_input_IPAddress, $g_key_Shortcut, $g_lbl_Account_1, $g_lbl_Account_2, $g_lbl_Battery_1, $g_lbl_Battery_2, $g_lbl_Connection_1, $g_lbl_Connection_2, $g_lbl_IP_1, $g_lbl_IP_2, $g_lbl_Model_1, $g_lbl_Model_2, $g_lbl_Parameter, $g_lbl_SelectedDevice_1, $g_lbl_SelectedDevice_2, $g_lbl_Serial_1, $g_lbl_Serial_2, $g_lbl_User_1, $g_lbl_User_2, $g_lbl_Uptime_1, $g_lbl_Uptime_2, $g_lbl_Wifi_1, $g_lbl_Wifi_2, $g_lvw_DeviceList, $g_rad_ResolutionAuto, $g_rad_ResolutionMax, $g_rad_ShortcutAlt, $g_rad_ShortcutCtrl, $g_regex_DeviceAccount, $g_regex_DeviceBattery, $g_regex_DeviceBatteryAC, $g_regex_DeviceBatteryUSB, $g_regex_DeviceUser, $g_regex_DeviceWifi, $g_Slogan, $g_Status, $g_txt_IP_1, $g_txt_IP_2, $g_txt_IP_3, $g_txt_IP_4, $g_lbl_Title_1, $g_lbl_Title_2, $g_input_Title, $g_btn_DeviceShutdown, $g_btn_DeviceReboot, $g_btn_DisplayPowerOnOff, $g_btn_DeviceUnlock, $g_data_ScrcpyTitle, $g_cmd_Connect
 Global $g_ini_Config = @ScriptDir & "\Core\Config.ini"
 Global $g_font_Name = "Baloo Da 2"
 Global $g_font_Size = 9.5
@@ -38,66 +39,57 @@ _f_sub_MainProgram()
 
 Func _f_sub_MainProgram()
 	_f_sub_StartupCheck()
-	_f_sub_StatusBar("Installing required components")
 	_f_sub_GUIMain()
-	_f_sub_StatusBar("Reading settings")
+	_f_sub_StatusBar("Reading from config file.")
 	_f_sub_ReadIni()
-	_f_sub_StatusBar("Starting ADB Server")
+	_f_sub_StatusBar("Starting ADB server.")
 	_f_sub_AdbStart()
-	_f_sub_StatusBar("Searching for device")
-	_f_sub_DeviceListGet()
-	_f_sub_StatusBar("Making a device list")
-	_f_sub_DeviceListSet()
-	_f_sub_StatusBar("Select a device from list")
+	_f_btn_Refresh()
 	While 1
 		Sleep(100)
 	WEnd
 EndFunc   ;==>_f_sub_MainProgram
 
 Func _f_btn_Refresh()
-	_f_sub_StatusBar("Searching for device")
+	_f_sub_StatusBar("Searching for device.")
 	_f_sub_DeviceListGet()
-	_f_sub_StatusBar("Making a device list")
+	_f_sub_StatusBar("Making a device list.")
 	_f_sub_DeviceListSet()
-	_f_sub_StatusBar("Select a device from list")
+	_f_sub_StatusBar("Select a device from list.")
 EndFunc   ;==>_f_btn_Refresh
 
 Func _f_btn_Reset()
-	_f_sub_StatusBar("Restarting ADB Server")
+	_f_sub_StatusBar("Restarting ADB server.")
 	_f_sub_AdbStop()
 	_f_sub_AdbStart()
-	_f_sub_StatusBar("Searching for device")
-	_f_sub_DeviceListGet()
-	_f_sub_StatusBar("Making a device list")
-	_f_sub_DeviceListSet()
-	_f_sub_StatusBar("Select a device from list")
+	_f_btn_Refresh()
 EndFunc   ;==>_f_btn_Reset
 
 Func _f_btn_GetIP()
-	_f_sub_StatusBar("Geting IP Address from selected device")
+	_f_sub_StatusBar("Getting IP address from selected device.")
 	_f_sub_GetIP()
-	_f_sub_ReadIni()
+	_f_sub_StatusBar("Click ""Connect"" button to add " & $g_cmdout_GetIP & ".")
+;~	_f_sub_ReadIni()
 EndFunc   ;==>_f_btn_GetIP
 
 Func _f_btn_Connect()
-	_f_sub_StatusBar("Try connecting to given IP")
+	_f_sub_StatusBar("Connecting . . .")
 	_f_sub_Connect()
-	_f_sub_StatusBar("Searching for device")
-	_f_sub_DeviceListGet()
-	_f_sub_StatusBar("Making a device list")
-	_f_sub_DeviceListSet()
-	_f_sub_StatusBar("Select a device from list")
+	_f_sub_StatusBar("Updating device list.")
+	_f_btn_Refresh()
 EndFunc   ;==>_f_btn_Connect
 
 Func _f_btn_Parameter()
-	_f_sub_StatusBar("Adding select parameter in the scrcpy command line")
+	_f_sub_StatusBar("Updating all selected options in scrcpy command line.")
 	_f_sub_ParameterUpdate()
 	_f_sub_ScrcpyCommand()
+	_f_sub_StatusBar("Click ""Scrcpy On"" button to start Scrcpy.")
 EndFunc   ;==>_f_btn_Parameter
 
 Func _f_btn_ScrcpyOn()
-	_f_sub_StatusBar("Starting scrcpy command")
+	_f_sub_StatusBar("Verifing all selected options in scrcpy command line.")
 	_f_btn_Parameter()
+	_f_sub_StatusBar("Now closing main window.")
 	_f_sub_ScrcpyOn()
 	_f_sub_GUIChild()
 	_f_sub_ScrcpyRun()
@@ -236,11 +228,15 @@ Func _f_sub_GUIMain()
 	GUICtrlSetColor(-1, 0x006A4E)
 	GUICtrlSetFont(-1, 8.5, $g_font_Bold)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
+	
+;	_GUIExtender_Init($hGUI_1)
 
 	$g_group_Options = GUICtrlCreateGroup("Options", 5, 320, 315, 135, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 	$g_lbl_Title_1 = GUICtrlCreateLabel("Window Title", 10, 337, 62, 15)
 	$g_lbl_Title_2 = GUICtrlCreateLabel(":", 72, 337, 5, 15)
 	$g_input_Title = GUICtrlCreateEdit("", 78, 335, 237, 17, BitOR($ES_AUTOVSCROLL, $ES_AUTOHSCROLL))
+	GUICtrlSetColor(-1, 0x006A4E)
+	GUICtrlSetFont(-1, 8.5, $g_font_Bold)
 	$g_chk_AlwaysOnTop = GUICtrlCreateCheckbox("Always On Top", 10, 358, 97, 25, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE, $BS_RIGHTBUTTON))
 	GUICtrlSetOnEvent(-1, "_f_btn_Parameter")
 	GUICtrlSetTip(-1, "Make scrcpy window always on top (above other windows).")
@@ -312,6 +308,8 @@ Func _f_sub_GUIMain()
 
 	$g_group_Parameter = GUICtrlCreateGroup("Parameter", 5, 515, 390, 50, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 	$g_lbl_Parameter = GUICtrlCreateLabel($g_ini_ScrcpyCommand, 10, 530, 380, 30, -1)
+	GUICtrlSetColor(-1, 0x006A4E)
+	GUICtrlSetFont(-1, 8.5, $g_font_Bold)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	$g_Status = _GUICtrlStatusBar_Create($g_gui_Main)
@@ -405,6 +403,7 @@ Func _f_sub_GetIP()
 	_ClipBoard_Open($g_gui_Main)
 	_ClipBoard_Empty()
 	_ClipBoard_Close()
+	GUICtrlSetState($g_btn_Connect, $GUI_ENABLE)
 EndFunc   ;==>_f_sub_GetIP
 
 Func _f_sub_Connect()
@@ -412,22 +411,64 @@ Func _f_sub_Connect()
 		MsgBox($MB_SYSTEMMODAL, "", "Enter IP Address.")
 		_GUICtrlIpAddress_SetFocus($g_input_IPAddress, 0)
 	Else
-		RunWait(@ComSpec & " /c " & "adb connect " & _GUICtrlIpAddress_Get($g_input_IPAddress), "", @SW_HIDE)
+		$g_cmd_Connect = RunWait(@ComSpec & " /c " & "adb tcpip 5555 | adb connect " & _GUICtrlIpAddress_Get($g_input_IPAddress), "", @SW_HIDE)
+		ProcessWaitClose($g_cmd_Connect)
 	EndIf
 EndFunc   ;==>_f_sub_Connect
 
-Func _f_sub_DeviceInfo()
+Func _f_sub_UpdateWindow()
+	If $g_data_DeviceConnection = "Wireless" Then
+		GUICtrlSetState($g_btn_GetIP, $GUI_DISABLE)
+		GUICtrlSetState($g_input_IPAddress, $GUI_DISABLE)
+		GUICtrlSetState($g_btn_Connect, $GUI_DISABLE)
+	Else
+		GUICtrlSetState($g_btn_GetIP, $GUI_ENABLE)
+		GUICtrlSetState($g_input_IPAddress, $GUI_ENABLE)
+		GUICtrlSetState($g_btn_Connect, $GUI_ENABLE)
+	EndIf
+	If _GUICtrlIpAddress_IsBlank($g_input_IPAddress) Then
+		GUICtrlSetState($g_btn_Connect, $GUI_DISABLE)
+	Else
+		GUICtrlSetState($g_btn_Connect, $GUI_ENABLE)
+	EndIf
+EndFunc   ;==>_f_sub_UpdateWindow
+
+Func _f_sub_DeviceInfoClear()
+	_f_sub_StatusBar("Getting device info.")
+	GUICtrlSetData($g_data_User, "")
+	Sleep(250)
+	GUICtrlSetData($g_data_Account, "")
+	Sleep(250)
+	GUICtrlSetData($g_data_Model, "")
+	Sleep(250)
+	GUICtrlSetData($g_data_Serial_2, "")
+	Sleep(250)
+	GUICtrlSetData($g_data_Battery, "")
+	Sleep(250)
+	GUICtrlSetData($g_data_Uptime, "")
+	Sleep(250)
+	GUICtrlSetData($g_data_Connection, "")
+	Sleep(250)
+	GUICtrlSetData($g_data_Wifi, "")
+	Sleep(250)
+	GUICtrlSetData($g_data_IP, "")
+	Sleep(250)
+	GUICtrlSetData($g_input_Title, "")
+	Sleep(250)
+	GUICtrlSetData($g_lbl_Parameter, "")
+EndFunc   ;==>_f_sub_DeviceInfoClear
+
+Func _f_sub_DeviceInfoAdd()
 	If $g_data_Serial_1 = "No" Then
 		_f_sub_StatusBar("No device found")
 	Else
-		_f_sub_StatusBar("Selected device: " & $g_data_Serial_1)
+		_f_sub_StatusBar("Getting device info.")
 
 		$g_cmd_DeviceUser = Run(@ComSpec & " /c adb -s " & $g_data_Serial_1 & " shell dumpsys user", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 		ProcessWaitClose($g_cmd_DeviceUser)
 		$g_cmdout_DeviceUser = StdoutRead($g_cmd_DeviceUser)
 		$g_regex_DeviceUser = StringRegExp($g_cmdout_DeviceUser, "{[0-9]+:(.*):[0-9]+}", 3)
 		$g_data_DeviceUser = $g_regex_DeviceUser[0]
-		GUICtrlSetData($g_data_User, $g_data_DeviceUser)
 
 		$g_cmd_DeviceAccount = Run(@ComSpec & " /c adb -s " & $g_data_Serial_1 & " shell dumpsys account", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 		ProcessWaitClose($g_cmd_DeviceAccount)
@@ -437,17 +478,14 @@ Func _f_sub_DeviceInfo()
 			$g_regex_DeviceAccount[$x] = $g_regex_DeviceAccount[$x]
 		Next
 		$g_data_DeviceAccount = _ArrayToString($g_regex_DeviceAccount, ", ")
-		GUICtrlSetData($g_data_Account, $g_data_DeviceAccount)
 
 		$g_cmd_DeviceModel = Run(@ComSpec & " /c adb -s " & $g_data_Serial_1 & " shell getprop ro.product.model", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 		ProcessWaitClose($g_cmd_DeviceModel)
 		$g_data_DeviceModel = StringStripWS(StdoutRead($g_cmd_DeviceModel), 8)
-		GUICtrlSetData($g_data_Model, $g_data_DeviceModel)
 
 		$g_cmd_DeviceSerial = Run(@ComSpec & " /c adb -s " & $g_data_Serial_1 & " shell getprop ro.serialno", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 		ProcessWaitClose($g_cmd_DeviceSerial)
 		$g_data_DeviceSerial = StringStripWS(StdoutRead($g_cmd_DeviceSerial), 8)
-		GUICtrlSetData($g_data_Serial_2, $g_data_DeviceSerial)
 
 		$g_cmd_DeviceBattery = Run(@ComSpec & " /c adb -s " & $g_data_Serial_1 & " shell dumpsys battery", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 		ProcessWaitClose($g_cmd_DeviceBattery)
@@ -458,6 +496,30 @@ Func _f_sub_DeviceInfo()
 		$g_data_DeviceBatteryAC = $g_regex_DeviceBatteryAC[0]
 		$g_regex_DeviceBatteryUSB = StringRegExp($g_cmdout_DeviceBattery, "USB powered: (.*)", 3)
 		$g_data_DeviceBatteryUSB = $g_regex_DeviceBatteryUSB[0]
+
+		$g_cmd_DeviceUptime = Run(@ComSpec & " /c adb -s " & $g_data_Serial_1 & " shell uptime", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
+		ProcessWaitClose($g_cmd_DeviceUptime)
+		$g_cmdout_DeviceUptime = StdoutRead($g_cmd_DeviceUptime)
+		$g_data_DeviceUptime = StringRegExpReplace($g_cmdout_DeviceUptime, "up time: (.*?), (.*?):(.*?):(.*), idle(.*)", "$1 $2 hrs $3 mins", 0)
+
+		$g_cmd_DeviceWifi = Run(@ComSpec & " /c adb -s " & $g_data_Serial_1 & " shell dumpsys connectivity", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
+		ProcessWaitClose($g_cmd_DeviceWifi)
+		$g_cmdout_DeviceWifi = StdoutRead($g_cmd_DeviceWifi)
+		$g_regex_DeviceWifi = StringRegExp($g_cmdout_DeviceWifi, 'extra: "(.*)"', 3)
+		$g_data_DeviceWifi = $g_regex_DeviceWifi[0]
+
+		$g_cmd_DeviceIP = Run(@ComSpec & " /c adb -s " & $g_data_Serial_1 & " shell getprop dhcp.wlan0.ipaddress", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
+		ProcessWaitClose($g_cmd_DeviceIP)
+		$g_data_DeviceIP = StringStripWS(StdoutRead($g_cmd_DeviceIP), 8)
+
+		GUICtrlSetData($g_data_User, $g_data_DeviceUser)
+		Sleep(333)
+		GUICtrlSetData($g_data_Account, $g_data_DeviceAccount)
+		Sleep(333)
+		GUICtrlSetData($g_data_Model, $g_data_DeviceModel)
+		Sleep(333)
+		GUICtrlSetData($g_data_Serial_2, $g_data_DeviceSerial)
+		Sleep(333)
 		If ($g_data_DeviceBatteryAC = "false" And $g_data_DeviceBatteryUSB = "false") Or ($g_data_DeviceBatteryAC = "true" And $g_data_DeviceBatteryUSB = "true") Then
 			GUICtrlSetData($g_data_Battery, $g_data_DeviceBattery & "% (Not Charging)")
 		ElseIf ($g_data_DeviceBatteryAC = "true") And ($g_data_DeviceBatteryUSB = "false") Then
@@ -465,36 +527,25 @@ Func _f_sub_DeviceInfo()
 		Else
 			GUICtrlSetData($g_data_Battery, $g_data_DeviceBattery & "% (USB Charging)")
 		EndIf
-
-		$g_cmd_DeviceUptime = Run(@ComSpec & " /c adb -s " & $g_data_Serial_1 & " shell uptime", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
-		ProcessWaitClose($g_cmd_DeviceUptime)
-		$g_cmdout_DeviceUptime = StdoutRead($g_cmd_DeviceUptime)
-		$g_data_DeviceUptime = StringRegExpReplace($g_cmdout_DeviceUptime, "up time: (.*?), (.*?):(.*?):(.*), idle(.*)", "$1 $2 hrs $3 mins", 0)
+		Sleep(333)
 		GUICtrlSetData($g_data_Uptime, $g_data_DeviceUptime)
-
+		Sleep(333)
 		GUICtrlSetData($g_data_Connection, $g_data_DeviceConnection)
-
-		$g_cmd_DeviceWifi = Run(@ComSpec & " /c adb -s " & $g_data_Serial_1 & " shell dumpsys connectivity", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
-		ProcessWaitClose($g_cmd_DeviceWifi)
-		$g_cmdout_DeviceWifi = StdoutRead($g_cmd_DeviceWifi)
-		$g_regex_DeviceWifi = StringRegExp($g_cmdout_DeviceWifi, 'extra: "(.*)"', 3)
-		$g_data_DeviceWifi = $g_regex_DeviceWifi[0]
+		Sleep(333)
 		GUICtrlSetData($g_data_Wifi, $g_data_DeviceWifi)
-
-		$g_cmd_DeviceIP = Run(@ComSpec & " /c adb -s " & $g_data_Serial_1 & " shell getprop dhcp.wlan0.ipaddress", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
-		ProcessWaitClose($g_cmd_DeviceIP)
-		$g_data_DeviceIP = StringStripWS(StdoutRead($g_cmd_DeviceIP), 8)
+		Sleep(333)
 		GUICtrlSetData($g_data_IP, $g_data_DeviceIP)
+		Sleep(333)
 		GUICtrlSetData($g_input_Title, $g_data_DeviceUser & "'s Phone")
 	EndIf
-EndFunc   ;==>_f_sub_DeviceInfo
+EndFunc   ;==>_f_sub_DeviceInfoAdd
 
 Func _f_sub_ParameterUpdate()
 	$g_data_ScrcpyTitle = GUICtrlRead($g_input_Title)
 	If $g_data_ScrcpyTitle = "" Then
 		$g_data_Title = ""
 	Else
-		$g_data_Title = " --window-title=" & $g_data_ScrcpyTitle
+		$g_data_Title = " --window-title=" & '"' & $g_data_ScrcpyTitle & '"'
 	EndIf
 	If _IsChecked($g_rad_ResolutionAuto) Then
 		$g_data_Resolution = ""
@@ -758,7 +809,9 @@ Func WM_NOTIFY($hWnd, $Msg, $wParam, $lParam)
 						$g_data_Serial_1 = _GUICtrlListView_GetItemText($g_lvw_DeviceList, $iItem, 1)
 						$g_data_DeviceConnection = _GUICtrlListView_GetItemText($g_lvw_DeviceList, $iItem, 2)
 						_SaveIni("Serial", $g_data_Serial_1)
-						_f_sub_DeviceInfo()
+						_f_sub_UpdateWindow()
+						_f_sub_DeviceInfoClear()
+						_f_sub_DeviceInfoAdd()
 						_f_btn_Parameter()
 					EndIf
 			EndSwitch
