@@ -414,6 +414,11 @@ Func _f_sub_Connect()
 EndFunc   ;==>_f_sub_Connect
 
 Func _f_sub_UpdateWindow()
+	If _GUICtrlIpAddress_IsBlank($g_input_IPAddress) Then
+		GUICtrlSetState($g_btn_Connect, $GUI_DISABLE)
+	Else
+		GUICtrlSetState($g_btn_Connect, $GUI_ENABLE)
+	EndIf
 	If $g_data_DeviceConnection = "Wireless" Then
 		GUICtrlSetState($g_btn_GetIP, $GUI_DISABLE)
 		GUICtrlSetState($g_input_IPAddress, $GUI_DISABLE)
@@ -421,11 +426,6 @@ Func _f_sub_UpdateWindow()
 	Else
 		GUICtrlSetState($g_btn_GetIP, $GUI_ENABLE)
 		GUICtrlSetState($g_input_IPAddress, $GUI_ENABLE)
-		GUICtrlSetState($g_btn_Connect, $GUI_ENABLE)
-	EndIf
-	If _GUICtrlIpAddress_IsBlank($g_input_IPAddress) Then
-		GUICtrlSetState($g_btn_Connect, $GUI_DISABLE)
-	Else
 		GUICtrlSetState($g_btn_Connect, $GUI_ENABLE)
 	EndIf
 EndFunc   ;==>_f_sub_UpdateWindow
