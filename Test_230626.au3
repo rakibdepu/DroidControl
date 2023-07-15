@@ -25,10 +25,11 @@ Opt("MustDeclareVars", 1)
 #include <TabConstants.au3>
 #include <WinAPI.au3>
 #include <WindowsConstants.au3>
+#include "GUIExtender.au3"
 
 Global $g_array_Devices, $g_btn_Back, $g_btn_Connect, $g_btn_GetIP, $g_btn_Home, $g_btn_Menu, $g_btn_NotificationOff, $g_btn_NotificationOn, $g_btn_ScrcpyOn, $g_btn_Power, $g_btn_Refresh, $g_btn_Reset, $g_btn_ScreenOff, $g_btn_ScreenOn, $g_btn_Switch, $g_btn_VolumeDown, $g_btn_VolumeUP, $g_chk_AlwaysOnTop, $g_chk_Borderless, $g_chk_FullScreen, $g_chk_NoScreenSaver, $g_chk_PowerOffOnExit, $g_chk_ShowTouch, $g_chk_StayAwake, $g_chk_TurnOffTheScreen, $g_chk_ViewOnlyMode, $g_cmd_DeviceAccount, $g_cmd_DeviceBattery, $g_cmd_DeviceIP, $g_cmd_DeviceListGet, $g_cmd_DeviceModel, $g_cmd_DeviceSerial, $g_cmd_DeviceUser, $g_cmd_DeviceUptime, $g_cmd_DeviceWifi, $g_cmd_GetIP, $g_cmdout_DeviceAccount, $g_cmdout_DeviceBattery, $g_cmdout_DeviceListGet, $g_cmdout_DeviceUser, $g_cmdout_DeviceUptime, $g_cmdout_DeviceWifi, $g_cmdout_GetIP, $g_data_Account, $g_data_AlwaysOnTop, $g_data_Battery, $g_data_Borderless, $g_data_Connection, $g_data_DeviceAccount, $g_data_DeviceBattery
 Global $g_data_DeviceBatteryAC, $g_data_DeviceBatteryUSB, $g_data_DeviceConnection, $g_data_DeviceIP, $g_data_DeviceListGet, $g_data_DeviceModel, $g_data_DeviceSerial, $g_data_DeviceUser, $g_data_DeviceUptime, $g_data_DeviceWifi, $g_data_FullScreen, $g_data_IP, $g_data_Model, $g_data_NoScreenSaver, $g_data_PowerOffOnExit, $g_data_Resolution, $g_data_Serial_1, $g_data_Serial_2, $g_data_Shortcut, $g_data_ShowTouch, $g_data_StayAwake, $g_data_Title, $g_data_User, $g_data_TurnOffTheScreen, $g_data_Uptime, $g_data_ViewOnlyMode, $g_data_Wifi, $g_extfile_IP, $g_graphic_Line, $g_group_Details, $g_group_DeviceList, $g_group_Options, $g_group_Parameter, $g_group_Resolution, $g_group_SelectedDevice, $g_group_Shortcut, $g_group_Touch, $g_group_Wireless, $g_gui_Child, $g_gui_Main, $g_ini_AlwaysOnTop, $g_ini_Borderless, $g_ini_Devices, $g_ini_FullScreen, $g_ini_NoScreenSaver, $g_ini_PowerOffOnExit, $g_ini_ScrcpyCommand, $g_ini_ShowTouch, $g_ini_StayAwake, $g_ini_TurnOffTheScreen, $g_ini_ViewOnlyMode
-Global $g_ini_WiFiAddress, $g_input_IPAddress, $g_key_Shortcut, $g_lbl_Account_1, $g_lbl_Account_2, $g_lbl_Battery_1, $g_lbl_Battery_2, $g_lbl_Connection_1, $g_lbl_Connection_2, $g_lbl_IP_1, $g_lbl_IP_2, $g_lbl_Model_1, $g_lbl_Model_2, $g_lbl_Parameter, $g_lbl_SelectedDevice_1, $g_lbl_SelectedDevice_2, $g_lbl_Serial_1, $g_lbl_Serial_2, $g_lbl_User_1, $g_lbl_User_2, $g_lbl_Uptime_1, $g_lbl_Uptime_2, $g_lbl_Wifi_1, $g_lbl_Wifi_2, $g_lvw_DeviceList, $g_rad_ResolutionAuto, $g_rad_ResolutionMax, $g_rad_ShortcutAlt, $g_rad_ShortcutCtrl, $g_regex_DeviceAccount, $g_regex_DeviceBattery, $g_regex_DeviceBatteryAC, $g_regex_DeviceBatteryUSB, $g_regex_DeviceUser, $g_regex_DeviceWifi, $g_Slogan, $g_Status, $g_txt_IP_1, $g_txt_IP_2, $g_txt_IP_3, $g_txt_IP_4, $g_lbl_Title_1, $g_lbl_Title_2, $g_input_Title, $g_btn_DeviceShutdown, $g_btn_DeviceReboot, $g_btn_DisplayPowerOnOff, $g_btn_DeviceUnlock, $g_data_ScrcpyTitle, $g_cmd_Connect
+Global $g_ini_WiFiAddress, $g_input_IPAddress, $g_key_Shortcut, $g_lbl_Account_1, $g_lbl_Account_2, $g_lbl_Battery_1, $g_lbl_Battery_2, $g_lbl_Connection_1, $g_lbl_Connection_2, $g_lbl_IP_1, $g_lbl_IP_2, $g_lbl_Model_1, $g_lbl_Model_2, $g_lbl_Parameter, $g_lbl_SelectedDevice_1, $g_lbl_SelectedDevice_2, $g_lbl_Serial_1, $g_lbl_Serial_2, $g_lbl_User_1, $g_lbl_User_2, $g_lbl_Uptime_1, $g_lbl_Uptime_2, $g_lbl_Wifi_1, $g_lbl_Wifi_2, $g_lvw_DeviceList, $g_rad_ResolutionAuto, $g_rad_ResolutionMax, $g_rad_ShortcutAlt, $g_rad_ShortcutCtrl, $g_regex_DeviceAccount, $g_regex_DeviceBattery, $g_regex_DeviceBatteryAC, $g_regex_DeviceBatteryUSB, $g_regex_DeviceUser, $g_regex_DeviceWifi, $g_Slogan, $g_Status, $g_txt_IP_1, $g_txt_IP_2, $g_txt_IP_3, $g_txt_IP_4, $g_lbl_Title_1, $g_lbl_Title_2, $g_input_Title, $g_btn_DeviceShutdown, $g_btn_DeviceReboot, $g_btn_DisplayPowerOnOff, $g_btn_DeviceUnlock, $g_data_ScrcpyTitle, $g_cmd_Connect, $g_data_SectionState
 Global $g_ini_Config = @ScriptDir & "\Core\Config.ini"
 Global $g_font_Name = "Baloo Da 2"
 Global $g_font_Size = 9.5
@@ -127,6 +128,9 @@ Func _f_sub_GUIMain()
 	$g_gui_Main = GUICreate("Droid Control", 800, 360, -1, -1, BitOR($WS_POPUP, $WS_CAPTION))
 	GUISetOnEvent($GUI_EVENT_CLOSE, "_f_sub_GUIMainClose")
 	GUISetBkColor($CLR_WHITE)
+	_GUIExtender_Init($g_gui_Main, 1, 1, True)
+	_GUIExtender_Section_Create($g_gui_Main, Default, 400)
+	_GUIExtender_Section_Activate($g_gui_Main, 2)
 	$g_group_DeviceList = GUICtrlCreateGroup("Device List", 5, 5, 390, 135, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 	$g_lvw_DeviceList = _GUICtrlListView_Create($g_gui_Main, "#|Device|Connection", 10, 20, 305, 110)
 	_GUICtrlListView_SetExtendedListViewStyle($g_lvw_DeviceList, $LVS_EX_FULLROWSELECT)
@@ -156,7 +160,7 @@ Func _f_sub_GUIMain()
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	$g_group_Details = GUICtrlCreateGroup("Details", 5, 190, 390, 140, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
-	$g_graphic_Line = GUICtrlCreateGraphic(81, 220, 309, 140)
+	$g_graphic_Line = GUICtrlCreateGraphic(81, 220, 309, 105)
 	GUICtrlSetGraphic($g_graphic_Line, $GUI_GR_PENSIZE, 1)
 	GUICtrlSetGraphic($g_graphic_Line, $GUI_GR_COLOR, 0xDCDCDC)
 	GUICtrlSetGraphic($g_graphic_Line, $GUI_GR_LINE, 309, 0)
@@ -228,6 +232,8 @@ Func _f_sub_GUIMain()
 	GUICtrlSetFont(-1, 8.5, $g_font_Bold)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
+	_GUIExtender_Section_Create($g_gui_Main, Default, Default)
+
 	$g_group_Options = GUICtrlCreateGroup("Options", 405, 5, 315, 135, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 	$g_lbl_Title_1 = GUICtrlCreateLabel("Window Title", 410, 22, 62, 15)
 	$g_lbl_Title_2 = GUICtrlCreateLabel(":", 472, 22, 5, 15)
@@ -284,7 +290,7 @@ Func _f_sub_GUIMain()
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	$g_group_Parameter = GUICtrlCreateGroup("Parameter", 405, 145, 390, 130, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
-	$g_lbl_Parameter = GUICtrlCreateLabel($g_ini_ScrcpyCommand, 410, 160, 380, 30, -1)
+	$g_lbl_Parameter = GUICtrlCreateLabel($g_ini_ScrcpyCommand, 410, 160, 380, 110, -1)
 	GUICtrlSetColor(-1, 0x006A4E)
 	GUICtrlSetFont(-1, 8.5, $g_font_Bold)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
@@ -311,6 +317,9 @@ Func _f_sub_GUIMain()
 
 	$g_Status = _GUICtrlStatusBar_Create($g_gui_Main)
 	_GUICtrlStatusBar_SetMinHeight($g_Status, 25)
+
+	_GUIExtender_Section_Create($g_gui_Main, -99)
+	_GUIExtender_Section_Action($g_gui_Main, 2, False) ; hide section 2
 
 	GUIRegisterMsg($WM_NOTIFY, "WM_NOTIFY")
 
@@ -533,6 +542,14 @@ Func _f_sub_DeviceInfoAdd()
 		Sleep(333)
 		GUICtrlSetData($g_data_IP, $g_data_DeviceIP)
 		Sleep(333)
+		$g_data_SectionState = _GUIExtender_Section_State($g_gui_Main, 2)
+		ConsoleWrite(@ScriptLineNumber & ': ' & $g_data_SectionState & @CRLF)
+		If $g_data_SectionState = 0 Then
+			_GUIExtender_Section_Action($g_gui_Main, 2, 9)
+			Sleep(333)
+		Else
+			Sleep(333)
+		EndIf
 		GUICtrlSetData($g_input_Title, $g_data_DeviceUser & "'s Phone")
 	EndIf
 EndFunc   ;==>_f_sub_DeviceInfoAdd
