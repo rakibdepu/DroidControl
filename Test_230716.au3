@@ -30,7 +30,7 @@ Opt("MustDeclareVars", 1)
 Global $g_array_Devices, $g_btn_Back, $g_btn_Connect, $g_btn_GetIP, $g_btn_Home, $g_btn_Menu, $g_btn_NotificationOff, $g_btn_NotificationOn, $g_btn_ScrcpyOn, $g_btn_Power, $g_btn_Refresh, $g_btn_Reset, $g_btn_ScreenOff, $g_btn_ScreenOn, $g_btn_Switch, $g_btn_VolumeDown, $g_btn_VolumeUP, $g_chk_AlwaysOnTop, $g_chk_Borderless, $g_chk_FullScreen, $g_chk_NoScreenSaver, $g_chk_PowerOffOnExit, $g_chk_ShowTouch, $g_chk_StayAwake, $g_chk_TurnOffTheScreen, $g_chk_ViewOnlyMode, $g_cmd_DeviceAccount, $g_cmd_DeviceBattery, $g_cmd_DeviceIP, $g_cmd_DeviceListGet, $g_cmd_DeviceModel, $g_cmd_DeviceSerial, $g_cmd_DeviceUser, $g_cmd_DeviceUptime, $g_cmd_DeviceWifi, $g_cmd_GetIP, $g_cmdout_DeviceAccount, $g_cmdout_DeviceBattery, $g_cmdout_DeviceListGet, $g_cmdout_DeviceUser, $g_cmdout_DeviceUptime, $g_cmdout_DeviceWifi, $g_cmdout_GetIP, $g_data_Account, $g_data_AlwaysOnTop, $g_data_Battery, $g_data_Borderless, $g_data_Connection, $g_data_DeviceAccount, $g_data_DeviceBattery
 Global $g_data_DeviceBatteryAC, $g_data_DeviceBatteryUSB, $g_data_DeviceConnection, $g_data_DeviceIP, $g_data_DeviceListGet, $g_data_DeviceModel, $g_data_DeviceSerial, $g_data_DeviceUser, $g_data_DeviceUptime, $g_data_DeviceWifi, $g_data_FullScreen, $g_data_IP, $g_data_Model, $g_data_NoScreenSaver, $g_data_PowerOffOnExit, $g_data_Resolution, $g_data_DeviceSelected, $g_data_Serial, $g_data_Shortcut, $g_data_ShowTouch, $g_data_StayAwake, $g_data_Title, $g_data_User, $g_data_TurnOffTheScreen, $g_data_Uptime, $g_data_ViewOnlyMode, $g_data_Wifi, $g_graphic_Line, $g_group_Details, $g_group_DeviceList, $g_group_Options, $g_group_Parameter, $g_group_Resolution, $g_group_SelectedDevice, $g_group_Shortcut, $g_group_Touch, $g_group_Wireless, $g_gui_Child, $g_gui_Main, $g_ini_AlwaysOnTop, $g_ini_Borderless, $g_ini_Devices, $g_ini_FullScreen, $g_ini_NoScreenSaver, $g_ini_PowerOffOnExit, $g_ini_ScrcpyCommand, $g_ini_ShowTouch, $g_ini_StayAwake, $g_ini_TurnOffTheScreen, $g_ini_ViewOnlyMode
 Global $g_ini_WiFiAddress, $g_input_IPAddress, $g_key_Shortcut, $g_lbl_Account_1, $g_lbl_Account_2, $g_lbl_Battery_1, $g_lbl_Battery_2, $g_lbl_Connection_1, $g_lbl_Connection_2, $g_lbl_IP_1, $g_lbl_IP_2, $g_lbl_Model_1, $g_lbl_Model_2, $g_lbl_Parameter, $g_lbl_SelectedDevice_1, $g_lbl_SelectedDevice_2, $g_lbl_Serial_1, $g_lbl_Serial_2, $g_lbl_User_1, $g_lbl_User_2, $g_lbl_Uptime_1, $g_lbl_Uptime_2, $g_lbl_Wifi_1, $g_lbl_Wifi_2, $g_lvw_DeviceList, $g_rad_ResolutionAuto, $g_rad_ResolutionMax, $g_rad_ShortcutAlt, $g_rad_ShortcutCtrl, $g_regex_DeviceAccount, $g_regex_DeviceBattery, $g_regex_DeviceBatteryAC, $g_regex_DeviceBatteryUSB, $g_regex_DeviceUser, $g_regex_DeviceWifi, $g_Slogan, $g_Status, $g_lbl_Title_1, $g_lbl_Title_2, $g_input_Title, $g_btn_DeviceShutdown, $g_btn_DeviceReboot, $g_btn_DisplayPowerOnOff, $g_btn_DeviceUnlock, $g_data_ScrcpyTitle, $g_cmd_Connect, $g_data_SectionState, $g_data_IniSection, $g_ini_DeviceUser, $g_ini_DeviceAccount, $g_ini_DeviceModel, $g_ini_DeviceSerial, $g_ini_DeviceConnection
-Global $g_ini_Config = @ScriptDir & "\Core\Config.ini"
+Global $g_ini_Config = @ScriptDir & "\Config.ini"
 Global $g_font_Name = "Baloo Da 2"
 Global $g_font_Size = 9.5
 Global $g_font_Bold = 700
@@ -336,22 +336,23 @@ Func _f_sub_ReadIni()
 				_f_sub_GetIni()
 			Else
 				_f_sub_SetIni()
+				_f_sub_GetIni()
 			EndIf
 		Next
 	EndIf
 EndFunc   ;==>_f_sub_ReadIni
 
 Func _f_sub_GetIni()
-	$g_ini_DeviceUser = _ReadIni("4200349cce57438b_User", "")
+	$g_ini_DeviceUser = _ReadIni("" & $g_data_DeviceSelected & "_User", "")
 	GUICtrlSetData($g_data_User, $g_ini_DeviceUser)
 	Sleep(333)
-	$g_ini_DeviceAccount = _ReadIni($g_data_DeviceSelected & "_Account", "")
+	$g_ini_DeviceAccount = _ReadIni("" & $g_data_DeviceSelected & "_Account", "")
 	GUICtrlSetData($g_data_Account, $g_ini_DeviceAccount)
 	Sleep(333)
-	$g_ini_DeviceModel = _ReadIni($g_data_DeviceSelected & "_Model", "")
+	$g_ini_DeviceModel = _ReadIni("" & $g_data_DeviceSelected & "_Model", "")
 	GUICtrlSetData($g_data_Model, $g_ini_DeviceModel)
 	Sleep(333)
-	$g_ini_DeviceSerial = _ReadIni($g_data_DeviceSelected & "_Serial", "")
+	$g_ini_DeviceSerial = _ReadIni("" & $g_data_DeviceSelected & "_Serial", "")
 	GUICtrlSetData($g_data_Serial, $g_ini_DeviceSerial)
 	Sleep(333)
 	$g_cmd_DeviceBattery = Run(@ComSpec & " /c adb -s " & $g_data_DeviceSelected & " shell dumpsys battery", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
@@ -377,7 +378,7 @@ Func _f_sub_GetIni()
 	$g_data_DeviceUptime = StringStripWS(StringRegExpReplace($g_cmdout_DeviceUptime, "up time: (.*?), (.*?):(.*?):(.*), idle(.*)", "$1 $2 hrs $3 mins", 0), 2)
 	GUICtrlSetData($g_data_Uptime, $g_data_DeviceUptime)
 	Sleep(333)
-	$g_ini_DeviceConnection = _ReadIni($g_data_DeviceSelected & "_Connection")
+	$g_ini_DeviceConnection = _ReadIni("" & $g_data_DeviceSelected & "_Connection")
 	GUICtrlSetData($g_data_Connection, $g_ini_DeviceConnection)
 	Sleep(333)
 	$g_cmd_DeviceWifi = Run(@ComSpec & " /c adb -s " & $g_data_DeviceSelected & " shell dumpsys connectivity", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
@@ -391,13 +392,13 @@ Func _f_sub_GetIni()
 	ProcessWaitClose($g_cmd_DeviceIP)
 	$g_data_DeviceIP = StringStripWS(StdoutRead($g_cmd_DeviceIP), 8)
 	GUICtrlSetData($g_data_IP, $g_data_DeviceIP)
-	Sleep(333)
-	If $g_data_SectionState = 0 Then
-		_GUIExtender_Section_Action($g_gui_Main, 2, 9)
-		Sleep(333)
-	Else
-		Sleep(333)
-	EndIf
+		$g_data_SectionState = _GUIExtender_Section_State($g_gui_Main, 2)
+		If $g_data_SectionState = 0 Then
+			_GUIExtender_Section_Action($g_gui_Main, 2, 9)
+			Sleep(333)
+		Else
+			Sleep(333)
+		EndIf
 	GUICtrlSetData($g_input_Title, $g_ini_DeviceUser & "'s Phone")
 EndFunc   ;==>_f_sub_GetIni
 
@@ -470,7 +471,7 @@ EndFunc   ;==>_f_sub_AdbStop
 Func _f_sub_GetIP()
 	$g_cmd_GetIP = Run(@ComSpec & " /c " & "adb -s " & $g_data_DeviceSelected & " shell getprop dhcp.wlan0.ipaddress", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 	ProcessWaitClose($g_cmd_GetIP)
-	$g_cmdout_GetIP = StdoutRead($g_cmd_GetIP)
+	$g_cmdout_GetIP = StringStripWS(StdoutRead($g_cmd_GetIP), 2)
 	_GUICtrlIpAddress_Set($g_input_IPAddress, $g_cmdout_GetIP)
 	_SaveIni("WiFiAddress", $g_cmdout_GetIP)
 	GUICtrlSetState($g_btn_Connect, $GUI_ENABLE)
@@ -682,8 +683,8 @@ Func _SaveIni($_sKey, $_sValue)
 	IniWrite($g_ini_Config, $g_data_DeviceSelected, $_sKey, $_sValue)
 EndFunc   ;==>_SaveIni
 
-Func _ReadIni($_rKey, $_rValue)
-	IniRead($g_ini_Config, $g_data_DeviceSelected, $_rKey, $_rValue)
+Func _ReadIni(ByRef $_rKey, $_rValue = "")
+	Return IniRead($g_ini_Config, $g_data_DeviceSelected, $_rKey, $_rValue)
 EndFunc   ;==>_ReadIni
 
 Func _IsChecked($idControlID)
