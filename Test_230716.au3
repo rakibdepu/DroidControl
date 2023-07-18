@@ -28,9 +28,9 @@ Opt("MustDeclareVars", 1)
 #include <WindowsConstants.au3>
 #include "GUIExtender.au3"
 
-Global $g_array_Devices, $g_btn_Back, $g_btn_Connect, $g_btn_GetIP, $g_btn_Home, $g_btn_Menu, $g_btn_NotificationOff, $g_btn_NotificationOn, $g_btn_ScrcpyOn, $g_btn_Power, $g_btn_Refresh, $g_btn_Reset, $g_btn_ScreenOff, $g_btn_ScreenOn, $g_btn_Switch, $g_btn_VolumeDown, $g_btn_VolumeUP, $g_chk_AlwaysOnTop, $g_chk_Borderless, $g_chk_FullScreen, $g_chk_NoScreenSaver, $g_chk_PowerOffOnExit, $g_chk_ShowTouch, $g_chk_StayAwake, $g_chk_TurnOffTheScreen, $g_chk_ViewOnlyMode, $g_cmd_DeviceAccount, $g_cmd_DeviceBattery, $g_cmd_DeviceIP, $g_cmd_DeviceListGet, $g_cmd_DeviceModel, $g_cmd_DeviceSerial, $g_cmd_DeviceUser, $g_cmd_DeviceUptime, $g_cmd_DeviceWifi, $g_cmd_GetIP, $g_cmdout_DeviceAccount, $g_cmdout_DeviceBattery, $g_cmdout_DeviceListGet, $g_cmdout_DeviceUser, $g_cmdout_DeviceUptime, $g_cmdout_DeviceWifi, $g_cmdout_GetIP, $g_data_Account, $g_data_AlwaysOnTop, $g_data_Battery, $g_data_Borderless, $g_data_Connection, $g_data_DeviceAccount, $g_data_DeviceBattery
-Global $g_data_DeviceBatteryAC, $g_data_DeviceBatteryUSB, $g_data_DeviceConnection, $g_data_DeviceIP, $g_data_DeviceListGet, $g_data_DeviceModel, $g_data_DeviceSerial, $g_data_DeviceUser, $g_data_DeviceUptime, $g_data_DeviceWifi, $g_data_FullScreen, $g_data_IP, $g_data_Model, $g_data_NoScreenSaver, $g_data_PowerOffOnExit, $g_data_Resolution, $g_data_DeviceSelected, $g_data_Serial, $g_data_Shortcut, $g_data_ShowTouch, $g_data_StayAwake, $g_data_Title, $g_data_User, $g_data_TurnOffTheScreen, $g_data_Uptime, $g_data_ViewOnlyMode, $g_data_Wifi, $g_graphic_Line, $g_group_Details, $g_group_DeviceList, $g_group_Options, $g_group_Parameter, $g_group_Resolution, $g_group_SelectedDevice, $g_group_Shortcut, $g_group_Touch, $g_group_Wireless, $g_gui_Child, $g_gui_Main, $g_ini_AlwaysOnTop, $g_ini_Borderless, $g_ini_Devices, $g_ini_FullScreen, $g_ini_NoScreenSaver, $g_ini_PowerOffOnExit, $g_ini_ScrcpyCommand, $g_ini_ShowTouch, $g_ini_StayAwake, $g_ini_TurnOffTheScreen, $g_ini_ViewOnlyMode
-Global $g_ini_WiFiAddress, $g_input_IPAddress, $g_key_Shortcut, $g_lbl_Account_1, $g_lbl_Account_2, $g_lbl_Battery_1, $g_lbl_Battery_2, $g_lbl_Connection_1, $g_lbl_Connection_2, $g_lbl_IP_1, $g_lbl_IP_2, $g_lbl_Model_1, $g_lbl_Model_2, $g_lbl_Parameter, $g_lbl_SelectedDevice_1, $g_lbl_SelectedDevice_2, $g_lbl_Serial_1, $g_lbl_Serial_2, $g_lbl_User_1, $g_lbl_User_2, $g_lbl_Uptime_1, $g_lbl_Uptime_2, $g_lbl_Wifi_1, $g_lbl_Wifi_2, $g_lvw_DeviceList, $g_rad_ResolutionAuto, $g_rad_ResolutionMax, $g_rad_ShortcutAlt, $g_rad_ShortcutCtrl, $g_regex_DeviceAccount, $g_regex_DeviceBattery, $g_regex_DeviceBatteryAC, $g_regex_DeviceBatteryUSB, $g_regex_DeviceUser, $g_regex_DeviceWifi, $g_Slogan, $g_Status, $g_lbl_Title_1, $g_lbl_Title_2, $g_input_Title, $g_btn_DeviceShutdown, $g_btn_DeviceReboot, $g_btn_DisplayPowerOnOff, $g_btn_DeviceUnlock, $g_data_ScrcpyTitle, $g_cmd_Connect, $g_data_SectionState, $g_data_IniSection, $g_ini_DeviceUser, $g_ini_DeviceAccount, $g_ini_DeviceModel, $g_ini_DeviceSerial, $g_ini_DeviceConnection, $g_cmd_AdbStart, $g_cmdout_AdbStart, $g_cmdout_DeviceIP, $g_cmdout_DeviceModel, $g_cmdout_DeviceSerial, $g_cmd_AdbStop, $g_cmdout_AdbStop, $g_data_GetIP
+Global $g_array_Devices, $g_btn_Back, $g_btn_Connect, $g_btn_DeviceReboot, $g_btn_DeviceShutdown, $g_btn_DeviceUnlock, $g_btn_DisplayPowerOnOff, $g_btn_GetIP, $g_btn_Home, $g_btn_Menu, $g_btn_NotificationOff, $g_btn_NotificationOn, $g_btn_Power, $g_btn_Refresh, $g_btn_Reset, $g_btn_ScrcpyOn, $g_btn_ScreenOff, $g_btn_ScreenOn, $g_btn_Switch, $g_btn_VolumeDown, $g_btn_VolumeUP, $g_chk_AlwaysOnTop, $g_chk_Borderless, $g_chk_FullScreen, $g_chk_NoScreenSaver, $g_chk_PowerOffOnExit, $g_chk_ShowTouch, $g_chk_StayAwake, $g_chk_TurnOffTheScreen, $g_chk_ViewOnlyMode, $g_cmdout_AdbStart, $g_cmdout_AdbStart1, $g_cmdout_AdbStop, $g_cmdout_AdbStop1, $g_cmdout_DeviceAccount, $g_cmdout_DeviceBattery, $g_cmdout_DeviceIP, $g_cmdout_DeviceListGet, $g_cmdout_DeviceModel, $g_cmdout_DeviceSerial, $g_cmdout_DeviceUptime, $g_cmdout_DeviceUser, $g_cmdout_DeviceWifi, $g_cmdout_GetIP, $g_cmd_AdbStart, $g_cmd_AdbStop, $g_cmd_Connect, $g_cmd_DeviceAccount, $g_cmd_DeviceBattery, $g_cmd_DeviceIP, $g_cmd_DeviceListGet, $g_cmd_DeviceModel, $g_cmd_DeviceSerial, $g_cmd_DeviceUptime, $g_cmd_DeviceUser
+Global $g_cmd_DeviceWifi, $g_cmd_GetIP, $g_data_Account, $g_data_AlwaysOnTop, $g_data_Battery, $g_data_Borderless, $g_data_Connection, $g_data_DeviceAccount, $g_data_DeviceBattery, $g_data_DeviceBatteryAC, $g_data_DeviceBatteryUSB, $g_data_DeviceConnection, $g_data_DeviceIP, $g_data_DeviceListGet, $g_data_DeviceModel, $g_data_DeviceSelected, $g_data_DeviceSerial, $g_data_DeviceUptime, $g_data_DeviceUser, $g_data_DeviceWifi, $g_data_FullScreen, $g_data_GetIP, $g_data_IP, $g_data_Model, $g_data_NoScreenSaver, $g_data_PowerOffOnExit, $g_data_Resolution, $g_data_ScrcpyTitle, $g_data_SectionState, $g_data_Serial, $g_data_Shortcut, $g_data_ShowTouch, $g_data_StayAwake, $g_data_Title, $g_data_TurnOffTheScreen, $g_data_Uptime, $g_data_User, $g_data_ViewOnlyMode, $g_data_Wifi, $g_font_Bold, $g_font_Name, $g_font_Size, $g_graphic_Line, $g_group_Details, $g_group_DeviceList, $g_group_Options, $g_group_Parameter, $g_group_Resolution, $g_group_SelectedDevice, $g_group_Shortcut, $g_group_Touch, $g_group_Wireless, $g_gui_Child, $g_gui_Main
+Global $g_ini_AlwaysOnTop, $g_ini_Borderless, $g_ini_Config, $g_ini_DeviceAccount, $g_ini_DeviceConnection, $g_ini_DeviceModel, $g_ini_Devices, $g_ini_DeviceSerial, $g_ini_DeviceUser, $g_ini_FullScreen, $g_ini_NoScreenSaver, $g_ini_PowerOffOnExit, $g_ini_ScrcpyCommand, $g_ini_ShowTouch, $g_ini_StayAwake, $g_ini_TurnOffTheScreen, $g_ini_ViewOnlyMode, $g_ini_WiFiAddress, $g_input_IPAddress, $g_input_Title, $g_key_Shortcut, $g_lbl_Account_1, $g_lbl_Account_2, $g_lbl_Battery_1, $g_lbl_Battery_2, $g_lbl_Connection_1, $g_lbl_Connection_2, $g_lbl_IP_1, $g_lbl_IP_2, $g_lbl_Model_1, $g_lbl_Model_2, $g_lbl_Parameter, $g_lbl_SelectedDevice_1, $g_lbl_SelectedDevice_2, $g_lbl_Serial_1, $g_lbl_Serial_2, $g_lbl_Title_1, $g_lbl_Title_2, $g_lbl_Uptime_1, $g_lbl_Uptime_2, $g_lbl_User_1, $g_lbl_User_2, $g_lbl_Wifi_1, $g_lbl_Wifi_2, $g_lvw_DeviceList, $g_rad_ResolutionAuto, $g_rad_ResolutionMax, $g_rad_ShortcutAlt, $g_rad_ShortcutCtrl, $g_regex_DeviceAccount, $g_regex_DeviceBattery, $g_regex_DeviceBatteryAC, $g_regex_DeviceBatteryUSB, $g_regex_DeviceUser, $g_regex_DeviceWifi, $g_Status
 Global $g_ini_Config = @ScriptDir & "\Config.ini"
 Global $g_font_Name = "Baloo Da 2"
 Global $g_font_Size = 9.5
@@ -81,19 +81,19 @@ Func _f_sub_DeviceSelected()
 	_f_sub_StatusBar("Receiving device info.")
 	_f_sub_StatusBar("Updating config files.")
 	_f_sub_ReadIni()
-	_f_sub_OptionSet()
+	_f_sub_Option()
 EndFunc   ;==>_f_sub_DeviceSelected
 
-Func _f_sub_OptionSet()
+Func _f_sub_Option()
 	_f_sub_StatusBar("Updating all selected options in scrcpy command line.")
-	_f_sub_OptionGet()
+	_f_sub_OptionSet()
 	_f_sub_ScrcpyCommand()
 	_f_sub_StatusBar("Click ""Scrcpy On"" button to start Scrcpy.")
-EndFunc   ;==>_f_sub_OptionSet
+EndFunc   ;==>_f_sub_Option
 
 Func _f_btn_ScrcpyOn()
 	_f_sub_StatusBar("Verifing all selected options in scrcpy command line.")
-	_f_sub_OptionSet()
+	_f_sub_Option()
 	_f_sub_StatusBar("Now closing main window.")
 	_f_sub_MainGuiHide()
 	_f_sub_GUIChild()
@@ -234,51 +234,49 @@ Func _f_sub_GUIMain()
 	GUICtrlSetColor(-1, 0x006A4E)
 	GUICtrlSetFont(-1, 8.5, $g_font_Bold)
 	$g_chk_AlwaysOnTop = GUICtrlCreateCheckbox("Always On Top", 410, 43, 97, 25, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE, $BS_RIGHTBUTTON))
-	GUICtrlSetOnEvent(-1, "_f_sub_OptionSet")
+	GUICtrlSetOnEvent(-1, "_f_sub_Option")
 	GUICtrlSetTip(-1, "Make scrcpy window always on top (above other windows).")
 	$g_chk_Borderless = GUICtrlCreateCheckbox("Borderless", 512, 43, 97, 25, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE, $BS_RIGHTBUTTON))
-	GUICtrlSetOnEvent(-1, "_f_sub_OptionSet")
+	GUICtrlSetOnEvent(-1, "_f_sub_Option")
 	GUICtrlSetTip(-1, "Disable window decorations (display borderless window).")
 	$g_chk_FullScreen = GUICtrlCreateCheckbox("Full Screen", 613, 43, 97, 25, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE, $BS_RIGHTBUTTON))
-	GUICtrlSetOnEvent(-1, "_f_sub_OptionSet")
+	GUICtrlSetOnEvent(-1, "_f_sub_Option")
 	GUICtrlSetTip(-1, "Start in fullscreen.")
 	$g_chk_NoScreenSaver = GUICtrlCreateCheckbox("No ScreenSaver", 410, 74, 97, 25, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE, $BS_RIGHTBUTTON))
-	GUICtrlSetOnEvent(-1, "_f_sub_OptionSet")
+	GUICtrlSetOnEvent(-1, "_f_sub_Option")
 	GUICtrlSetTip(-1, "Disable screensaver while scrcpy is running.")
 	$g_chk_PowerOffOnExit = GUICtrlCreateCheckbox("Power Off On Exit", 512, 74, 96, 25, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE, $BS_RIGHTBUTTON))
-	GUICtrlSetOnEvent(-1, "_f_sub_OptionSet")
+	GUICtrlSetOnEvent(-1, "_f_sub_Option")
 	GUICtrlSetTip(-1, "Turn the device screen off when closing scrcpy.")
 	$g_chk_ShowTouch = GUICtrlCreateCheckbox("Show Touch", 613, 74, 96, 25, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE, $BS_RIGHTBUTTON))
-	GUICtrlSetOnEvent(-1, "_f_sub_OptionSet")
+	GUICtrlSetOnEvent(-1, "_f_sub_Option")
 	GUICtrlSetTip(-1, "Enable 'show touches' on start, restore the initial value on exit.")
 	$g_chk_StayAwake = GUICtrlCreateCheckbox("Stay Awake", 410, 105, 96, 25, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE, $BS_RIGHTBUTTON))
-	GUICtrlSetOnEvent(-1, "_f_sub_OptionSet")
+	GUICtrlSetOnEvent(-1, "_f_sub_Option")
 	GUICtrlSetTip(-1, "Keep the device on while scrcpy is running.")
 	$g_chk_TurnOffTheScreen = GUICtrlCreateCheckbox("Turn Off The Screen", 512, 105, 97, 25, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE, $BS_RIGHTBUTTON))
-	GUICtrlSetOnEvent(-1, "_f_sub_OptionSet")
+	GUICtrlSetOnEvent(-1, "_f_sub_Option")
 	GUICtrlSetTip(-1, "Turn the device screen off immediately.")
 	$g_chk_ViewOnlyMode = GUICtrlCreateCheckbox("View Only Mode", 613, 105, 97, 25, BitOR($GUI_SS_DEFAULT_CHECKBOX, $BS_MULTILINE, $BS_RIGHTBUTTON))
-	GUICtrlSetOnEvent(-1, "_f_sub_OptionSet")
+	GUICtrlSetOnEvent(-1, "_f_sub_Option")
 	GUICtrlSetTip(-1, "Disable device control (mirror the device in read-only).")
-;~ 	$g_Slogan = GUICtrlCreateLabel("Made with? ? in Bangladesh", 10, 467, 290, 30, $SS_CENTER)
-;~ 	GUICtrlSetFont(-1, $g_font_Size, $g_font_Bold, 0, $g_font_Name, 5)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	$g_group_Resolution = GUICtrlCreateGroup("Resolution", 725, 5, 70, 65, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 	$g_rad_ResolutionAuto = GUICtrlCreateRadio("Auto", 730, 20, 60, 20, $GUI_SS_DEFAULT_RADIO)
-	GUICtrlSetOnEvent(-1, "_f_sub_OptionSet")
+	GUICtrlSetOnEvent(-1, "_f_sub_Option")
 	GUICtrlSetTip(-1, "Set window height automatic.")
 	$g_rad_ResolutionMax = GUICtrlCreateRadio("Max", 730, 45, 60, 20, $GUI_SS_DEFAULT_RADIO)
-	GUICtrlSetOnEvent(-1, "_f_sub_OptionSet")
+	GUICtrlSetOnEvent(-1, "_f_sub_Option")
 	GUICtrlSetTip(-1, "Set window height maximum.")
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	$g_group_Shortcut = GUICtrlCreateGroup("ShortCut", 725, 75, 70, 65, BitOR($GUI_SS_DEFAULT_GROUP, $BS_CENTER))
 	$g_rad_ShortcutCtrl = GUICtrlCreateRadio("Ctrl", 730, 90, 60, 20, $GUI_SS_DEFAULT_RADIO)
-	GUICtrlSetOnEvent(-1, "_f_sub_OptionSet")
+	GUICtrlSetOnEvent(-1, "_f_sub_Option")
 	GUICtrlSetTip(-1, "Set 'Ctrl' as shortcut key.")
 	$g_rad_ShortcutAlt = GUICtrlCreateRadio("Alt", 730, 115, 60, 20, $GUI_SS_DEFAULT_RADIO)
-	GUICtrlSetOnEvent(-1, "_f_sub_OptionSet")
+	GUICtrlSetOnEvent(-1, "_f_sub_Option")
 	GUICtrlSetTip(-1, "Set 'Alt' as shortcut key.")
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
@@ -357,7 +355,6 @@ Func _f_sub_DeviceListSet()
 EndFunc   ;==>_f_sub_DeviceListSet
 
 Func _f_sub_AdbStop()
-	RunWait(@ComSpec & " /c " & "adb kill-server", "", @SW_HIDE)
 	$g_cmd_AdbStop = Run(@ComSpec & " /c " & "adb kill-server", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 	ProcessWaitClose($g_cmd_AdbStop)
 	$g_cmdout_AdbStop = StdoutRead($g_cmd_AdbStop)
@@ -373,7 +370,6 @@ Func _f_sub_GetIP()
 	$g_data_GetIP = StringStripWS($g_cmdout_GetIP, 2)
 	_GUICtrlEdit_AppendText($g_lbl_Parameter, @CRLF & $g_cmdout_GetIP)
 	_GUICtrlIpAddress_Set($g_input_IPAddress, $g_data_GetIP)
-;~ 	_SaveIni("WiFiAddress", $g_data_GetIP)
 	GUICtrlSetState($g_btn_Connect, $GUI_ENABLE)
 EndFunc   ;==>_f_sub_GetIP
 
@@ -388,18 +384,12 @@ Func _f_sub_Connect()
 EndFunc   ;==>_f_sub_Connect
 
 Func _f_sub_ReadIni()
-;~ 	$g_data_IniSection = IniReadSectionNames($g_ini_Config)
-;~ 	If Not @error Then
-;~ 		For $i = 1 To $g_data_IniSection[0]
-;~ 			If $g_data_DeviceSelected == $g_data_IniSection[$i] Then
-			If (_ReadIni("" & $g_data_DeviceSelected & "_Connection") = "USB") Or (_ReadIni("" & $g_data_DeviceSelected & "_Connection") = "Wireless") Then
-				_f_sub_GetIni()
-			Else
-				_f_sub_SetIni()
-				_f_sub_GetIni()
-			EndIf
-;~ 		Next
-;~ 	EndIf
+	If (_ReadIni("" & $g_data_DeviceSelected & "_Connection") = "USB") Or (_ReadIni("" & $g_data_DeviceSelected & "_Connection") = "Wireless") Then
+		_f_sub_GetIni()
+	Else
+		_f_sub_SetIni()
+		_f_sub_GetIni()
+	EndIf
 EndFunc   ;==>_f_sub_ReadIni
 
 Func _f_sub_GetIni()
@@ -466,6 +456,34 @@ Func _f_sub_GetIni()
 		Sleep(333)
 	EndIf
 	GUICtrlSetData($g_input_Title, $g_ini_DeviceUser & "'s Phone")
+	$g_ini_AlwaysOnTop = _ReadIni("" & $g_data_DeviceSelected & "_AlwaysOnTop", "")
+	GUICtrlSetState($g_chk_AlwaysOnTop, $g_ini_AlwaysOnTop)
+	$g_ini_Borderless = _ReadIni("" & $g_data_DeviceSelected & "_Borderless", "")
+	GUICtrlSetState($g_chk_Borderless, $g_ini_Borderless)
+	$g_ini_FullScreen = _ReadIni("" & $g_data_DeviceSelected & "_FullScreen", "")
+	GUICtrlSetState($g_chk_FullScreen, $g_ini_FullScreen)
+	$g_ini_NoScreenSaver = _ReadIni("" & $g_data_DeviceSelected & "_NoScreenSaver", "")
+	GUICtrlSetState($g_chk_NoScreenSaver, $g_ini_NoScreenSaver)
+	$g_ini_PowerOffOnExit = _ReadIni("" & $g_data_DeviceSelected & "_PowerOffOnExit", "")
+	GUICtrlSetState($g_chk_PowerOffOnExit, $g_ini_PowerOffOnExit)
+	If _ReadIni("" & $g_data_DeviceSelected & "_ResolutionAuto", "") = 1 Then
+		GUICtrlSetState($g_rad_ResolutionAuto, $GUI_CHECKED)
+	ElseIf _ReadIni("" & $g_data_DeviceSelected & "_ResolutionMax", "") = 1 Then
+		GUICtrlSetState($g_rad_ResolutionMax, $GUI_CHECKED)
+	EndIf
+	If _ReadIni("" & $g_data_DeviceSelected & "_ShortCutCtrl", "") = 1 Then
+		GUICtrlSetState($g_rad_ShortcutCtrl, $GUI_CHECKED)
+	ElseIf _ReadIni("" & $g_data_DeviceSelected & "_ShortCutAlt", "") = 1 Then
+		GUICtrlSetState($g_rad_ShortcutAlt, $GUI_CHECKED)
+	EndIf
+	$g_ini_ShowTouch = _ReadIni("" & $g_data_DeviceSelected & "_ShowTouch", "")
+	GUICtrlSetState($g_chk_ShowTouch, $g_ini_ShowTouch)
+	$g_ini_StayAwake = _ReadIni("" & $g_data_DeviceSelected & "_StayAwake", "")
+	GUICtrlSetState($g_chk_StayAwake, $g_ini_StayAwake)
+	$g_ini_TurnOffTheScreen = _ReadIni("" & $g_data_DeviceSelected & "_TurnOffTheScreen", "")
+	GUICtrlSetState($g_chk_TurnOffTheScreen, $g_ini_TurnOffTheScreen)
+	$g_ini_ViewOnlyMode = _ReadIni("" & $g_data_DeviceSelected & "_ViewOnlyMode", "")
+	GUICtrlSetState($g_chk_ViewOnlyMode, $g_ini_ViewOnlyMode)
 EndFunc   ;==>_f_sub_GetIni
 
 Func _f_sub_SetIni()
@@ -505,101 +523,100 @@ Func _f_sub_SetIni()
 	_SaveIni($g_data_DeviceSelected & "_Connection", $g_data_DeviceConnection)
 EndFunc   ;==>_f_sub_SetIni
 
-Func _f_sub_OptionGet()
+Func _f_sub_OptionSet()
 	$g_data_ScrcpyTitle = GUICtrlRead($g_input_Title)
 	If $g_data_ScrcpyTitle = "" Then
 		$g_data_Title = ""
 	Else
 		$g_data_Title = " --window-title=" & '"' & $g_data_ScrcpyTitle & '"'
 	EndIf
-	If _IsChecked($g_rad_ResolutionAuto) Then
-		$g_data_Resolution = ""
-		_SaveIni("ResolutionAuto", GUICtrlRead($g_rad_ResolutionAuto))
-		_SaveIni("ResolutionMax", GUICtrlRead($g_rad_ResolutionMax))
-	ElseIf _IsChecked($g_rad_ResolutionMax) Then
-		$g_data_Resolution = " --window-height=" & _GetworkingAreaHeight()
-		_SaveIni("ResolutionAuto", GUICtrlRead($g_rad_ResolutionAuto))
-		_SaveIni("ResolutionMax", GUICtrlRead($g_rad_ResolutionMax))
-	EndIf
-	If _IsChecked($g_chk_FullScreen) Then
-		$g_data_FullScreen = " -f"
-		_SaveIni("FullScreen", GUICtrlRead($g_chk_FullScreen))
-	Else
-		$g_data_FullScreen = ""
-		_SaveIni("FullScreen", GUICtrlRead($g_chk_FullScreen))
-	EndIf
-	If _IsChecked($g_chk_PowerOffOnExit) Then
-		$g_data_PowerOffOnExit = " --power-off-on-close"
-		_SaveIni("PowerOffOnExit", GUICtrlRead($g_chk_PowerOffOnExit))
-	Else
-		$g_data_PowerOffOnExit = ""
-		_SaveIni("PowerOffOnExit", GUICtrlRead($g_chk_PowerOffOnExit))
-	EndIf
 	If _IsChecked($g_chk_AlwaysOnTop) Then
 		$g_data_AlwaysOnTop = " --always-on-top"
-		_SaveIni("AlwaysOnTop", GUICtrlRead($g_chk_AlwaysOnTop))
+		_SaveIni($g_data_DeviceSelected & "_AlwaysOnTop", GUICtrlRead($g_chk_AlwaysOnTop))
 	Else
 		$g_data_AlwaysOnTop = ""
-		_SaveIni("AlwaysOnTop", GUICtrlRead($g_chk_AlwaysOnTop))
-	EndIf
-	If _IsChecked($g_chk_ViewOnlyMode) Then
-		$g_data_ViewOnlyMode = " -n"
-		_SaveIni("ViewOnlyMode", GUICtrlRead($g_chk_ViewOnlyMode))
-	Else
-		$g_data_ViewOnlyMode = ""
-		_SaveIni("ViewOnlyMode", GUICtrlRead($g_chk_ViewOnlyMode))
-	EndIf
-	If _IsChecked($g_chk_ShowTouch) Then
-		$g_data_ShowTouch = " -t"
-		_SaveIni("ShowTouch", GUICtrlRead($g_chk_ShowTouch))
-	Else
-		$g_data_ShowTouch = ""
-		_SaveIni("ShowTouch", GUICtrlRead($g_chk_ShowTouch))
-	EndIf
-	If _IsChecked($g_chk_NoScreenSaver) Then
-		$g_data_NoScreenSaver = " --disable-screensaver"
-		_SaveIni("NoScreenSaver", GUICtrlRead($g_chk_NoScreenSaver))
-	Else
-		$g_data_NoScreenSaver = ""
-		_SaveIni("NoScreenSaver", GUICtrlRead($g_chk_NoScreenSaver))
-	EndIf
-	If _IsChecked($g_chk_TurnOffTheScreen) Then
-		$g_data_TurnOffTheScreen = " -S"
-		_SaveIni("TurnOffTheScreen", GUICtrlRead($g_chk_TurnOffTheScreen))
-	Else
-		$g_data_TurnOffTheScreen = ""
-		_SaveIni("TurnOffTheScreen", GUICtrlRead($g_chk_TurnOffTheScreen))
-	EndIf
-	If _IsChecked($g_chk_StayAwake) Then
-		$g_data_StayAwake = " -w"
-		_SaveIni("StayAwake", GUICtrlRead($g_chk_StayAwake))
-	Else
-		$g_data_StayAwake = ""
-		_SaveIni("StayAwake", GUICtrlRead($g_chk_StayAwake))
+		_SaveIni($g_data_DeviceSelected & "_AlwaysOnTop", GUICtrlRead($g_chk_AlwaysOnTop))
 	EndIf
 	If _IsChecked($g_chk_Borderless) Then
 		$g_data_Borderless = " --window-borderless"
-		_SaveIni("Borderless", GUICtrlRead($g_chk_Borderless))
+		_SaveIni($g_data_DeviceSelected & "_Borderless", GUICtrlRead($g_chk_Borderless))
 	Else
 		$g_data_Borderless = ""
-		_SaveIni("Borderless", GUICtrlRead($g_chk_Borderless))
+		_SaveIni($g_data_DeviceSelected & "_Borderless", GUICtrlRead($g_chk_Borderless))
+	EndIf
+	If _IsChecked($g_chk_FullScreen) Then
+		$g_data_FullScreen = " -f"
+		_SaveIni($g_data_DeviceSelected & "_FullScreen", GUICtrlRead($g_chk_FullScreen))
+	Else
+		$g_data_FullScreen = ""
+		_SaveIni($g_data_DeviceSelected & "_FullScreen", GUICtrlRead($g_chk_FullScreen))
+	EndIf
+	If _IsChecked($g_chk_NoScreenSaver) Then
+		$g_data_NoScreenSaver = " --disable-screensaver"
+		_SaveIni($g_data_DeviceSelected & "_NoScreenSaver", GUICtrlRead($g_chk_NoScreenSaver))
+	Else
+		$g_data_NoScreenSaver = ""
+		_SaveIni($g_data_DeviceSelected & "_NoScreenSaver", GUICtrlRead($g_chk_NoScreenSaver))
+	EndIf
+	If _IsChecked($g_chk_PowerOffOnExit) Then
+		$g_data_PowerOffOnExit = " --power-off-on-close"
+		_SaveIni($g_data_DeviceSelected & "_PowerOffOnExit", GUICtrlRead($g_chk_PowerOffOnExit))
+	Else
+		$g_data_PowerOffOnExit = ""
+		_SaveIni($g_data_DeviceSelected & "_PowerOffOnExit", GUICtrlRead($g_chk_PowerOffOnExit))
+	EndIf
+	If _IsChecked($g_rad_ResolutionAuto) Then
+		$g_data_Resolution = ""
+		_SaveIni($g_data_DeviceSelected & "_ResolutionAuto", GUICtrlRead($g_rad_ResolutionAuto))
+		_SaveIni($g_data_DeviceSelected & "_ResolutionMax", GUICtrlRead($g_rad_ResolutionMax))
+	ElseIf _IsChecked($g_rad_ResolutionMax) Then
+		$g_data_Resolution = " --window-height=" & _GetworkingAreaHeight()
+		_SaveIni($g_data_DeviceSelected & "_ResolutionAuto", GUICtrlRead($g_rad_ResolutionAuto))
+		_SaveIni($g_data_DeviceSelected & "_ResolutionMax", GUICtrlRead($g_rad_ResolutionMax))
 	EndIf
 	If _IsChecked($g_rad_ShortcutCtrl) Then
 		$g_data_Shortcut = " --shortcut-mod=""lctrl,rctrl"""
 		$g_key_Shortcut = "^"
-		_SaveIni("ShortCutCtrl", GUICtrlRead($g_rad_ShortcutCtrl))
-		_SaveIni("ShortCutAlt", GUICtrlRead($g_rad_ShortcutAlt))
+		_SaveIni($g_data_DeviceSelected & "_ShortCutCtrl", GUICtrlRead($g_rad_ShortcutCtrl))
+		_SaveIni($g_data_DeviceSelected & "_ShortCutAlt", GUICtrlRead($g_rad_ShortcutAlt))
 	ElseIf _IsChecked($g_rad_ShortcutAlt) Then
 		$g_data_Shortcut = " --shortcut-mod=""lalt,ralt"""
 		$g_key_Shortcut = "!"
-		_SaveIni("ShortCutCtrl", GUICtrlRead($g_rad_ShortcutCtrl))
-		_SaveIni("ShortCutAlt", GUICtrlRead($g_rad_ShortcutAlt))
+		_SaveIni($g_data_DeviceSelected & "_ShortCutCtrl", GUICtrlRead($g_rad_ShortcutCtrl))
+		_SaveIni($g_data_DeviceSelected & "_ShortCutAlt", GUICtrlRead($g_rad_ShortcutAlt))
 	EndIf
-EndFunc   ;==>_f_sub_OptionGet
+	If _IsChecked($g_chk_ShowTouch) Then
+		$g_data_ShowTouch = " -t"
+		_SaveIni($g_data_DeviceSelected & "_ShowTouch", GUICtrlRead($g_chk_ShowTouch))
+	Else
+		$g_data_ShowTouch = ""
+		_SaveIni($g_data_DeviceSelected & "_ShowTouch", GUICtrlRead($g_chk_ShowTouch))
+	EndIf
+	If _IsChecked($g_chk_StayAwake) Then
+		$g_data_StayAwake = " -w"
+		_SaveIni($g_data_DeviceSelected & "_StayAwake", GUICtrlRead($g_chk_StayAwake))
+	Else
+		$g_data_StayAwake = ""
+		_SaveIni($g_data_DeviceSelected & "_StayAwake", GUICtrlRead($g_chk_StayAwake))
+	EndIf
+	If _IsChecked($g_chk_TurnOffTheScreen) Then
+		$g_data_TurnOffTheScreen = " -S"
+		_SaveIni($g_data_DeviceSelected & "_TurnOffTheScreen", GUICtrlRead($g_chk_TurnOffTheScreen))
+	Else
+		$g_data_TurnOffTheScreen = ""
+		_SaveIni($g_data_DeviceSelected & "_TurnOffTheScreen", GUICtrlRead($g_chk_TurnOffTheScreen))
+	EndIf
+	If _IsChecked($g_chk_ViewOnlyMode) Then
+		$g_data_ViewOnlyMode = " -n"
+		_SaveIni($g_data_DeviceSelected & "_ViewOnlyMode", GUICtrlRead($g_chk_ViewOnlyMode))
+	Else
+		$g_data_ViewOnlyMode = ""
+		_SaveIni($g_data_DeviceSelected & "_ViewOnlyMode", GUICtrlRead($g_chk_ViewOnlyMode))
+	EndIf
+EndFunc   ;==>_f_sub_OptionSet
 
 Func _f_sub_ScrcpyCommand()
-	$g_ini_ScrcpyCommand = " -s " & $g_data_DeviceSelected & $g_data_Resolution & $g_data_Shortcut & $g_data_FullScreen & $g_data_PowerOffOnExit & $g_data_AlwaysOnTop & $g_data_ViewOnlyMode & $g_data_ShowTouch & $g_data_NoScreenSaver & $g_data_TurnOffTheScreen & $g_data_StayAwake & $g_data_Borderless & $g_data_Title
-	_SaveIni("FinalParameter", $g_ini_ScrcpyCommand)
+	$g_ini_ScrcpyCommand = " -s " & $g_data_DeviceSelected & $g_data_Title & $g_data_AlwaysOnTop & $g_data_Borderless & $g_data_FullScreen & $g_data_NoScreenSaver & $g_data_PowerOffOnExit & $g_data_Resolution & $g_data_Shortcut & $g_data_ShowTouch & $g_data_StayAwake & $g_data_TurnOffTheScreen & $g_data_ViewOnlyMode
 	_GUICtrlEdit_AppendText($g_lbl_Parameter, @CRLF & $g_ini_ScrcpyCommand)
 EndFunc   ;==>_f_sub_ScrcpyCommand
 
@@ -620,7 +637,7 @@ Func _f_sub_GUIChild()
 	$g_lbl_SelectedDevice_1 = GUICtrlCreateLabel("", 10, 20, 235, 18, $SS_CENTER)
 	GUICtrlSetFont(-1, $g_font_Size, $g_font_Bold, 0, $g_font_Name, 5)
 	$g_lbl_SelectedDevice_2 = GUICtrlCreateLabel("", 10, 38, 235, 17, $SS_CENTER)
-	GUICtrlSetData($g_lbl_SelectedDevice_1, $g_data_DeviceUser & "'s Phone")
+	GUICtrlSetData($g_lbl_SelectedDevice_1, $g_ini_DeviceUser & "'s Phone")
 	GUICtrlSetData($g_lbl_SelectedDevice_2, "(" & $g_data_DeviceSelected & ")")
 	GUICtrlSetFont(-1, $g_font_Size, $g_font_Bold, 0, $g_font_Name, 5)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
@@ -735,8 +752,6 @@ EndFunc   ;==>_f_sub_GUIChildClose
 
 Func _f_sub_GUIMainClose()
 	_f_sub_AdbStop()
-	_SaveIni("Serial", "")
-	_SaveIni("FinalParameter", "")
 	Exit
 EndFunc   ;==>_f_sub_GUIMainClose
 
