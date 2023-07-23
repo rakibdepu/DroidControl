@@ -1,5 +1,5 @@
 #NoTrayIcon
-;==>"Made with? ? in Bangladesh"
+;==>"Made with️ ❤ in Bangladesh"
 
 Opt("GUIOnEventMode", 1)
 Opt("GUICoordMode", 1)
