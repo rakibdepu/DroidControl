@@ -28,7 +28,7 @@ Opt("MustDeclareVars", 1)
 #include <WindowsConstants.au3>
 #include "include\GUIExtender.au3"
 
-Global $g_array_Devices, $g_btn_Back, $g_btn_Connect, $g_btn_DeviceReboot, $g_btn_DeviceShutdown, $g_btn_DeviceUnlock, $g_btn_DisplayPowerOnOff, $g_btn_GetIP, $g_btn_Home, $g_btn_Menu, $g_btn_NotificationOff, $g_btn_NotificationOn, $g_btn_Power, $g_btn_Refresh, $g_btn_Reset, $g_btn_ScrcpyOn, $g_btn_ScreenOff, $g_btn_ScreenOn, $g_btn_Switch, $g_btn_VolumeDown, $g_btn_VolumeUP, $g_chk_AlwaysOnTop, $g_chk_Borderless, $g_chk_FullScreen, $g_chk_NoScreenSaver, $g_chk_PowerOffOnExit, $g_chk_ShowTouch, $g_chk_StayAwake, $g_chk_TurnOffTheScreen, $g_chk_ViewOnlyMode, $g_cmdout_AdbStart, $g_cmdout_AdbStart1, $g_cmdout_AdbStop, $g_cmdout_AdbStop1, $g_cmdout_DeviceAccount, $g_cmdout_DeviceApi, $g_cmdout_DeviceBattery, $g_cmdout_DeviceIP, $g_cmdout_DeviceListGet, $g_cmdout_DeviceModel, $g_cmdout_DeviceName, $g_cmdout_DeviceSerial, $g_cmdout_DeviceUptime, $g_cmdout_DeviceUser, $g_cmdout_DeviceVersion, $g_cmdout_DeviceWifi, $g_cmdout_DeviceWifiC, $g_cmdout_DeviceWifiC2, $g_cmdout_GetIP, $g_cmd_AdbStart, $g_cmd_AdbStop, $g_cmd_Connect, $g_cmd_DeviceAccount, $g_cmd_DeviceApi, $g_cmd_DeviceBattery, $g_cmd_DeviceIP, $g_cmd_DeviceListGet, $g_cmd_DeviceModel, $g_cmd_DeviceName, $g_cmd_DeviceSerial, $g_cmd_DeviceUptime, $g_cmd_DeviceUser, $g_cmd_DeviceVersion
+Global $g_array_Devices, $g_btn_Back, $g_btn_Connect, $g_btn_DeviceReboot, $g_btn_DeviceShutdown, $g_btn_DeviceUnlock, $g_btn_DisplayPowerOnOff, $g_btn_GetIP, $g_btn_Home, $g_btn_Menu, $g_btn_NotificationOff, $g_btn_NotificationOn, $g_btn_Power, $g_btn_Refresh, $g_btn_Reset, $g_btn_ScrcpyOn, $g_btn_ScreenOff, $g_btn_ScreenOn, $g_btn_Switch, $g_btn_VolumeDown, $g_btn_VolumeUP, $g_chk_AlwaysOnTop, $g_chk_Borderless, $g_chk_FullScreen, $g_chk_NoScreenSaver, $g_chk_PowerOffOnExit, $g_chk_SelectedItem, $g_chk_ShowTouch, $g_chk_StayAwake, $g_chk_TurnOffTheScreen, $g_chk_ViewOnlyMode, $g_cmdout_AdbStart, $g_cmdout_AdbStart1, $g_cmdout_AdbStop, $g_cmdout_AdbStop1, $g_cmdout_DeviceAccount, $g_cmdout_DeviceApi, $g_cmdout_DeviceBattery, $g_cmdout_DeviceIP, $g_cmdout_DeviceListGet, $g_cmdout_DeviceModel, $g_cmdout_DeviceName, $g_cmdout_DeviceSerial, $g_cmdout_DeviceUptime, $g_cmdout_DeviceUser, $g_cmdout_DeviceVersion, $g_cmdout_DeviceWifi, $g_cmdout_DeviceWifiC, $g_cmdout_DeviceWifiC2, $g_cmdout_GetIP, $g_cmd_AdbStart, $g_cmd_AdbStop, $g_cmd_Connect, $g_cmd_DeviceAccount, $g_cmd_DeviceApi, $g_cmd_DeviceBattery, $g_cmd_DeviceIP, $g_cmd_DeviceListGet, $g_cmd_DeviceModel, $g_cmd_DeviceName, $g_cmd_DeviceSerial, $g_cmd_DeviceUptime, $g_cmd_DeviceUser, $g_cmd_DeviceVersion
 Global $g_cmd_DeviceWifi, $g_cmd_DeviceWifiC, $g_cmd_GetIP, $g_data_Account, $g_data_AlwaysOnTop, $g_data_Battery, $g_data_Borderless, $g_data_Connection, $g_data_DeviceAccount, $g_data_DeviceApi, $g_data_DeviceBattery, $g_data_DeviceBatteryAC, $g_data_DeviceBatteryUSB, $g_data_DeviceConnection, $g_data_DeviceIP, $g_data_DeviceListGet, $g_data_DeviceModel, $g_data_DeviceName, $g_data_DeviceSelected, $g_data_DeviceSerial, $g_data_DeviceUptime, $g_data_DeviceUser, $g_data_DeviceVersion, $g_data_DeviceWifi, $g_data_FullScreen, $g_data_GetIP, $g_data_IP, $g_data_Model, $g_data_NoScreenSaver, $g_data_PowerOffOnExit, $g_data_Resolution, $g_data_ScrcpyTitle, $g_data_SectionState, $g_data_Serial, $g_data_Shortcut, $g_data_ShowTouch, $g_data_StayAwake, $g_data_Title, $g_data_TurnOffTheScreen, $g_data_Uptime, $g_data_User, $g_data_Version, $g_data_ViewOnlyMode, $g_data_Wifi, $g_font_Bold, $g_font_Name, $g_font_Size, $g_graphic_Line, $g_group_Details, $g_group_DeviceList, $g_group_Options, $g_group_Parameter, $g_group_Resolution, $g_group_SelectedDevice, $g_group_Shortcut, $g_group_Touch, $g_group_Wireless, $g_gui_Child, $g_gui_Main
 Global $g_ini_AlwaysOnTop, $g_ini_Borderless, $g_ini_Config, $g_ini_DeviceAccount, $g_ini_DeviceConnection, $g_ini_DeviceModel, $g_ini_Devices, $g_ini_DeviceSerial, $g_ini_DeviceUser, $g_ini_DeviceVersion, $g_ini_FullScreen, $g_ini_NoScreenSaver, $g_ini_PowerOffOnExit, $g_ini_ScrcpyCommand, $g_ini_ShowTouch, $g_ini_StayAwake, $g_ini_TurnOffTheScreen, $g_ini_ViewOnlyMode, $g_ini_WiFiAddress, $g_input_IPAddress, $g_input_Title, $g_key_Shortcut, $g_lbl_Account_1, $g_lbl_Account_2, $g_lbl_Battery_1, $g_lbl_Battery_2, $g_lbl_Connection_1, $g_lbl_Connection_2, $g_lbl_IP_1, $g_lbl_IP_2, $g_lbl_Model_1, $g_lbl_Model_2, $g_lbl_Parameter, $g_lbl_SelectedDevice_1, $g_lbl_SelectedDevice_2, $g_lbl_Serial_1, $g_lbl_Serial_2, $g_lbl_Title_1, $g_lbl_Title_2, $g_lbl_Uptime_1, $g_lbl_Uptime_2, $g_lbl_User_1, $g_lbl_User_2, $g_lbl_Version_1, $g_lbl_Version_2, $g_lbl_Wifi_1, $g_lbl_Wifi_2, $g_lvw_DeviceList, $g_rad_ResolutionAuto, $g_rad_ResolutionMax, $g_rad_ShortcutAlt, $g_rad_ShortcutCtrl, $g_regex_DeviceAccount, $g_regex_DeviceBattery, $g_regex_DeviceBatteryAC, $g_regex_DeviceBatteryUSB, $g_regex_DeviceUser, $g_regex_DeviceWifi, $g_Status
 Global $g_ini_Config = @ScriptDir & "\Config.ini"
@@ -329,7 +329,7 @@ Func _f_sub_GUIMain()
 	GUICtrlSetTip(-1, "Unlock Device")
 
 	$g_btn_ScrcpyOn = GUICtrlCreateButton("Scrcpy" & @CRLF & "On", 725, 280, 70, 50, $BS_MULTILINE)
-	GUICtrlSetImage(-1, "..\NewSoft\scrcpy-win32\icon.ico", 1, 1)
+	GUICtrlSetImage(-1, @ScriptDir & "\icon\icon.ico", 1, 1)
 	GUICtrlSetState(-1, $GUI_DISABLE)
 	GUICtrlSetOnEvent(-1, "_f_btn_ScrcpyOn")
 	GUICtrlSetTip(-1, "Start SCRCPY.")
@@ -349,9 +349,9 @@ Func _f_sub_AdbStart()
 	_GUICtrlEdit_AppendText($g_lbl_Parameter, "shell@droid_control:/ $ " & @CRLF & "Starting ADB Server.")
 	$g_cmd_AdbStart = Run(@ComSpec & " /c " & "adb start-server", "", @SW_HIDE, $STDERR_CHILD + $STDOUT_CHILD)
 	ProcessWaitClose($g_cmd_AdbStart)
-	$g_cmdout_AdbStart = StdoutRead($g_cmd_AdbStart)
-	Local $g_cmdout_AdbStart1 = StderrRead($g_cmd_AdbStart)
-	_GUICtrlEdit_AppendText($g_lbl_Parameter, @CRLF & @CRLF & "shell@droid_control:/ $ " & @CRLF & $g_cmdout_AdbStart1)
+	$g_cmdout_AdbStart = StderrRead($g_cmd_AdbStart)
+;~ 	Local $g_cmdout_AdbStart1 = StderrRead($g_cmd_AdbStart)
+	_GUICtrlEdit_AppendText($g_lbl_Parameter, @CRLF & @CRLF & "shell@droid_control:/ $ " & @CRLF & $g_cmdout_AdbStart)
 EndFunc   ;==>_f_sub_AdbStart
 
 Func _f_sub_DeviceListGet()
@@ -361,9 +361,9 @@ Func _f_sub_DeviceListGet()
 	$g_cmdout_DeviceListGet = StdoutRead($g_cmd_DeviceListGet)
 	_GUICtrlEdit_AppendText($g_lbl_Parameter, @CRLF & "shell@droid_control:/ $ " & @CRLF & "Searching . . .")
 	_GUICtrlEdit_AppendText($g_lbl_Parameter, @CRLF & @CRLF & "shell@droid_control:/ $ " & @CRLF & "Receiving connected device name.")
-	$g_data_DeviceListGet = StringReplace(StringReplace(StringReplace(StringStripWS(StringTrimLeft($g_cmdout_DeviceListGet, 26), $STR_STRIPTRAILING), @CR, ""), "	device", " USB ="), ":5555 USB =", ":5555 Wireless =")
+	$g_data_DeviceListGet = StringReplace(StringReplace(StringReplace(StringStripWS(StringTrimLeft($g_cmdout_DeviceListGet, 26), $STR_STRIPTRAILING), @CR, ""), "	device", "=USB"), ":5555=USB", ":5555=Wireless")
 	If $g_data_DeviceListGet = "" Then
-		IniWriteSection($g_ini_Config, "Devices", "NO USB =")
+		IniWriteSection($g_ini_Config, "Devices", "No Device=USB")
 	Else
 		IniWriteSection($g_ini_Config, "Devices", $g_data_DeviceListGet)
 	EndIf
@@ -375,13 +375,13 @@ Func _f_sub_DeviceListSet()
 	ConsoleWrite(@ScriptLineNumber & ': ' & $g_ini_Devices & @CRLF)
 	_GUICtrlListView_BeginUpdate($g_lvw_DeviceList)
 	For $i = 1 To $g_ini_Devices[0][0]
-		_GUICtrlListView_AddItem($g_lvw_DeviceList, $i)
-		$g_array_Devices = StringSplit($g_ini_Devices[$i][0], " ", 1)
-		_GUICtrlEdit_AppendText($g_lbl_Parameter, @CRLF & @CRLF & "shell@droid_control:/ $ " & @CRLF & $g_array_Devices[1])
-		_GUICtrlListView_AddSubItem($g_lvw_DeviceList, $i - 1, $g_array_Devices[1], 1)
-		_GUICtrlListView_AddSubItem($g_lvw_DeviceList, $i - 1, $g_array_Devices[2], 2)
+		$g_chk_SelectedItem = _GUICtrlListView_AddItem($g_lvw_DeviceList, $i)
+		_GUICtrlEdit_AppendText($g_lbl_Parameter, @CRLF & @CRLF & "shell@droid_control:/ $ " & @CRLF & $g_ini_Devices[$i][0] & " via " & $g_ini_Devices[$i][1])
+		_GUICtrlListView_AddSubItem($g_lvw_DeviceList, $i - 1, $g_ini_Devices[$i][0], 1)
+		_GUICtrlListView_AddSubItem($g_lvw_DeviceList, $i - 1, $g_ini_Devices[$i][1], 2)
 	Next
 	_GUICtrlListView_EndUpdate($g_lvw_DeviceList)
+	GUICtrlSetState($g_chk_SelectedItem, $GUI_CHECKED)
 EndFunc   ;==>_f_sub_DeviceListSet
 
 Func _f_sub_AdbStop()
@@ -416,15 +416,8 @@ EndFunc   ;==>_f_sub_Connect
 
 Func _f_sub_ReadIni()
 	If (_ReadIni("" & $g_data_DeviceSelected & "_Connection") = "USB") Or (_ReadIni("" & $g_data_DeviceSelected & "_Connection") = "Wireless") Then
-		If ($g_data_User == "") Then
-			_f_sub_UpdateWindow()
-			_f_sub_DeviceInfoClear()
-			_f_sub_GetIni()
-		Else
-			_f_sub_UpdateWindow()
-			_f_sub_DeviceInfoClear()
-			_f_sub_GetIni()
-		EndIf
+		_f_sub_DeviceInfoClear()
+		_f_sub_GetIni()
 	Else
 		_f_sub_SetIni()
 		_f_sub_GetIni()
@@ -611,9 +604,8 @@ Func _f_sub_SetIni()
 EndFunc   ;==>_f_sub_SetIni
 
 Func _f_sub_UpdateWindow()
-	If _GUICtrlIpAddress_IsBlank($g_input_IPAddress) Then
-		GUICtrlSetState($g_btn_Connect, $GUI_DISABLE)
-	Else
+	_GUICtrlIpAddress_ClearAddress($g_input_IPAddress)
+	If ($g_data_DeviceSelected == "No Device") Then
 		GUICtrlSetState($g_btn_Connect, $GUI_ENABLE)
 	EndIf
 	If $g_data_DeviceConnection = "Wireless" Then
@@ -919,7 +911,10 @@ Func WM_NOTIFY($hWnd, $Msg, $wParam, $lParam)
 					If _GUICtrlListView_GetItemSelected($hListView, $iItem) = True Then
 						$g_data_DeviceSelected = _GUICtrlListView_GetItemText($g_lvw_DeviceList, $iItem, 1)
 						$g_data_DeviceConnection = _GUICtrlListView_GetItemText($g_lvw_DeviceList, $iItem, 2)
-						_f_sub_DeviceSelected()
+						_f_sub_UpdateWindow()
+						If Not ($g_data_DeviceSelected == "No Device") Then
+							_f_sub_DeviceSelected()
+						EndIf
 					EndIf
 			EndSwitch
 	EndSwitch
