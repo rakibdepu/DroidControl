@@ -393,7 +393,7 @@ Func _f_sub_DeviceListSet()
 		_GUICtrlListView_AddSubItem($g_lvw_DeviceList, $i - 1, $g_ini_Devices[$i][1], 2)
 	Next
 	_GUICtrlListView_EndUpdate($g_lvw_DeviceList)
-	GUICtrlSetState($g_chk_SelectedItem, $GUI_CHECKED)
+	_GUICtrlListView_ClickItem($g_lvw_DeviceList, 0)
 EndFunc   ;==>_f_sub_DeviceListSet
 
 Func _f_sub_AdbStop()
